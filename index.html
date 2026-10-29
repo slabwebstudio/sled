@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFF6E8">
 <link rel="icon" href="logo-dark.png">
 <title>SLED Dive Center</title>
-<meta name="description" content="SLED — дайв-центр SSI на острове Ган, атолл Лааму, Мальдивы. Инструктор говорит по-русски, группа до 4 человек, без предоплаты.">
+<meta name="description" content="SLED — маленький дайв-центр SSI на острове Ган, атолл Лааму, Мальдивы. Инструктор говорит по-русски, в группе максимум четыре человека, без предоплаты.">
+<link rel="preload" href="assets/fonts/unbounded-3a5ed4d1.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts.css">
 <style>
 /* Layout: a dive in one scroll. Bright surface at the top, the page darkens as you go deeper, then surfaces again into sunlight at the contacts. */
@@ -19,14 +21,15 @@
   --ink:#231F20;       /* logo black */
   --fin:#F9A72B;       /* logo orange */
   --coral:#FF6A4D;     /* third sticker colour */
-  --muted-l:rgba(35,31,32,.62);
-  --muted-d:rgba(232,248,251,.72);
+  --muted-l:rgba(35,31,32,.7);
+  --muted-d:rgba(232,248,251,.8);
   --bg:var(--sand);
   --fg:var(--ink);
   --muted:var(--muted-l);
   --hair:rgba(35,31,32,.12);
-  --display:"Oswald","Arial Narrow","Roboto Condensed",Impact,sans-serif;
-  --body:"Manrope","Segoe UI",system-ui,-apple-system,sans-serif;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:"Onest","Segoe UI",system-ui,-apple-system,sans-serif;
   --hand:"Caveat","Comic Sans MS",cursive;
   --gl:max(16px,env(safe-area-inset-left,0px));
   --gr:max(16px,env(safe-area-inset-right,0px));
@@ -40,19 +43,20 @@ body{overflow-x:hidden}
 @supports (overflow:clip){body{overflow-x:visible}html,body{overflow-x:clip}}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{margin:0;background:var(--sand);color:var(--fg);font:500 19px/1.6 var(--body);-webkit-font-smoothing:antialiased}
-@media (max-width:700px){body{font-size:17.5px}}
+body{margin:0;background:var(--sand);color:var(--fg);font:450 19px/1.6 var(--body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+@media (max-width:700px){body{font-size:17.5px;line-height:1.55}}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--bg);transition:background-color .8s}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--fin);outline-offset:3px;border-radius:6px}
-h1,h2,h3{margin:0;font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.005em;text-wrap:balance}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:800;line-height:1;letter-spacing:-.035em;text-wrap:balance;overflow-wrap:break-word}
+h1 em,h2 em,.acc{font-family:var(--serif);font-style:italic;font-weight:800;letter-spacing:-.01em;font-size:1.12em;line-height:.9}
 p{margin:0}
 .wrap{width:100%;max-width:1260px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
-.hand{font-family:var(--hand);font-weight:700;text-transform:none;letter-spacing:0}
+.hand{font-family:var(--hand);font-weight:700;text-transform:none;letter-spacing:0;line-height:1.1}
 
 /* stickers: tilted labels, the page's signature device */
-.stk{display:inline-block;padding:.5em 1em .55em;border-radius:14px;font:700 clamp(14px,1.25vw,17px)/1.1 var(--body);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(5,41,58,.55)}
+.stk{display:inline-block;max-width:100%;padding:.55em 1em .6em;border-radius:14px;font:700 clamp(13px,1.2vw,16px)/1.15 var(--body);letter-spacing:.05em;text-transform:uppercase;box-shadow:0 10px 24px -12px rgba(5,41,58,.55)}
 .stk.t{background:var(--lagoon);color:#03303d}
 .stk.o{background:var(--fin);color:var(--ink)}
 .stk.c{background:var(--coral);color:#fff}
@@ -60,16 +64,17 @@ p{margin:0}
 
 /* buttons */
 .btns{display:flex;flex-wrap:wrap;gap:12px}
-.btn{position:relative;display:inline-flex;align-items:center;gap:14px;min-height:64px;padding:7px 28px 7px 7px;border-radius:999px;font:800 15px/1 var(--body);letter-spacing:.07em;text-transform:uppercase;text-decoration:none;overflow:hidden;isolation:isolate;will-change:transform}
+.btn{position:relative;display:inline-flex;align-items:center;gap:14px;min-height:64px;max-width:100%;padding:7px 28px 7px 7px;border-radius:999px;font:700 15px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;overflow:hidden;isolation:isolate;will-change:transform}
 .btn .bi{position:relative;flex:none;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;transition:transform .7s cubic-bezier(.34,1.56,.64,1),background-color .4s,color .4s}
 .btn .bi svg{width:22px;height:22px}
-.btn .bt{position:relative;display:block;white-space:nowrap;overflow:hidden;height:1.1em;line-height:1.1}
+.btn .bt{position:relative;display:block;white-space:nowrap;overflow:hidden;height:1.3em;line-height:1.3}
 .btn .bt>span{display:block;transition:transform .55s var(--ease)}
 .btn .bt>span::after{content:attr(data-t);display:block}
 .btn:hover .bt>span{transform:translateY(-50%)}
 .btn::before{content:"";position:absolute;left:32px;top:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;z-index:-1;transform:scale(0);transition:transform .75s var(--ease)}
 .btn:hover::before{transform:scale(14)}
 .btn:hover .bi{transform:rotate(-360deg) scale(1.08)}
+.btn:active{transform:scale(.97)}
 .btn::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 4.5s 2s infinite}
 @keyframes shine{0%{left:-40%}22%,100%{left:130%}}
 .btn-fin{background:linear-gradient(115deg,#FFB547,var(--fin) 45%,#FF8A3D);color:var(--ink);box-shadow:0 18px 40px -16px rgba(249,140,43,.95)}
@@ -87,7 +92,8 @@ p{margin:0}
 /* header */
 .top{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:60;color:var(--fg);transition:background-color .6s,box-shadow .6s,color .6s,transform .45s var(--ease)}
 .top .wrap{animation:drop 1.1s .35s cubic-bezier(.16,1,.3,1) both;display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:12px}
-.top.solid{background:var(--bg);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--hair)}
+@keyframes drop{from{transform:translateY(-120%)}}
+.top.solid{background:var(--bg);background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--hair)}
 .top.hide{transform:translateY(-110%)}
 .logo{position:relative;display:block;height:58px;width:72px;flex:none;transition:height .35s,width .35s}
 .logo img{position:absolute;inset:0;height:100%;width:auto;transition:opacity .4s}
@@ -95,7 +101,7 @@ p{margin:0}
 html.deep .logo .lg-light{opacity:1}
 html.deep .logo .lg-dark{opacity:0}
 .top.solid .logo{height:46px;width:58px}
-.nav{display:flex;align-items:center;gap:24px;font:700 15px/1 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:24px;font:700 14px/1 var(--body);letter-spacing:.07em;text-transform:uppercase}
 .nav a{text-decoration:none;position:relative;padding-block:10px}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;background:var(--fin);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
 .nav a:hover::after{transform:scaleX(1);transform-origin:left}
@@ -106,12 +112,17 @@ html.deep .logo .lg-dark{opacity:0}
 .top-cta:hover{transform:translateY(-2px)}
 .burger{display:none;width:48px;height:48px;border-radius:50%;border:0;background:var(--fin);color:var(--ink);cursor:pointer;place-items:center;position:relative;z-index:3}
 .burger svg{width:24px;height:24px}
+.hdepth{display:none;align-items:center;gap:8px;margin-left:auto;padding:8px 14px;border-radius:999px;border:1.5px solid var(--hair);font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:opacity .4s}
+.hdepth b{font:800 15px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--fin)}
+.hdepth.on{opacity:1}
 @media (max-width:1080px){
-  .nav{position:fixed;inset:0;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:calc(90px + env(safe-area-inset-top,0px)) var(--gr) 40px var(--gl);background:var(--abyss);color:#fff;font:700 clamp(34px,9vw,56px)/1.05 var(--display);letter-spacing:0;clip-path:circle(0 at calc(100% - 40px) 40px);transition:clip-path .7s var(--ease);z-index:2}
+  .nav{position:fixed;inset:0;flex-direction:column;justify-content:center;align-items:flex-start;gap:8px;padding:calc(90px + env(safe-area-inset-top,0px)) var(--gr) 40px var(--gl);background:var(--abyss);color:#fff;font:800 clamp(30px,8vw,52px)/1.1 var(--display);letter-spacing:-.03em;text-transform:none;clip-path:circle(0 at calc(100% - 40px) 40px);transition:clip-path .7s var(--ease);z-index:2}
   .nav.open{clip-path:circle(150% at calc(100% - 40px) 40px)}
-  .nav .lang{margin-top:24px;border-color:rgba(255,255,255,.3)}
+  .nav a:nth-child(even){font-family:var(--serif);font-style:italic;color:var(--fin)}
+  .nav .lang{margin-top:24px;border-color:rgba(255,255,255,.3);font-family:var(--body)}
   .burger{display:inline-grid}
   .top-cta{display:none}
+  .hdepth{display:inline-flex}
 }
 
 /* HERO — pinned; the camera sinks under the waterline as you scroll */
@@ -119,28 +130,28 @@ html.deep .logo .lg-dark{opacity:0}
 .hero-stick{position:sticky;top:0;height:100vh;height:100svh;min-height:520px;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;color:#fff}
 .hero-media{position:absolute;inset:0;z-index:-3;will-change:transform}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 52%}
-.hero-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(255,255,255,0) 40%,rgba(3,62,84,.18) 62%,rgba(3,48,66,.62) 100%)}
+.hero-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(255,255,255,0) 30%,rgba(3,62,84,.25) 55%,rgba(3,48,66,.72) 100%)}
 .hero-deep{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,191,208,.25) 0%,rgba(10,120,145,.55) 55%,rgba(255,246,232,1) 100%);opacity:0}
-.hero-in{position:relative;padding-block:120px clamp(40px,7vh,84px);display:grid;gap:clamp(16px,2.4vh,26px)}
+.hero-in{position:relative;padding-block:120px clamp(40px,7vh,84px);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(16px,2.4vh,26px)}
 .hero-stk{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
 .hero-stk .stk:nth-child(1){transform:rotate(-4deg)}
 .hero-stk .stk:nth-child(2){transform:rotate(3deg)}
 .hero-stk .stk:nth-child(3){transform:rotate(-2deg)}
-.hero h1{font-size:clamp(44px,min(11.6vw,15vh),200px);line-height:.86;text-shadow:0 6px 40px rgba(3,48,66,.35)}
-.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.04em;margin-bottom:-.04em}
+.hero h1{font-size:clamp(50px,min(12.5vw,15vh),190px);line-height:.95;text-shadow:0 6px 40px rgba(3,48,66,.35)}
+.hero h1 .ln{display:block}
 .hero h1 .ln>span{display:inline-block}
-.hero h1 .ln:nth-child(2){color:var(--fin);padding-left:clamp(0px,8vw,150px)}
+.hero h1 .ln.acc{color:var(--fin);padding-left:clamp(0px,7vw,140px);font-size:1.08em;line-height:1}
 .hero-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px 40px}
-.hero-sub{max-width:44ch;font-size:clamp(18px,1.55vw,22px);font-weight:600;color:#EAFBFE;text-shadow:0 2px 14px rgba(3,48,66,.5)}
-.badge{position:absolute;right:max(5vw,var(--gr));top:calc(130px + env(safe-area-inset-top,0px));width:clamp(104px,10vw,150px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 20px 50px -24px rgba(5,41,58,.5)}
+.hero-sub{max-width:42ch;font-size:clamp(18px,1.55vw,22px);font-weight:500;color:#F1FCFE;text-shadow:0 2px 14px rgba(3,48,66,.6)}
+.badge{position:absolute;right:max(5vw,var(--gr));top:calc(130px + env(safe-area-inset-top,0px));width:clamp(104px,10vw,150px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 20px 50px -24px rgba(5,41,58,.5)}
 .badge svg.ring{position:absolute;inset:6%;width:88%;height:88%;will-change:transform}
-.badge text{font:800 10.5px var(--body);letter-spacing:.2em;text-transform:uppercase;fill:currentColor}
+.badge text{font:700 10.5px var(--body);letter-spacing:.2em;text-transform:uppercase;fill:currentColor}
 .badge .arr{width:42%;aspect-ratio:1;border-radius:50%;background:var(--fin);display:grid;place-items:center;animation:bob 1.8s ease-in-out infinite}
 .badge .arr svg{width:46%;height:46%}
 @keyframes bob{0%,100%{transform:translateY(-4px)}50%{transform:translateY(5px)}}
 .badge:hover .arr{background:var(--coral)}
-@media (max-width:700px){.badge{top:calc(84px + env(safe-area-inset-top,0px))}}
-
+@media (max-width:700px){.badge{top:calc(84px + env(safe-area-inset-top,0px))}.hero-in{padding-top:110px}}
+@media (max-width:700px) and (max-height:740px){.hero-stk .stk:nth-child(3){display:none}.hero-sub{font-size:16.5px}.hero-in{gap:14px}}
 @media (max-width:380px){
   .hero-in{padding-top:96px;gap:12px}
   .hero-stk{gap:6px 8px}.hero-stk .stk{font-size:11px;padding:.45em .8em}
@@ -151,140 +162,156 @@ html.deep .logo .lg-dark{opacity:0}
   .hero-stick{min-height:0}
   .hero-stk,.badge{display:none}
   .hero-in{padding-top:76px;padding-bottom:18px;gap:10px}
+  .hero h1{font-size:clamp(36px,13vh,90px)}
   .hero-sub{font-size:15px;max-width:52ch}
   .btn{min-height:50px}.btn .bi{width:38px;height:38px}
 }
-.hero-in{grid-template-columns:minmax(0,1fr)}
 
-/* depth gauge, fixed at the right edge on wide screens */
+/* depth gauge: labelled scale on wide screens, a slim rail at the edge on phones */
 .gauge.dk{color:#F2FBFD}
 .gauge{position:fixed;right:calc(22px + env(safe-area-inset-right,0px));top:50%;z-index:40;transform:translateY(-50%);display:grid;justify-items:center;gap:10px;font:700 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--fg);transition:color .8s,opacity .5s;pointer-events:none}
 .gauge .rail{position:relative;width:2px;height:180px;background:var(--hair)}
 .gauge .fill{position:absolute;left:0;top:0;width:2px;height:0;background:var(--fin)}
 .gauge .dot{position:absolute;left:50%;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--fin);box-shadow:0 0 0 5px rgba(249,167,43,.25)}
-.gauge b{font:600 22px/1 var(--display);letter-spacing:0;font-variant-numeric:tabular-nums}
+.gauge b{font:700 18px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .gauge.off{opacity:0}
-@media (max-width:1380px){.gauge{display:none}}
+@media (max-width:1380px){
+  .gauge{right:calc(5px + env(safe-area-inset-right,0px));gap:0}
+  .gauge>span,.gauge>b{display:none}
+  .gauge .rail{height:34vh;width:3px;border-radius:3px;background:rgba(127,127,127,.22)}
+  .gauge .fill{width:3px;border-radius:3px}
+  .gauge .dot{width:9px;height:9px;margin:-4.5px 0 0 -4.5px;box-shadow:0 0 0 4px rgba(249,167,43,.25)}
+}
 
 /* MARQUEE */
 .marq{padding-block:clamp(36px,6vw,80px) clamp(20px,3vw,40px);overflow:hidden}
-.mrow{display:flex;width:max-content;gap:.35em;font:700 clamp(64px,11vw,190px)/1 var(--display);text-transform:uppercase;white-space:nowrap;will-change:transform}
+.mrow{display:flex;width:max-content;gap:.35em;font:800 clamp(56px,10vw,170px)/1.05 var(--display);letter-spacing:-.04em;white-space:nowrap;will-change:transform}
 .mrow span{display:inline-flex;align-items:center;gap:.35em}
 .mrow .o{color:transparent;-webkit-text-stroke:2px var(--fg)}
 .mrow .f{color:var(--fin)}
 .mrow .t{color:var(--lagoon)}
-.mrow .dot{width:.22em;height:.22em;border-radius:50%;background:var(--coral);flex:none}
+.mrow .s{font-family:var(--serif);font-style:italic;letter-spacing:-.01em;color:var(--coral)}
+.mrow .dot{width:.2em;height:.2em;border-radius:50%;background:var(--coral);flex:none}
 .mrow+.mrow{margin-top:.08em}
 
 /* MANIFESTO — words fill in as you read */
 .mani{padding-block:clamp(40px,7vw,110px) clamp(80px,10vw,150px)}
-.mani-text{font:700 clamp(28px,4.3vw,66px)/1.12 var(--body);letter-spacing:-.025em;max-width:22ch;text-wrap:pretty}
-.mani-text .wd{opacity:.14;transition:opacity .15s linear}
+.mani-text{font:600 clamp(27px,4.1vw,62px)/1.18 var(--body);letter-spacing:-.025em;max-width:23ch;text-wrap:pretty}
+.mani-text em{font-family:var(--serif);font-style:italic;font-weight:700;color:var(--coral);letter-spacing:0}
+.mani-text .wd{opacity:.2}
 .mani-text .pic{display:inline-block;vertical-align:middle;width:2.1em;height:1em;border-radius:999px;overflow:hidden;margin:-.1em .08em 0;transform:rotate(-3deg)}
 .mani-text .pic:nth-of-type(2n){transform:rotate(4deg)}
 .mani-text .pic img{width:100%;height:100%;object-fit:cover}
 .perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(50px,7vw,96px)}
-.perk{position:relative;padding:26px 24px 28px;border-radius:26px;background:var(--shell);color:var(--ink);display:grid;gap:12px;align-content:start;box-shadow:0 24px 50px -36px rgba(5,41,58,.45)}
+.perk{position:relative;padding:28px 24px 30px;border-radius:26px;background:var(--shell);color:var(--ink);display:grid;gap:12px;align-content:start;box-shadow:0 24px 50px -36px rgba(5,41,58,.45)}
 .perk.ready{transition:transform .45s var(--ease)}
 .perk:nth-child(1){transform:rotate(-2deg)}
 .perk:nth-child(2){transform:rotate(1.5deg) translateY(18px)}
 .perk:nth-child(3){transform:rotate(-1deg)}
 .perk:nth-child(4){transform:rotate(2deg) translateY(14px)}
 .perk:hover{transform:rotate(0) translateY(-8px)}
-.perk b{font:700 clamp(40px,4vw,60px)/.9 var(--display);text-transform:uppercase}
+.perk b{font:800 clamp(40px,3.8vw,58px)/1 var(--display);letter-spacing:-.04em}
 .perk:nth-child(1) b{color:var(--lagoon)}
 .perk:nth-child(2) b{color:var(--fin)}
 .perk:nth-child(3) b{color:var(--coral)}
 .perk:nth-child(4) b{color:var(--reef)}
-.perk h3{font:800 21px/1.25 var(--body);text-transform:none;letter-spacing:0}
-.perk p{color:var(--muted-l);font-size:18px;line-height:1.5}
+.perk h3{font:700 21px/1.25 var(--body);letter-spacing:-.01em}
+.perk p{color:var(--muted-l);font-size:17.5px;line-height:1.5}
 @media (max-width:980px){.perks{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.perks{grid-template-columns:minmax(0,1fr)}.perk:nth-child(n){transform:rotate(0)}}
+@media (max-width:520px){.perks{grid-template-columns:minmax(0,1fr);gap:16px}.perk:nth-child(odd){transform:rotate(-1.2deg)}.perk:nth-child(even){transform:rotate(1.2deg)}}
 
 /* SLED — four words of the name, four photo tiles */
 .words{padding-block:0 clamp(90px,10vw,150px)}
 .words-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(28px,4vw,50px)}
-.words-head h2{font-size:clamp(52px,8vw,130px)}
-.words-head h2 em{font-style:normal;color:var(--fin)}
+.words-head h2{font-size:clamp(42px,7.4vw,120px)}
+.words-head h2 em{color:var(--fin)}
 .words-head .hand{font-size:clamp(28px,2.6vw,38px);color:var(--coral);transform:rotate(-4deg)}
 .tiles{display:flex;gap:14px;height:clamp(460px,72vh,720px)}
 .tile{position:relative;flex:1 1 0;min-width:0;border-radius:28px;overflow:hidden;color:#fff;isolation:isolate;transition:flex-grow .8s var(--ease)}
 @media (hover:hover){.tile:hover{flex-grow:2.3}}
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--ease)}
 .tile:hover img{transform:scale(1.08)}
-.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,0) 35%,rgba(5,41,58,.85))}
-.tile .L{position:absolute;left:18px;top:6px;font:700 clamp(90px,11vw,180px)/1 var(--display);color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.9)}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,0) 30%,rgba(5,41,58,.88))}
+.tile .L{position:absolute;left:18px;top:10px;font:800 clamp(90px,10vw,170px)/1 var(--display);color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.9)}
 .tile:nth-child(1) .L{-webkit-text-stroke-color:var(--lagoon)}
 .tile:nth-child(2) .L{-webkit-text-stroke-color:#fff}
 .tile:nth-child(3) .L{-webkit-text-stroke-color:var(--fin)}
 .tile:nth-child(4) .L{-webkit-text-stroke-color:var(--coral)}
 .tile .tx{position:absolute;left:22px;right:22px;bottom:22px;display:grid;gap:8px}
-.tile h3{font-size:clamp(36px,3.4vw,54px)}
-.tile p{font-size:clamp(16px,1.25vw,19px);font-weight:600;color:#E6F7FA;max-width:30ch;line-height:1.4}
-@media (max-width:900px){.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:auto}.tile{aspect-ratio:3/4;max-width:100%}.tile:hover{flex-grow:1}}
-@media (max-width:520px){.tiles{grid-template-columns:minmax(0,1fr)}.tile{aspect-ratio:4/5}}
+.tile h3{font-size:clamp(30px,2.8vw,44px)}
+.tile p{font-size:clamp(16px,1.2vw,18.5px);font-weight:500;color:#EEFAFC;max-width:32ch;line-height:1.45}
+@media (max-width:900px){
+  .tiles{display:block;height:auto}
+  .tile{position:sticky;top:calc(80px + var(--i,0) * 14px + env(safe-area-inset-top,0px));height:min(72svh,600px);margin-bottom:22px;box-shadow:0 -20px 40px -24px rgba(5,41,58,.5);transform-origin:50% 0}
+  .tile:last-child{margin-bottom:0}
+  .tile .L{font-size:clamp(90px,28vw,150px)}
+  .tile h3{font-size:clamp(30px,8.4vw,44px)}
+  .tile p{font-size:17px}
+}
 
 /* SEA — polaroids drift past a pinned title */
 .sea{position:relative;height:340vh;overflow-x:clip;background:linear-gradient(180deg,var(--sand) 0,#8FDDE4 10vh,#13809A 26vh,#0A4E63 40vh,var(--abyss) 60vh,var(--abyss) 100%)}
-.sea-stick{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;padding-left:var(--gl);padding-right:var(--gr)}
-.sea-title{display:grid;gap:22px;justify-items:center;position:relative;z-index:1}
-.sea-title h2{font-size:clamp(56px,10vw,170px);line-height:.86}
-.sea-title h2 em{font-style:normal;color:var(--lagoon)}
-.sea-title p{max-width:38ch;color:var(--muted);font-size:clamp(18px,1.6vw,23px);font-weight:600}
+.sea-stick{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;padding-left:var(--gl);padding-right:var(--gr);z-index:3;pointer-events:none}
+.sea-title{display:grid;gap:22px;justify-items:center;position:relative;z-index:3;pointer-events:none;text-shadow:0 4px 30px rgba(5,41,58,.9),0 1px 3px rgba(5,41,58,.8)}
+.sea-title h2{font-size:clamp(44px,9vw,150px);line-height:.98}
+.sea-title h2 em{color:var(--lagoon)}
+.sea-title p{max-width:40ch;color:var(--muted);font-size:clamp(18px,1.6vw,22px);font-weight:500}
 .sea-title .hand{font-size:clamp(26px,2.4vw,36px);color:var(--fin);transform:rotate(-4deg)}
 .pols{position:absolute;inset:0;z-index:2;pointer-events:none}
 .pol{position:absolute;margin:0;background:#fff;padding:10px 10px 0;border-radius:6px;box-shadow:0 30px 60px -28px rgba(0,0,0,.7);will-change:transform;pointer-events:auto}
 .pol img{width:100%;aspect-ratio:var(--ar,4/3);object-fit:cover;border-radius:2px}
-.pol figcaption{font:700 clamp(24px,2vw,32px)/1 var(--hand);color:var(--ink);padding:10px 4px 12px}
+.pol figcaption{font:700 clamp(22px,1.9vw,30px)/1.05 var(--hand);color:var(--ink);padding:10px 4px 12px}
 @media (max-width:820px){
-  .sea{height:auto;padding-block:46vh 70px}
-  .sea-stick{position:relative;height:auto;padding-block:0 40px}
-  .pols{position:relative;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:22px 16px;padding-left:var(--gl);padding-right:var(--gr)}
-  .pol{position:relative;left:auto!important;top:auto!important;width:auto!important}
-  .pol:nth-child(odd){transform:rotate(-3deg)}
-  .pol:nth-child(even){transform:rotate(3deg);margin-top:30px}
+  .sea{height:auto;padding-block:32vh 80px}
+  .sea-stick{position:relative;height:auto;padding-block:0 46px}
+  .pols{position:relative;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:26px 16px;padding-left:var(--gl);padding-right:var(--gr)}
+  .pol{position:relative;left:auto!important;top:auto!important;width:auto!important;padding:7px 7px 0}
+  .pol:nth-child(even){margin-top:56px}
+  .pol figcaption{font-size:21px;padding:8px 2px 10px}
 }
 
 /* STATS over a parallax photo */
 .stats{position:relative;overflow:hidden;isolation:isolate;color:#fff;padding-block:clamp(110px,14vw,200px)}
 .stats .bgimg{position:absolute;inset:-20% 0;z-index:-2}
 .stats .bgimg img{width:100%;height:100%;object-fit:cover}
-.stats::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,.55),rgba(5,41,58,.78))}
+.stats::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,.55),rgba(5,41,58,.8))}
 .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px}
-.stat{display:grid;gap:10px;align-content:start}
-.stat b{font:700 clamp(64px,8.4vw,140px)/.85 var(--display);font-variant-numeric:tabular-nums;color:#fff}
+.stat{display:grid;gap:12px;align-content:start}
+.stat b{font:800 clamp(44px,5.4vw,100px)/.95 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:#fff;white-space:nowrap}
 .stat:nth-child(2) b{color:var(--fin)}
 .stat:nth-child(4) b{color:var(--lagoon)}
-.stat span{font-weight:700;color:#D9F3F7;max-width:18ch;font-size:clamp(17px,1.5vw,21px);line-height:1.35}
-@media (max-width:820px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:50px}}
+.stat span{font-weight:600;color:#E2F6F9;max-width:20ch;font-size:clamp(16.5px,1.45vw,20px);line-height:1.35}
+@media (max-width:820px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:50px;column-gap:18px}.stat b{font-size:clamp(40px,11.5vw,80px)}}
 
 /* COACH */
-.coach{background:linear-gradient(180deg,var(--abyss) 0,var(--abyss) calc(100% - 38vh),#0A4E63 calc(100% - 28vh),#13809A calc(100% - 18vh),#8FDDE4 calc(100% - 8vh),var(--sand) 100%);padding-block:clamp(90px,11vw,170px) calc(clamp(60px,8vw,120px) + 34vh)}
+.coach{--tail:34vh;background:linear-gradient(180deg,var(--abyss) 0,var(--abyss) calc(100% - var(--tail) - 4vh),#0A4E63 calc(100% - var(--tail)*.8),#13809A calc(100% - var(--tail)*.5),#8FDDE4 calc(100% - var(--tail)*.22),var(--sand) 100%);padding-block:clamp(90px,11vw,170px) calc(clamp(60px,8vw,120px) + var(--tail))}
+@media (max-width:860px){.coach{--tail:22vh}}
 .coach-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,100px);align-items:center}
 .coach-img{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:200px 200px 28px 28px;overflow:hidden}
 .coach-img img{width:100%;height:118%;object-fit:cover;will-change:transform}
-.coach-img .stk{position:absolute;left:18px;bottom:22px;max-width:calc(100% - 36px);white-space:normal;transform:rotate(-4deg)}
+.coach-img .stk{position:absolute;left:18px;bottom:22px;max-width:calc(100% - 36px);transform:rotate(-4deg)}
 .coach-txt{display:grid;gap:24px}
 .coach-txt .k{font:700 13px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--fin)}
-.coach-txt h2{font-size:clamp(58px,8vw,130px);line-height:.86}
+.coach-txt{min-width:0}
+.coach-txt h2{font-size:clamp(42px,5.6vw,100px);line-height:.98}
 .coach-txt h2 span{display:block}
 .coach-txt h2 .o{color:transparent;-webkit-text-stroke:2px var(--fg)}
-.coach-txt .lead{font-size:clamp(19px,1.7vw,24px);color:var(--muted);max-width:52ch}
-.ticks{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-.ticks li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;font-weight:600;font-size:clamp(18px,1.45vw,21px)}
+.coach-txt .lead{font-size:clamp(19px,1.65vw,23px);color:var(--muted);max-width:50ch}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.ticks li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;font-weight:500;font-size:clamp(17.5px,1.4vw,20px)}
 .ticks li::before{content:"";width:28px;height:28px;border-radius:50%;background:var(--fin) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23231F20' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-9'/%3E%3C/svg%3E") center/16px no-repeat}
 @media (max-width:860px){.coach-grid{grid-template-columns:minmax(0,1fr)}.coach-img{max-width:440px}}
 
-/* COURSES — pinned horizontal track */
+/* COURSES — pinned horizontal track (any screen tall enough) */
 .courses{position:relative}
 .c-stick{padding-block:clamp(70px,9vw,120px)}
 .c-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px 40px;margin-bottom:clamp(30px,4vw,50px)}
-.c-head h2{font-size:clamp(52px,8vw,130px)}
-.c-head h2 em{font-style:normal;color:var(--coral)}
-.c-head p{max-width:38ch;color:var(--muted);font-size:clamp(18px,1.5vw,21px)}
+.c-head h2{font-size:clamp(42px,7.4vw,120px)}
+.c-head h2 em{color:var(--coral)}
+.c-head p{max-width:38ch;color:var(--muted);font-size:clamp(17px,1.45vw,20px)}
 .track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px var(--gr) 26px var(--gl);scrollbar-width:none}
 .track::-webkit-scrollbar{display:none}
-.card{flex:0 0 min(380px,80vw);scroll-snap-align:start;background:var(--shell);color:var(--ink);border-radius:30px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 60px -40px rgba(5,41,58,.55)}
+.card{flex:0 0 min(380px,82vw);scroll-snap-align:start;background:var(--shell);color:var(--ink);border-radius:30px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 60px -40px rgba(5,41,58,.55)}
 .card.ready{transition:transform .45s var(--ease)}
 .card:hover{transform:translateY(-10px) rotate(-1deg)}
 .card .im{position:relative;aspect-ratio:5/4;max-width:100%;overflow:hidden}
@@ -292,105 +319,117 @@ html.deep .logo .lg-dark{opacity:0}
 .card:hover .im img{transform:scale(1.08)}
 .card .stk{position:absolute;top:16px;left:16px;transform:rotate(-3deg)}
 .card .bd{padding:24px 24px 26px;display:grid;gap:10px;flex:1;align-content:start}
-.card h3{font-size:40px;line-height:.95}
-.card p{color:var(--muted-l);font-size:18px;line-height:1.5}
-.card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid rgba(35,31,32,.1);font-size:16px;font-weight:700;color:var(--muted-l)}
+.card h3{font-size:28px;line-height:1.05;letter-spacing:-.04em}
+.card p{color:var(--muted-l);font-size:17px;line-height:1.5}
+.card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid rgba(35,31,32,.1);font-size:15px;font-weight:600;color:var(--muted-l)}
 .card .meta a::after{content:"→";display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--fin);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .card .meta a:hover::after{transform:rotate(-45deg) scale(1.15)}
-.card .meta a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;background:var(--fin);padding:12px 18px;border-radius:999px;font-weight:800;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.card .meta a{flex:none;display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;background:var(--fin);padding:12px 16px;border-radius:999px;font-weight:800;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
 .c-bar{height:3px;background:var(--hair);border-radius:3px;margin-top:8px;overflow:hidden}
 .c-bar i{display:block;height:100%;width:100%;background:var(--fin);transform-origin:left;transform:scaleX(0)}
-.c-note{color:var(--muted);font-size:16px;margin-top:14px}
-@media (min-width:901px){
-  .js-pin .courses{height:var(--pin-h,300vh)}
-  .js-pin .c-stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-  .js-pin .track{overflow:visible;scroll-snap-type:none;will-change:transform}
-  .js-pin .c-stick{padding-block:calc(70px + 1vh) 2vh}
-  .js-pin .c-head{flex-wrap:nowrap;margin-bottom:clamp(10px,2.4vh,36px)}
-  .js-pin .c-head h2{font-size:clamp(40px,min(6.4vw,8.6vh),120px)}
-  .js-pin .c-head p{font-size:clamp(16px,min(1.4vw,2.3vh),21px)}
-  .js-pin .track{padding-block:6px 14px}
-  .js-pin .card{flex-basis:clamp(290px,min(25vw,52vh),380px)}
-  .js-pin .card .im{aspect-ratio:auto;height:clamp(110px,25vh,290px)}
-  .js-pin .card .bd{padding:clamp(14px,2.4vh,24px) clamp(18px,1.8vw,24px);gap:clamp(4px,1vh,10px)}
-  .js-pin .card h3{font-size:clamp(26px,min(2.4vw,4.4vh),40px)}
-  .js-pin .card p{font-size:clamp(15px,min(1.2vw,2.1vh),18px);line-height:1.4}
-  .js-pin .card .meta{padding-top:clamp(8px,1.6vh,16px)}
-  .js-pin .card .meta{font-size:15px;white-space:nowrap}
-  .js-pin .card .meta a{padding:clamp(9px,1.3vh,12px) 16px}
-  .js-pin .c-note{margin-top:8px}
+.js-pin .courses{height:var(--pin-h,300vh)}
+.js-pin .c-stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-block:calc(70px + 1vh) 2vh}
+.js-pin .track{overflow:visible;scroll-snap-type:none;will-change:transform;padding-block:6px 14px}
+.js-pin .c-head{flex-wrap:nowrap;margin-bottom:clamp(10px,2.4vh,36px)}
+.js-pin .c-head h2{font-size:clamp(34px,min(6vw,8vh),110px)}
+.js-pin .c-head p{font-size:clamp(15px,min(1.4vw,2.3vh),20px)}
+.js-pin .card{flex-basis:clamp(290px,min(25vw,52vh),380px)}
+.js-pin .card .im{aspect-ratio:auto;height:clamp(110px,25vh,290px)}
+.js-pin .card .bd{padding:clamp(14px,2.4vh,24px) clamp(18px,1.8vw,24px);gap:clamp(4px,1vh,10px)}
+.js-pin .card h3{font-size:clamp(21px,min(2vw,3.6vh),30px)}
+.js-pin .card p{font-size:clamp(15px,min(1.2vw,2.1vh),17px);line-height:1.42}
+.js-pin .card .meta{padding-top:clamp(8px,1.6vh,16px);white-space:nowrap}
+.js-pin .card .meta a{padding:clamp(9px,1.3vh,12px) 16px}
+@media (max-width:900px){
+  .js-pin .c-stick{padding-block:calc(66px + env(safe-area-inset-top,0px)) 3vh;justify-content:flex-start}
+  .js-pin .c-head{flex-wrap:wrap;gap:8px;margin-bottom:2.2vh}
+  .js-pin .c-head h2{font-size:clamp(32px,min(9.6vw,6.2vh),60px)}
+  .js-pin .c-head p{font-size:clamp(14.5px,2vh,17px);line-height:1.45}
+  .js-pin .card{flex-basis:min(82vw,400px)}
+  .js-pin .card .im{height:clamp(120px,24vh,260px)}
+  .js-pin .card h3{font-size:clamp(21px,3.2vh,28px)}
+  .js-pin .card p{font-size:clamp(15px,2.1vh,17px)}
+  .js-pin .track{gap:14px}
+  .c-bar{margin-top:2px}
 }
-@media (max-width:900px){.c-bar{display:none}}
+html:not(.js-pin) .c-bar{display:none}
 
 /* LAAMU — a framed photo opens to full screen */
 .laamu{position:relative;height:220vh}
 .l-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
 .l-frame{position:absolute;inset:0;clip-path:inset(16% 22% 16% 22% round 36px);will-change:clip-path}
 .l-frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.25);will-change:transform}
-.l-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,41,58,.78),rgba(5,41,58,.2) 70%);opacity:var(--o,0)}
-.l-txt{position:relative;z-index:2;color:#fff;display:grid;gap:22px;align-content:center;width:100%;opacity:0}
-.l-txt{padding-top:56px}
-.l-txt h2{font-size:clamp(48px,min(9vw,15vh),150px);max-width:9ch;line-height:.86}
-.l-txt p{max-width:42ch;font-size:clamp(18px,1.7vw,24px);color:#E2F6FA;font-weight:600}
+.l-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,41,58,.82),rgba(5,41,58,.25) 70%);opacity:var(--o,0)}
+.l-txt{position:relative;z-index:2;color:#fff;display:grid;gap:22px;align-content:center;width:100%;opacity:0;padding-top:56px}
+.l-txt h2{font-size:clamp(42px,min(8vw,13vh),136px);max-width:9ch;line-height:.98}
+.l-txt h2 em{color:var(--fin)}
+.l-txt p{max-width:42ch;font-size:clamp(18px,1.65vw,23px);color:#EAF8FB;font-weight:500}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
-.chips span{border:1.5px solid rgba(255,255,255,.6);border-radius:999px;padding:12px 20px;font-weight:700;font-size:17px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,.08)}
+.chips span{border:1.5px solid rgba(255,255,255,.6);border-radius:999px;padding:11px 18px;font-weight:600;font-size:16.5px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,.1)}
 .l-cap{position:absolute;bottom:clamp(20px,6vh,60px);left:50%;transform:translateX(-50%) rotate(-3deg);font:700 clamp(24px,2.2vw,32px)/1 var(--hand);color:var(--fg);white-space:nowrap}
-@media (max-width:700px){.l-frame{clip-path:inset(22% 8% 22% 8% round 28px)}}
+@media (max-width:700px){
+  .l-frame{clip-path:inset(22% 8% 22% 8% round 28px)}
+  .l-frame::after{background:linear-gradient(180deg,rgba(5,41,58,.15) 0%,rgba(5,41,58,.55) 35%,rgba(5,41,58,.88) 100%)}
+  .l-txt{align-content:end;padding-bottom:max(36px,env(safe-area-inset-bottom,0px));height:100%;gap:16px}
+  .chips span{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(5,41,58,.35);font-size:15px;padding:9px 14px}
+}
 
 /* STEPS — the dive profile draws itself */
 .how{padding-block:clamp(90px,11vw,160px)}
-.how h2{font-size:clamp(52px,8vw,130px)}
-.how h2 em{font-style:normal;color:var(--lagoon)}
+.how h2{font-size:clamp(42px,7.4vw,120px)}
+.how h2 em{color:var(--lagoon)}
 .profile{position:relative;margin-top:clamp(36px,5vw,64px)}
 .profile svg{width:100%;height:auto;display:block;overflow:visible}
 .profile .base{stroke:var(--hair)}
 .profile .line{stroke:var(--fin)}
-.profile text{fill:var(--muted);font:700 17px var(--body);letter-spacing:.05em}
+.profile text{fill:var(--muted);font:600 17px var(--body);letter-spacing:.04em}
 .profile .surf{stroke:var(--lagoon);stroke-dasharray:2 8}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:20px}
 .step{display:grid;gap:10px;align-content:start}
-.step .n{font:700 64px/.8 var(--display);color:var(--fin)}
-.step h3{font:800 clamp(24px,2.1vw,30px)/1.15 var(--body);text-transform:none;letter-spacing:-.01em}
-.step p{color:var(--muted);font-size:clamp(18px,1.5vw,21px)}
-@media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr)}.profile text{font-size:30px}.profile .line{stroke-width:9}.profile .base{stroke-width:7}}
+.step .n{font:400 72px/.9 var(--serif);font-style:italic;font-weight:800;color:var(--fin)}
+.step h3{font:700 clamp(23px,2vw,28px)/1.2 var(--body);letter-spacing:-.015em}
+.step p{color:var(--muted);font-size:clamp(17.5px,1.45vw,20px)}
+@media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr);gap:34px;margin-top:34px}.profile text{font-size:44px}.profile .line{stroke-width:10}.profile .base{stroke-width:8}#ddot{r:18px}}
 
 /* GALLERY rows drifting with scroll */
 .gal{overflow:hidden;padding-block:calc(30vh + 40px) calc(30vh + 30px);background:linear-gradient(180deg,var(--sand) 0,#8FDDE4 7vh,#13809A 15vh,#0A4E63 22vh,var(--abyss) 30vh,var(--abyss) calc(100% - 30vh),#0A4E63 calc(100% - 22vh),#13809A calc(100% - 15vh),#8FDDE4 calc(100% - 7vh),var(--sand) 100%)}
 .gal-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(30px,4vw,56px)}
-.gal-head h2{font-size:clamp(52px,8vw,130px)}
-.gal-head h2 em{font-style:normal;color:var(--fin)}
-.gal-head p{max-width:34ch;color:var(--muted);font-size:clamp(18px,1.6vw,22px)}
+.gal-head h2{font-size:clamp(42px,7.4vw,120px)}
+.gal-head h2 em{color:var(--fin)}
+.gal-head p{max-width:36ch;color:var(--muted);font-size:clamp(17.5px,1.55vw,21px)}
 .grow{display:flex;gap:16px;width:max-content;will-change:transform}
 .grow+.grow{margin-top:16px}
-.grow figure{margin:0;height:clamp(180px,24vw,340px);aspect-ratio:var(--ar,1.5);border-radius:24px;overflow:hidden;flex:none}
+.grow figure{margin:0;height:clamp(190px,24vw,340px);aspect-ratio:var(--ar,1.5);border-radius:24px;overflow:hidden;flex:none}
 .grow figure img{height:100%;width:100%;max-width:none;object-fit:cover;transition:transform 1s var(--ease)}
 .grow figure:hover img{transform:scale(1.06)}
+@media (max-width:700px){.gal{padding-block:calc(22vh + 40px) calc(22vh + 30px)}}
 
 /* FAQ */
 .faq{padding-block:clamp(90px,11vw,160px)}
 .faq-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(30px,6vw,90px);align-items:start}
 .faq-side{position:sticky;top:110px;display:grid;gap:20px}
-.faq-side h2{font-size:clamp(52px,7vw,110px)}
+.faq-side h2{font-size:clamp(42px,6vw,96px)}
+.faq-side h2 em{color:var(--coral)}
 .faq-pics{position:relative;height:clamp(240px,26vw,360px);margin-top:20px}
 .faq-pics img{position:absolute;width:62%;aspect-ratio:4/5;object-fit:cover;border:8px solid #fff;border-radius:6px;box-shadow:0 24px 50px -24px rgba(5,41,58,.6);will-change:transform}
 .faq-pics img:nth-child(1){left:0;top:6%;transform:rotate(-8deg)}
 .faq-pics img:nth-child(2){left:22%;top:0;transform:rotate(5deg)}
 .faq-pics img:nth-child(3){left:38%;top:12%;transform:rotate(-3deg)}
-@media (max-width:860px){.faq-pics{height:300px;max-width:440px}}
+@media (max-width:860px){.faq-pics{height:260px;max-width:400px}}
 .faq-side .hand{font-size:34px;color:var(--coral);transform:rotate(-3deg);justify-self:start}
 .qa{border-top:1.5px solid var(--hair)}
 .qa:last-child{border-bottom:1.5px solid var(--hair)}
-.qa button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:28px 2px;cursor:pointer;font:800 clamp(21px,2vw,28px)/1.25 var(--body);letter-spacing:-.015em;transition:color .35s,padding .45s var(--ease)}
+.qa button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:26px 2px;cursor:pointer;font:700 clamp(20px,1.9vw,26px)/1.3 var(--body);letter-spacing:-.015em;transition:color .35s,padding .45s var(--ease)}
 .qa button:hover{color:var(--coral);padding-left:12px}
 .qa button:focus-visible{outline:3px solid var(--fin);outline-offset:2px;border-radius:6px}
-.qa i{flex:none;width:48px;height:48px;border-radius:50%;background:var(--fin);position:relative;transition:transform .4s var(--ease)}
+.qa i{flex:none;width:46px;height:46px;border-radius:50%;background:var(--fin);position:relative;transition:transform .4s var(--ease)}
 .qa i::before,.qa i::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2.5px;margin:-1.25px 0 0 -7px;background:var(--ink);border-radius:2px}
 .qa i::after{transform:rotate(90deg)}
 .qa.open i{transform:rotate(135deg)}
 .qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
 .qa.open .ans{grid-template-rows:1fr}
 .qa .ans>div{overflow:hidden}
-.qa .ans p{padding:0 2px 28px;color:var(--muted);max-width:56ch;font-size:clamp(18px,1.55vw,22px);transform:translateY(-14px);opacity:0;transition:transform .55s var(--ease),opacity .45s}
+.qa .ans p{padding:0 2px 28px;color:var(--muted);max-width:56ch;font-size:clamp(17.5px,1.5vw,21px);transform:translateY(-14px);opacity:0;transition:transform .55s var(--ease),opacity .45s}
 .qa.open .ans p{transform:none;opacity:1;transition-delay:.08s}
 @media (max-width:860px){.faq-grid{grid-template-columns:minmax(0,1fr)}.faq-side{position:static}}
 
@@ -398,20 +437,20 @@ html.deep .logo .lg-dark{opacity:0}
 .cta{position:relative;overflow:hidden;isolation:isolate;color:#fff;min-height:min(100svh,940px);display:flex;align-items:center}
 .cta .bgimg{position:absolute;inset:-12% 0;z-index:-3}
 .cta .bgimg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.cta::after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(5,41,58,.15) 0%,rgba(5,41,58,.35) 45%,rgba(5,41,58,.82) 100%)}
+.cta::after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(5,41,58,.25) 0%,rgba(5,41,58,.45) 45%,rgba(5,41,58,.85) 100%)}
 .cta canvas{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
 .cta .wrap{display:grid;gap:26px;padding-block:140px 90px}
-.cta h2{font-size:clamp(62px,11vw,200px);line-height:.84;text-shadow:0 8px 40px rgba(5,41,58,.35)}
+.cta h2{font-size:clamp(52px,10vw,180px);line-height:.95;text-shadow:0 8px 40px rgba(5,41,58,.35)}
 .cta h2 span{display:block}
-.cta h2 .f{color:var(--fin)}
-.cta .sub{max-width:44ch;font-size:clamp(19px,1.8vw,25px);font-weight:600;color:#EAFBFE}
-.cta .where{display:flex;flex-wrap:wrap;gap:10px 26px;font-weight:700;color:#D9F3F7;font-size:17px}
+.cta h2 em{display:block;color:var(--fin)}
+.cta .sub{max-width:44ch;font-size:clamp(18.5px,1.75vw,24px);font-weight:500;color:#F1FCFE}
+.cta .where{display:flex;flex-wrap:wrap;gap:10px 26px;font-weight:600;color:#DFF5F8;font-size:16.5px}
 
-footer{background:#081C26;color:#B9D3DA;padding-block:46px;font-size:16px}
+footer{background:#081C26;color:#B9D3DA;padding-block:46px calc(46px + env(safe-area-inset-bottom,0px));font-size:16px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:22px}
 footer img{height:64px;width:auto}
 
-/* floating messengers */
+/* floating messengers: always on wide screens; on phones they come back only while you scroll up, so they never sit on top of the text you are reading */
 .float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;display:grid;gap:10px;transform:translateY(160%);transition:transform .6s var(--ease)}
 .float.show{transform:none}
 .float a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 14px 30px -10px rgba(0,0,0,.55);transition:transform .3s var(--ease)}
@@ -419,11 +458,11 @@ footer img{height:64px;width:auto}
 .float a:last-child{background:#25D366}
 .float a:hover{transform:scale(1.1) rotate(-6deg)}
 .float svg{width:28px;height:28px}
-@media (max-width:700px){.float a{width:48px;height:48px}.float svg{width:24px;height:24px}}
+@media (max-width:900px){.float{grid-auto-flow:column;right:auto;left:50%;transform:translate(-50%,180%)}.float.show{transform:translate(-50%,0)}.float a{width:54px;height:54px}.float svg{width:25px;height:25px}}
 
-/* generic reveal helpers (JS adds motion; content is visible without it) */
-.sw{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
-.sw .ch{display:inline-block;will-change:transform}
+/* heading letters (JS adds motion; content is visible without it) */
+.sw{display:inline-block;white-space:nowrap;vertical-align:top}
+.sw .ch{display:inline-block}
 
 </style>
 </head>
@@ -436,6 +475,7 @@ footer img{height:64px;width:auto}
       <img class="lg-dark" src="logo-dark.png" alt="SLED — Sleep Live Eat Dive">
       <img class="lg-light" src="logo-light.png" alt="" aria-hidden="true">
     </a>
+    <span class="hdepth" id="hdepth" aria-hidden="true"><span data-i="depth">глубина</span> <b id="hnum">0 м</b></span>
     <nav class="nav" id="nav" aria-label="Основное меню">
       <a href="#about" data-i="nav1">О нас</a>
       <a href="#sea" data-i="nav2">Под водой</a>
@@ -467,18 +507,18 @@ footer img{height:64px;width:auto}
       <div class="hero-media" id="heroMedia"><img src="photos/hero.jpg" alt="Остров на Мальдивах над водой и коралловое дно под водой" fetchpriority="high"></div>
       <div class="hero-shade"></div>
       <div class="hero-deep" id="heroDeep"></div>
-      <a class="badge" href="#about" id="hint" aria-label="Листай вниз"><svg class="ring" id="ring" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text><textPath href="#circ" data-i="hint">листай вниз · ныряем глубже · </textPath></text></svg><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></span></a>
+      <a class="badge" href="#about" id="hint" aria-label="Вниз"><svg class="ring" id="ring" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text><textPath href="#circ" data-i="hint">там внизу черепахи · крути вниз · </textPath></text></svg><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></span></a>
       <div class="wrap hero-in" id="heroIn">
         <div class="hero-stk">
           <span class="stk t" data-i="s1">Остров Ган · атолл Лааму</span>
-          <span class="stk o" data-i="s2">Инструктор SSI на русском</span>
-          <span class="stk c" data-i="s3">До 4 человек в группе</span>
+          <span class="stk o" data-i="s2">Инструктор SSI говорит по-русски</span>
+          <span class="stk c" data-i="s3">Максимум 4 в группе</span>
         </div>
-        <h1 id="h1"><span class="ln"><span data-i="h1a">Ныряем</span></span><span class="ln"><span data-i="h1b">на Мальдивах</span></span></h1>
+        <h1 id="h1"><span class="ln"><span data-i="h1a">Ныряй</span></span><span class="ln acc"><span data-i="h1b">в вечное лето</span></span></h1>
         <div class="hero-row">
-          <p class="hero-sub" data-i="hsub">SLED — маленький дайв-центр на атолле Лааму, куда редко доплывают толпы. Пробные погружения, курсы SSI и фан-дайвинг с лодки.</p>
+          <p class="hero-sub" data-i="hsub">Маленький дайв-центр на краю Мальдив, куда не доплывают толпы. Вода тёплая круглый год, черепахи плавают рядом, а на риф не надо стоять в очереди.</p>
           <div class="btns">
-            <a class="btn btn-fin" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.3-1.5zM9.5 14.6l-.4 4.3-1.6-5.1 10.8-6.8z"/></svg></span><span class="bt"><span data-i="b1" data-t="Записаться в Telegram">Записаться в Telegram</span></span></a>
+            <a class="btn btn-fin" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.3-1.5zM9.5 14.6l-.4 4.3-1.6-5.1 10.8-6.8z"/></svg></span><span class="bt"><span data-i="b1" data-t="Хочу нырять!">Хочу нырять!</span></span></a>
             <a class="btn btn-glass" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span class="bt"><span data-t="WhatsApp">WhatsApp</span></span></a>
           </div>
         </div>
@@ -493,12 +533,12 @@ footer img{height:64px;width:auto}
 
   <section class="mani" id="about" data-depth="5">
     <div class="wrap">
-      <p class="mani-text" id="mani" data-i="mani">Мы маленький дайв-центр на острове Ган. <span class="pic"><img src="photos/c-try.jpg" alt=""></span> Один опытный инструктор, до четырёх человек в группе и спокойный темп. <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> Всё объясняем по-русски, а платите вы уже на месте.</p>
+      <p class="mani-text" id="mani" data-i="mani">Нас тут немного, и в этом весь кайф. Один инструктор, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> четыре человека в группе максимум и никакого конвейера: никто не торопит, никто не теряется в толпе. Всё объясняем по-русски, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> а платишь уже на месте, когда понял, что влюбился в этот риф.</p>
       <div class="perks">
-        <article class="perk"><b>4</b><h3 data-i="p1h">человека максимум</h3><p data-i="p1p">На одного инструктора не больше четырёх дайверов. Внимание достаётся каждому.</p></article>
-        <article class="perk"><b>RU</b><h3 data-i="p2h">на русском языке</h3><p data-i="p2p">Теория, брифинги и разбор погружений на родном языке, без спешки.</p></article>
-        <article class="perk"><b>SSI</b><h3 data-i="p3h">международный сертификат</h3><p data-i="p3p">С сертификатом SSI можно нырять в дайв-центрах по всему миру.</p></article>
-        <article class="perk"><b>0 $</b><h3 data-i="p4h">предоплаты</h3><p data-i="p4p">Записываетесь в мессенджере, оплачиваете на месте.</p></article>
+        <article class="perk"><b>4</b><h3 data-i="p1h">человека в группе, не больше</h3><p data-i="p1p">Александр видит каждого. Не нужно махать руками на глубине, чтобы тебя заметили.</p></article>
+        <article class="perk"><b>RU</b><h3 data-i="p2h">всё по-русски</h3><p data-i="p2p">Брифинг, теория и разбор после нырка на родном языке. Никаких «sorry, I don’t understand» на пятнадцати метрах.</p></article>
+        <article class="perk"><b>SSI</b><h3 data-i="p3h">сертификат на весь мир</h3><p data-i="p3p">Получил его здесь, а дальше ныряешь хоть в Египте, хоть на Бали, хоть в Таиланде.</p></article>
+        <article class="perk"><b>0 $</b><h3 data-i="p4h">предоплаты</h3><p data-i="p4p">Пишешь в мессенджер, приезжаешь, ныряешь. Рассчитаемся уже на месте.</p></article>
       </div>
     </div>
   </section>
@@ -507,13 +547,13 @@ footer img{height:64px;width:auto}
     <div class="wrap">
       <div class="words-head">
         <h2><span data-i="wh1">Спи. Живи.</span><br><em data-i="wh2">Ешь. Ныряй.</em></h2>
-        <span class="hand" data-i="whk">так расшифровывается SLED</span>
+        <span class="hand" data-i="whk">вот и весь SLED по буквам</span>
       </div>
       <div class="tiles" id="tiles">
-        <article class="tile"><img src="photos/sleep.jpg" alt="Гамак между пальмами у океана" loading="lazy"><span class="L" aria-hidden="true">S</span><div class="tx"><h3>Sleep</h3><p data-i="t1">Дайв-центр прямо на территории отеля-партнёра. От номера до снаряжения несколько шагов.</p></div></article>
-        <article class="tile"><img src="photos/live.jpg" alt="Девушка с маской для снорклинга бежит в море" loading="lazy"><span class="L" aria-hidden="true">L</span><div class="tx"><h3>Live</h3><p data-i="t2">Остров в ритме океана: белый песок, лагуна и никакой спешки.</p></div></article>
-        <article class="tile"><img src="photos/eat.jpg" alt="Завтрак у моря" loading="lazy"><span class="L" aria-hidden="true">E</span><div class="tx"><h3>Eat</h3><p data-i="t3">Отдых и еда между погружениями, чтобы второй выход был в удовольствие.</p></div></article>
-        <article class="tile"><img src="photos/dive.jpg" alt="Ныряльщик среди рыб в солнечных лучах" loading="lazy"><span class="L" aria-hidden="true">D</span><div class="tx"><h3>Dive</h3><p data-i="t4">3–4 погружения в день с инструктором, который объясняет всё по-русски.</p></div></article>
+        <article class="tile" style="--i:0"><img src="photos/sleep.jpg" alt="Гамак между пальмами у океана" loading="lazy"><span class="L" aria-hidden="true">S</span><div class="tx"><h3>Sleep</h3><p data-i="t1">Дайв-центр прямо на территории отеля. Проснулся, вышел из номера, и через пару минут уже примеряешь маску.</p></div></article>
+        <article class="tile" style="--i:1"><img src="photos/live.jpg" alt="Девушка с маской для снорклинга бежит в море" loading="lazy"><span class="L" aria-hidden="true">L</span><div class="tx"><h3>Live</h3><p data-i="t2">Босиком с утра до вечера. Белый песок, лагуна цвета мятной жвачки и ни одного «срочно» за весь отпуск.</p></div></article>
+        <article class="tile" style="--i:2"><img src="photos/eat.jpg" alt="Завтрак у моря" loading="lazy"><span class="L" aria-hidden="true">E</span><div class="tx"><h3>Eat</h3><p data-i="t3">Между нырками фрукты, кофе и обед с видом на океан. Голодный дайвер грустит, а мы такого не допускаем.</p></div></article>
+        <article class="tile" style="--i:3"><img src="photos/dive.jpg" alt="Ныряльщик среди рыб в солнечных лучах" loading="lazy"><span class="L" aria-hidden="true">D</span><div class="tx"><h3>Dive</h3><p data-i="t4">Три-четыре погружения в день с лодки. Сколько хватит сил и восторга, столько и нырнём.</p></div></article>
       </div>
     </div>
   </section>
@@ -521,36 +561,36 @@ footer img{height:64px;width:auto}
   <section class="sea dk" id="sea" data-depth="18" data-dk="0.14,1">
     <div class="sea-stick">
       <div class="sea-title">
-        <span class="hand" data-i="seak">а теперь вниз</span>
+        <span class="hand" data-i="seak">задержи дыхание… шучу, у нас баллоны</span>
         <h2><span data-i="sea1">Соседи</span><br><em data-i="sea2">по рифу</em></h2>
-        <p data-i="seap">Черепахи, манты, китовые акулы и огромные стаи рифовых рыб. На Мальдивах вода тёплая круглый год.</p>
+        <p data-i="seap">Черепахи, которые совсем не боятся людей. Манты, что проплывают над головой, как космические корабли. Акулята на мелководье и стаи рыб такие плотные, что за ними не видно солнца.</p>
       </div>
     </div>
     <div class="pols" id="pols">
-      <figure class="pol" data-x="4" data-y="5" data-w="24" data-r="-7" data-s="0.5"><img src="photos/turtle.jpg" alt="Морская черепаха над рифом" loading="lazy"><figcaption data-i="c1">черепаха</figcaption></figure>
-      <figure class="pol" data-x="70" data-y="3" data-w="23" data-r="6" data-s="1.0"><img src="photos/manta.jpg" alt="Манта" loading="lazy"><figcaption data-i="c2">манта</figcaption></figure>
-      <figure class="pol" data-x="34" data-y="20" data-w="13" data-r="5" data-s="1.7" style="--ar:3/4"><img src="photos/turtle2.jpg" alt="Черепаха над песчаным дном" loading="lazy"><figcaption data-i="c3">в голубой воде</figcaption></figure>
+      <figure class="pol" data-x="4" data-y="5" data-w="24" data-r="-7" data-s="0.5"><img src="photos/turtle.jpg" alt="Морская черепаха над рифом" loading="lazy"><figcaption data-i="c1">привет, черепаха!</figcaption></figure>
+      <figure class="pol" data-x="70" data-y="3" data-w="23" data-r="6" data-s="1.0"><img src="photos/manta.jpg" alt="Манта" loading="lazy"><figcaption data-i="c2">манта над головой</figcaption></figure>
+      <figure class="pol" data-x="34" data-y="20" data-w="13" data-r="5" data-s="1.7" style="--ar:3/4"><img src="photos/turtle2.jpg" alt="Черепаха над песчаным дном" loading="lazy"><figcaption data-i="c3">висим в синеве</figcaption></figure>
       <figure class="pol" data-x="52" data-y="9" data-w="17" data-r="-4" data-s="1.3"><img src="photos/selfie.jpg" alt="Девушка в маске под водой" loading="lazy"><figcaption data-i="c9">первый вдох под водой</figcaption></figure>
-      <figure class="pol" data-x="74" data-y="27" data-w="23" data-r="-5" data-s="0.8"><img src="photos/school.jpg" alt="Стая жёлтых рыб у рифа" loading="lazy"><figcaption data-i="c4">стаи рыб</figcaption></figure>
-      <figure class="pol" data-x="2" data-y="31" data-w="25" data-r="4" data-s="1.2"><img src="photos/whale.jpg" alt="Китовая акула" loading="lazy"><figcaption data-i="c5">китовая акула</figcaption></figure>
-      <figure class="pol" data-x="22" data-y="47" data-w="13" data-r="-8" data-s="1.5" style="--ar:4/5"><img src="photos/babyshark.jpg" alt="Маленькая рифовая акула на мелководье" loading="lazy"><figcaption data-i="c10">малыш-акула</figcaption></figure>
-      <figure class="pol" data-x="56" data-y="44" data-w="14" data-r="-6" data-s="1.0" style="--ar:3/4"><img src="photos/coral.jpg" alt="Кораллы" loading="lazy"><figcaption data-i="c6">кораллы</figcaption></figure>
-      <figure class="pol" data-x="76" data-y="54" data-w="22" data-r="5" data-s="0.9"><img src="photos/reefshark.jpg" alt="Рифовая акула" loading="lazy"><figcaption data-i="c11">рифовая акула</figcaption></figure>
-      <figure class="pol" data-x="3" data-y="61" data-w="20" data-r="6" data-s="1.1"><img src="photos/snorkel.jpg" alt="Ребёнок в маске для снорклинга" loading="lazy"><figcaption data-i="c12">снорклинг</figcaption></figure>
+      <figure class="pol" data-x="74" data-y="27" data-w="23" data-r="-5" data-s="0.8"><img src="photos/school.jpg" alt="Стая жёлтых рыб у рифа" loading="lazy"><figcaption data-i="c4">рыбный час пик</figcaption></figure>
+      <figure class="pol" data-x="2" data-y="31" data-w="25" data-r="4" data-s="1.2"><img src="photos/whale.jpg" alt="Китовая акула" loading="lazy"><figcaption data-i="c5">китовая акула, если повезёт</figcaption></figure>
+      <figure class="pol" data-x="22" data-y="47" data-w="13" data-r="-8" data-s="1.5" style="--ar:4/5"><img src="photos/babyshark.jpg" alt="Маленькая рифовая акула на мелководье" loading="lazy"><figcaption data-i="c10">акулёнок, не кусается</figcaption></figure>
+      <figure class="pol" data-x="56" data-y="44" data-w="14" data-r="-6" data-s="1.0" style="--ar:3/4"><img src="photos/coral.jpg" alt="Кораллы" loading="lazy"><figcaption data-i="c6">кораллы во всех цветах</figcaption></figure>
+      <figure class="pol" data-x="76" data-y="54" data-w="22" data-r="5" data-s="0.9"><img src="photos/reefshark.jpg" alt="Рифовая акула" loading="lazy"><figcaption data-i="c11">рифовая акула на патруле</figcaption></figure>
+      <figure class="pol" data-x="3" data-y="61" data-w="20" data-r="6" data-s="1.1"><img src="photos/snorkel.jpg" alt="Ребёнок в маске для снорклинга" loading="lazy"><figcaption data-i="c12">маска, трубка, вперёд!</figcaption></figure>
       <figure class="pol" data-x="38" data-y="65" data-w="22" data-r="-3" data-s="0.7"><img src="photos/swimmers.jpg" alt="Люди плавают в бирюзовой лагуне, вид сверху" loading="lazy"><figcaption data-i="c13">лагуна сверху</figcaption></figure>
-      <figure class="pol" data-x="84" data-y="73" data-w="12" data-r="8" data-s="1.6" style="--ar:3/4"><img src="photos/turtle3.jpg" alt="Черепаха" loading="lazy"><figcaption data-i="c7">знакомьтесь</figcaption></figure>
-      <figure class="pol" data-x="9" data-y="81" data-w="24" data-r="-4" data-s="0.9"><img src="photos/group.jpg" alt="Группа дайверов у рифа" loading="lazy"><figcaption data-i="c8">группа до 4 человек</figcaption></figure>
-      <figure class="pol" data-x="60" data-y="80" data-w="13" data-r="7" data-s="1.3" style="--ar:2/3"><img src="photos/swing.jpg" alt="Качели на пальме у моря" loading="lazy"><figcaption data-i="c14">после дайва</figcaption></figure>
+      <figure class="pol" data-x="84" data-y="73" data-w="12" data-r="8" data-s="1.6" style="--ar:3/4"><img src="photos/turtle3.jpg" alt="Черепаха" loading="lazy"><figcaption data-i="c7">позирует</figcaption></figure>
+      <figure class="pol" data-x="9" data-y="81" data-w="24" data-r="-4" data-s="0.9"><img src="photos/group.jpg" alt="Группа дайверов у рифа" loading="lazy"><figcaption data-i="c8">наша банда, до 4 человек</figcaption></figure>
+      <figure class="pol" data-x="60" data-y="80" data-w="13" data-r="7" data-s="1.3" style="--ar:2/3"><img src="photos/swing.jpg" alt="Качели на пальме у моря" loading="lazy"><figcaption data-i="c14">а это после дайва</figcaption></figure>
     </div>
   </section>
 
   <section class="stats dk" aria-label="SLED в цифрах" data-depth="24" data-dk="0,1">
     <div class="bgimg" data-par="18"><img src="photos/rays.jpg" alt="" loading="lazy"></div>
     <div class="wrap stats-grid">
-      <div class="stat rv"><b data-count="12">12</b><span data-i="st1">лет инструктор учит дайвингу</span></div>
-      <div class="stat rv"><b data-count="6500">6500</b><span data-i="st2">погружений за плечами</span></div>
-      <div class="stat rv"><b data-count="500" data-suffix="+">500+</b><span data-i="st3">выданных сертификатов</span></div>
-      <div class="stat rv"><b data-count="4">4</b><span data-i="st4">погружения в день максимум</span></div>
+      <div class="stat rv"><b data-count="12">12</b><span data-i="st1">лет Александр учит людей нырять</span></div>
+      <div class="stat rv"><b data-count="6500">6500</b><span data-i="st2">погружений в его логбуке</span></div>
+      <div class="stat rv"><b data-count="500" data-suffix="+">500+</b><span data-i="st3">новых дайверов с сертификатом</span></div>
+      <div class="stat rv"><b data-count="4">4</b><span data-i="st4">погружения в день, если хватит сил</span></div>
     </div>
   </section>
 
@@ -561,13 +601,13 @@ footer img{height:64px;width:auto}
         <span class="stk o">SSI Assistant Instructor Trainer</span>
       </div>
       <div class="coach-txt">
-        <p class="k rv" data-i="ck">Ваш инструктор</p>
+        <p class="k rv" data-i="ck">Твой инструктор</p>
         <h2 class="rv"><span data-i="cn1">Александр</span><span class="o" data-i="cn2">Шикун</span></h2>
-        <p class="lead rv" data-i="clead">Двенадцать лет учит людей дышать под водой. Тренер ассистентов инструкторов SSI: готовит не только дайверов, но и тех, кто потом сам будет учить.</p>
+        <p class="lead rv" data-i="clead">Двенадцать лет учит людей дышать под водой, и за плечами у него шесть с половиной тысяч погружений. Александр готовит не только дайверов, но и тех, кто потом сам становится инструктором. Так что ты в очень надёжных руках.</p>
         <ul class="ticks">
-          <li class="rv" data-i="ct1">Темп обучения подстраивается под вас, а не под расписание</li>
-          <li class="rv" data-i="ct2">Объясняет просто и по-русски, без непонятных терминов</li>
-          <li class="rv" data-i="ct3">На первом погружении сам проверяет воздух и грузы у каждого</li>
+          <li class="rv" data-i="ct1">Подстраивается под тебя: страшновато, значит не спешим, легко пошло, значит идём дальше</li>
+          <li class="rv" data-i="ct2">Объясняет на пальцах и по-русски, без заумных терминов</li>
+          <li class="rv" data-i="ct3">Перед первым нырком лично проверяет у каждого воздух и грузы</li>
         </ul>
       </div>
     </div>
@@ -577,15 +617,15 @@ footer img{height:64px;width:auto}
     <div class="c-stick">
       <div class="wrap c-head">
         <h2><span data-i="ch1">Выбирай</span><br><em data-i="ch2">свою глубину</em></h2>
-        <p data-i="chp">В стоимость курсов входят сертификат SSI и учебные материалы. Цены в долларах, налоги считаются отдельно.</p>
+        <p data-i="chp">Сертификат SSI и учебники уже входят в курс. Цены в долларах, налоги отдельно, точную сумму пришлём в мессенджере.</p>
       </div>
       <div class="track" id="track">
-        <article class="card"><div class="im"><img src="photos/c-try.jpg" alt="" loading="lazy"><span class="stk t" data-i="k1t">Новичкам</span></div><div class="bd"><h3 data-i="k1h">Пробное погружение</h3><p data-i="k1p">Первое знакомство с подводным миром рядом с инструктором. Опыт не нужен.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img src="photos/c-ow.jpg" alt="" loading="lazy"><span class="stk o" data-i="k2t">Первый сертификат</span></div><div class="bd"><h3>Open Water Diver</h3><p data-i="k2p">Базовый курс SSI. После него можно нырять самостоятельно с напарником до 18 метров.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img src="photos/c-adv.jpg" alt="" loading="lazy"><span class="stk c" data-i="k3t">Следующий шаг</span></div><div class="bd"><h3 data-i="k3h">Продвинутый уровень</h3><p data-i="k3p">Новые навыки, специализации и погружения глубже.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img src="photos/c-fun.jpg" alt="" loading="lazy"><span class="stk w" data-i="k4t">С сертификатом</span></div><div class="bd"><h3 data-i="k4h">Фан-дайвинг</h3><p data-i="k4p">3–4 погружения в день с лодки, в группе до четырёх человек.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img src="photos/c-check.jpg" alt="" loading="lazy"><span class="stk t" data-i="k5t">После перерыва</span></div><div class="bd"><h3 data-i="k5h">Проверочное погружение</h3><p data-i="k5p">Если вы не ныряли больше полугода. Оплачивается как одно погружение.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img src="photos/c-boat.jpg" alt="" loading="lazy"><span class="stk o" data-i="k6t">Аренда</span></div><div class="bd"><h3 data-i="k6h">Снаряжение</h3><p data-i="k6p">Шесть полных комплектов, если не хочется везти своё.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-try.jpg" alt="" loading="lazy"><span class="stk t" data-i="k1t">Впервые</span></div><div class="bd"><h3 data-i="k1h">Пробное погружение</h3><p data-i="k1p">Опыт не нужен, только желание. Инструктор всё время рядом, а ты просто дышишь и смотришь, как вокруг плавают рыбы. Спойлер: захочется ещё.</p><div class="meta"><span data-i="price">Цена в чате</span><a href="#contacts" data-i="ask">Спросить</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-ow.jpg" alt="" loading="lazy"><span class="stk o" data-i="k2t">Первый сертификат</span></div><div class="bd"><h3>Open Water Diver</h3><p data-i="k2p">Тот самый курс, после которого ты настоящий дайвер. Ныряешь с напарником до 18 метров в любой точке мира.</p><div class="meta"><span data-i="price">Цена в чате</span><a href="#contacts" data-i="ask">Спросить</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-adv.jpg" alt="" loading="lazy"><span class="stk c" data-i="k3t">Следующий шаг</span></div><div class="bd"><h3 data-i="k3h">Продвинутый уровень</h3><p data-i="k3p">Для тех, кого уже затянуло. Новые навыки, специализации и погружения поглубже.</p><div class="meta"><span data-i="price">Цена в чате</span><a href="#contacts" data-i="ask">Спросить</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-fun.jpg" alt="" loading="lazy"><span class="stk w" data-i="k4t">С сертификатом</span></div><div class="bd"><h3 data-i="k4h">Фан-дайвинг</h3><p data-i="k4p">Сертификат уже есть? Тогда просто прыгаем с лодки. Три-четыре нырка в день и компания до четырёх человек.</p><div class="meta"><span data-i="price">Цена в чате</span><a href="#contacts" data-i="ask">Спросить</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-check.jpg" alt="" loading="lazy"><span class="stk t" data-i="k5t">После перерыва</span></div><div class="bd"><h3 data-i="k5h">Проверочный нырок</h3><p data-i="k5p">Не нырял больше полугода? Одно спокойное погружение, чтобы руки всё вспомнили. Стоит как обычное.</p><div class="meta"><span data-i="price">Цена в чате</span><a href="#contacts" data-i="ask">Спросить</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-boat.jpg" alt="" loading="lazy"><span class="stk o" data-i="k6t">Аренда</span></div><div class="bd"><h3 data-i="k6h">Снаряжение</h3><p data-i="k6p">Шесть полных комплектов на месте. Можно лететь налегке, с одним купальником.</p><div class="meta"><span data-i="price">Цена в чате</span><a href="#contacts" data-i="ask">Спросить</a></div></div></article>
       </div>
       <div class="wrap"><div class="c-bar"><i id="cbar"></i></div></div>
     </div>
@@ -594,12 +634,12 @@ footer img{height:64px;width:auto}
   <section class="laamu" id="laamu" data-depth="4">
     <div class="l-stick">
       <div class="l-frame" id="lframe"><img src="photos/laamu.jpg" alt="Острова и песчаные косы Мальдив с высоты" loading="lazy"></div>
-      <span class="l-cap" id="lcap" data-i="lcap">листай, чтобы открыть</span>
+      <span class="l-cap" id="lcap" data-i="lcap">крути дальше, тут красиво</span>
       <div class="wrap l-txt" id="ltxt">
         <span class="stk t" style="justify-self:start;transform:rotate(-3deg)" data-i="lk">Атолл Лааму</span>
-        <h2 data-i="lh">Риф без очереди</h2>
-        <p data-i="lp">Лааму далеко от Мале, и толпы сюда почти не доезжают. Лодок на дайв-сайтах меньше, а мант, черепах и рифа на каждого больше.</p>
-        <div class="chips"><span data-i="f1">3–4 погружения в день</span><span data-i="f2">Выходы на лодке</span><span data-i="f3">Тёплая вода круглый год</span></div>
+        <h2><span data-i="lh1">Риф</span> <em data-i="lh2">без очереди</em></h2>
+        <p data-i="lp">Лааму далеко от Мале, и толпы сюда просто не доезжают. Пока на популярных атоллах лодки выстраиваются в ряд у одного рифа, здесь под водой тихо, а мант, черепах и кораллов хватает на всех.</p>
+        <div class="chips"><span data-i="f1">3–4 нырка в день</span><span data-i="f2">Выходим на лодке</span><span data-i="f3">Вода тёплая круглый год</span></div>
       </div>
     </div>
   </section>
@@ -613,15 +653,15 @@ footer img{height:64px;width:auto}
           <path class="base" d="M0 30H140L360 205C420 214 470 196 540 205S690 214 760 200L880 112H990L1080 30H1200" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
           <path class="line" id="dline" d="M0 30H140L360 205C420 214 470 196 540 205S690 214 760 200L880 112H990L1080 30H1200" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <circle id="ddot" r="9" fill="#F9A72B" cx="0" cy="30"/>
-          <text x="6" y="18" data-i="pr0">0 м · поверхность</text>
-          <text x="400" y="240" data-i="pr1">дно · до 18 м</text>
-          <text x="880" y="100" data-i="pr2">5 м · остановка 3 мин</text>
+          <text x="6" y="12" data-i="pr0">0 м · поверхность</text>
+          <text x="400" y="250" data-i="pr1">дно · до 18 м</text>
+          <text x="990" y="96" text-anchor="end" data-i="pr2">5 м · пауза 3 мин</text>
         </svg>
       </div>
       <div class="steps">
-        <div class="step rv"><span class="n">1</span><h3 data-i="sp1h">Напишите нам</h3><p data-i="sp1p">В Telegram или WhatsApp: как вас зовут и что хочется попробовать.</p></div>
-        <div class="step rv"><span class="n">2</span><h3 data-i="sp2h">Договоримся о времени</h3><p data-i="sp2p">Администратор ответит в течение нескольких часов и подберёт день.</p></div>
-        <div class="step rv"><span class="n">3</span><h3 data-i="sp3h">Ныряем</h3><p data-i="sp3p">Предоплата не нужна. Платите на месте, пока только наличными.</p></div>
+        <div class="step rv"><span class="n">1</span><h3 data-i="sp1h">Напиши нам</h3><p data-i="sp1p">В Telegram или WhatsApp. Имя и пара слов вроде «хочу попробовать» или «есть сертификат, хочу на риф», и этого хватит.</p></div>
+        <div class="step rv"><span class="n">2</span><h3 data-i="sp2h">Выбираем день</h3><p data-i="sp2p">Администратор ответит в течение нескольких часов и подберёт время под твой отпуск.</p></div>
+        <div class="step rv"><span class="n">3</span><h3 data-i="sp3h">Ныряем!</h3><p data-i="sp3p">Никакой предоплаты. Платишь на месте, пока наличными. А дальше только пузыри и черепахи.</p></div>
       </div>
     </div>
   </section>
@@ -629,7 +669,7 @@ footer img{height:64px;width:auto}
   <section class="gal dk" aria-label="Фотографии" data-depth="20" data-dk="0.12,0.88">
     <div class="wrap gal-head">
       <h2 class="rv"><span data-i="g1">Здесь не</span><br><em data-i="g2">бывает зимы</em></h2>
-      <p class="rv" data-i="gp">Тёплая прозрачная вода, белый песок и рифы в нескольких минутах на лодке.</p>
+      <p class="rv" data-i="gp">Пока дома слякоть и пуховики, тут +30, прозрачная вода и рифы в нескольких минутах на лодке.</p>
     </div>
     <div class="grow" id="gr1">
       <figure style="--ar:1.506"><img src="photos/reefshark.jpg" alt="Рифовая акула" loading="lazy"></figure>
@@ -656,19 +696,19 @@ footer img{height:64px;width:auto}
   <section class="faq" id="faq" data-depth="5">
     <div class="wrap faq-grid">
       <div class="faq-side">
-        <h2 class="rv" data-i="fq">Вопросы до&nbsp;нырка</h2>
-        <span class="hand rv" data-i="fqk">не нашли ответ? напишите</span>
+        <h2 class="rv"><span data-i="fq1">Вопросы</span><br><em data-i="fq2">до нырка</em></h2>
+        <span class="hand rv" data-i="fqk">не нашёл ответ? пиши, всё расскажем</span>
         <div class="faq-pics" id="fpics" aria-hidden="true"><img src="photos/beach2.jpg" alt="" loading="lazy"><img src="photos/c-try.jpg" alt="" loading="lazy"><img src="photos/turtle.jpg" alt="" loading="lazy"></div>
       </div>
       <div class="qas" id="qas">
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q1">Нужна ли предоплата?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a1">Нет. Вы платите на месте, пока только наличными.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q2">Включены ли налоги в цену?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a2">Нет, цены указаны в долларах без налогов.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q3">Что входит в стоимость курса?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a3">Сертификат SSI и учебные материалы.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q4">Я давно не нырял. Что делать?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a4">Если перерыв больше полугода, первое погружение будет проверочным. Оно оплачивается как одно погружение.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q5">Нужна ли страховка?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a5">Рекомендуем страховку, которая покрывает дайвинг. Инструктор и дайв-центр застрахованы.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q6">Можно отменить или перенести?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a6">Да, напишите нам, и мы договоримся.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q7">Сколько погружений в день?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a7">Три-четыре погружения в день, выходим на арендованной лодке.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q8">А нитрокс есть?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a8">Пока нет, ныряем на обычном воздухе. Когда нитрокс появится, напишем об этом здесь.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q1">Нужно платить заранее?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a1">Нет, ни цента. Платишь на месте, пока только наличными.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q2">Налоги уже в цене?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a2">Нет. Цены в долларах, а налоги считаются отдельно, на Мальдивах так принято.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q3">Что входит в курс?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a3">Сертификат SSI и все учебные материалы. Доплачивать за них ничего не придётся.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q4">Давно не нырял. Это проблема?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a4">Вообще нет. Если перерыв больше полугода, первый нырок будет проверочным: спокойно вспомнишь навыки, а Александр посмотрит, всё ли в порядке. Стоит как одно обычное погружение.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q5">Нужна страховка?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a5">Очень советуем взять страховку, которая покрывает дайвинг. Инструктор и дайв-центр застрахованы.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q6">Планы поменялись. Можно отменить?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a6">Конечно. Напиши нам, и вместе придумаем, как перенести.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q7">Сколько нырков в день?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a7">Три-четыре, выходим на лодке. Хочется меньше, значит ныряем меньше: отпуск твой.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q8">А нитрокс есть?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a8">Пока нет, ныряем на обычном воздухе. Как только появится, сразу напишем здесь.</p></div></div></div>
       </div>
     </div>
   </section>
@@ -677,14 +717,14 @@ footer img{height:64px;width:auto}
     <div class="bgimg" data-par="12"><img src="photos/palms.jpg" alt="Пальмы над бирюзовой лагуной" loading="lazy"></div>
     <canvas id="bubbles" aria-hidden="true"></canvas>
     <div class="wrap">
-      <span class="stk w rv" style="justify-self:start;transform:rotate(-3deg)" data-i="ctk">Всплываем</span>
-      <h2 class="rv"><span data-i="ct1">Пишите,</span><span class="f" data-i="ct2">нырнём вместе</span></h2>
-      <p class="sub rv" data-i="ctp">Достаточно имени и пары слов о том, что хочется попробовать. Ответим в течение нескольких часов.</p>
+      <span class="stk w rv" style="justify-self:start;transform:rotate(-3deg)" data-i="ctk">Всплываем!</span>
+      <h2 class="rv"><span data-i="ct1">Ну что,</span><em data-i="ct2">ныряем?</em></h2>
+      <p class="sub rv" data-i="ctp">Напиши имя и чего хочется: попробовать впервые, получить сертификат или просто на риф. Ответим в течение нескольких часов, а черепахи уже ждут.</p>
       <div class="btns rv">
         <a class="btn btn-fin" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.3-1.5zM9.5 14.6l-.4 4.3-1.6-5.1 10.8-6.8z"/></svg></span><span class="bt"><span data-t="Telegram">Telegram</span></span></a>
         <a class="btn btn-glass" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span class="bt"><span data-t="WhatsApp">WhatsApp</span></span></a>
       </div>
-      <div class="where rv"><span data-i="w1">Остров Ган, атолл Лааму, Мальдивы</span><span data-i="w2">Номер и ник в мессенджерах появятся перед открытием</span></div>
+      <div class="where rv"><span data-i="w1">Остров Ган, атолл Лааму, Мальдивы</span><span data-i="w2">Номер и ник в мессенджерах появятся здесь перед открытием</span></div>
     </div>
   </section>
 </main>
@@ -712,53 +752,55 @@ footer img{height:64px;width:auto}
   var $ = function(s, c){ return (c || document).querySelector(s); };
   var $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  // phones and tablets keep native scrolling: smooth-scroll libraries fight the finger and feel laggy there
+  var touch = matchMedia('(hover: none), (pointer: coarse)').matches;
 
   /* ---------- language ---------- */
   var EN = {
-    nav1:'About', nav2:'Underwater', nav3:'Instructor', nav4:'Courses', nav5:'Laamu', nav6:'FAQ', cta0:'Contact us', depth:'depth', hint:'scroll down · dive deeper · ',
-    s1:'Gan island · Laamu Atoll', s2:'SSI instructor', s3:'Max 4 divers per group',
-    h1a:'Dive with us', h1b:'in the Maldives',
-    hsub:'SLED is a small dive center on Laamu Atoll, far from the crowds. Try dives, SSI courses and boat fun dives.',
-    b1:'Book on Telegram',
-    mani:'We are a small dive center on Gan island. <span class="pic"><img src="photos/c-try.jpg" alt=""></span> One experienced instructor, up to four divers per group and an easy pace. <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> No prepayment: you pay on site.',
-    p1h:'divers at most', p1p:'No more than four divers per instructor, so everyone gets attention.',
-    p2h:'Russian & English', p2p:'Theory, briefings and debriefs in a language you understand, without rushing.',
-    p3h:'international certificate', p3p:'An SSI certificate lets you dive with dive centers all over the world.',
-    p4h:'prepayment', p4p:'Message us to book and pay on site.',
-    seak:'now let’s go down', sea1:'Your reef', sea2:'neighbours', seap:'Turtles, mantas, whale sharks and huge schools of reef fish. The water in the Maldives is warm all year round.',
-    c1:'turtle', c2:'manta', c3:'in the blue', c4:'schools of fish', c5:'whale shark', c6:'corals', c7:'say hi', c8:'groups of up to 4',
-    st1:'years teaching diving', st2:'dives logged', st3:'certifications issued', st4:'dives a day at most',
+    nav1:'About', nav2:'Underwater', nav3:'Instructor', nav4:'Courses', nav5:'Laamu', nav6:'FAQ', cta0:'Message us', depth:'depth', hint:'turtles down there · keep scrolling · ',
+    s1:'Gan island · Laamu Atoll', s2:'SSI instructor, Russian & English', s3:'Max 4 per group',
+    h1a:'Dive into', h1b:'endless summer',
+    hsub:'A small dive center at the far end of the Maldives, where the crowds never make it. Warm water all year, turtles swimming by, and no queue for the reef.',
+    b1:'I want to dive!',
+    mani:'There are only a few of us, and that’s the whole point. One instructor, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> four divers per group at most and no conveyor belt: nobody rushes you, nobody gets lost in a crowd. Everything is explained clearly, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> and you pay on site, once you’ve fallen for this reef.',
+    p1h:'divers per group, tops', p1p:'Aleksandr sees every one of you. No need to wave your arms at depth to get noticed.',
+    p2h:'Russian & English', p2p:'Briefings, theory and debriefs in a language you actually understand.',
+    p3h:'a certificate for the whole world', p3p:'Get it here, then dive in Egypt, Bali, Thailand or wherever the sea takes you.',
+    p4h:'prepayment', p4p:'Message us, show up, dive. We settle up on site.',
+    seak:'hold your breath… kidding, we have tanks', sea1:'Your reef', sea2:'neighbours', seap:'Turtles that aren’t shy of people at all. Mantas gliding overhead like spaceships. Baby sharks in the shallows and fish schools so thick they block out the sun.',
+    c1:'hi, turtle!', c2:'manta overhead', c3:'floating in the blue', c4:'fish rush hour', c5:'whale shark, if you’re lucky', c6:'corals in every colour', c7:'posing', c8:'our crew, up to 4',
+    st1:'years Aleksandr has been teaching', st2:'dives in his logbook', st3:'new certified divers', st4:'dives a day, if you’re up for it',
     ck:'Your instructor', cn1:'Aleksandr', cn2:'Shykun',
-    clead:'Twelve years of teaching people to breathe underwater. As an SSI Assistant Instructor Trainer he trains not only divers but future dive professionals too.',
-    ct1:'The pace follows you, not a timetable', ct2:'Clear explanations without jargon', ct3:'On your first dive he checks everyone’s air and weights himself',
-    ch1:'Choose', ch2:'your depth', chp:'Course prices include the SSI certificate and learning materials. Prices in USD, taxes not included.',
-    k1t:'Beginners', k1h:'Try dive', k1p:'Your first look at the underwater world with an instructor by your side. No experience needed.',
-    k2t:'First certificate', k2p:'The entry-level SSI course. Afterwards you can dive with a buddy down to 18 metres.',
-    k3t:'Next step', k3h:'Advanced level', k3p:'New skills, specialties and deeper dives.',
-    k4t:'Certified divers', k4h:'Fun diving', k4p:'3–4 boat dives a day in groups of up to four.',
-    k5t:'After a break', k5h:'Check dive', k5p:'If you haven’t dived for more than six months. Priced as one dive.',
-    k6t:'Rental', k6h:'Equipment', k6p:'Six full sets, so you don’t have to bring your own.',
-    price:'Price on request', ask:'Ask',
-    lcap:'keep scrolling', lk:'Laamu Atoll', lh:'A reef with no queue', lp:'Laamu is far from Malé and the crowds rarely make it this far. Fewer boats on the dive sites, more mantas, turtles and reef for each of you.',
+    clead:'Twelve years of teaching people to breathe underwater and six and a half thousand dives behind him. Aleksandr trains not only divers but future instructors too. You’re in very safe hands.',
+    ct1:'He follows your pace: a bit nervous means we slow down, going well means we go further', ct2:'Explains things simply, no confusing jargon', ct3:'Before your first dive he personally checks everyone’s air and weights',
+    ch1:'Choose', ch2:'your depth', chp:'The SSI certificate and learning materials are included. Prices in USD, taxes extra, and we’ll send you the exact price in the chat.',
+    k1t:'First time', k1h:'Try dive', k1p:'No experience needed, just the will. The instructor is right next to you while you breathe and watch the fish swirl around. Spoiler: you’ll want more.',
+    k2t:'First certificate', k2p:'The course that makes you a real diver. Dive with a buddy down to 18 metres anywhere in the world.',
+    k3t:'Next step', k3h:'Advanced level', k3p:'For those who are already hooked. New skills, specialties and deeper dives.',
+    k4t:'Certified divers', k4h:'Fun diving', k4p:'Already certified? Then we just jump off the boat. Three to four dives a day in a group of up to four.',
+    k5t:'After a break', k5h:'Check dive', k5p:'Haven’t dived for over six months? One easy dive so your hands remember everything. Priced as a regular dive.',
+    k6t:'Rental', k6h:'Equipment', k6p:'Six full sets on site. Fly light, with nothing but your swimsuit.',
+    price:'Price in chat', ask:'Ask',
+    lcap:'keep scrolling, it gets pretty', lk:'Laamu Atoll', lh1:'A reef', lh2:'with no queue', lp:'Laamu is far from Malé and the crowds simply don’t get this far. While boats line up at a single reef on the popular atolls, here it’s quiet underwater, with plenty of mantas, turtles and coral for everyone.',
     f1:'3–4 dives a day', f2:'Boat trips', f3:'Warm water all year',
     hw1:'Three steps', hw2:'to bubbles', pr0:'0 m · surface', pr1:'bottom · up to 18 m', pr2:'5 m · 3 min stop',
-    sp1h:'Message us', sp1p:'On Telegram or WhatsApp: your name and what you’d like to try.',
-    sp2h:'Pick a time', sp2p:'Our admin replies within a few hours and finds a day for you.',
-    sp3h:'Dive', sp3p:'No prepayment. Pay on site, cash only for now.',
-    g1:'Winter', g2:'never comes here', gp:'Warm clear water, white sand and reefs a few minutes away by boat.',
-    fq:'Before you dive', fqk:'didn’t find an answer? message us',
-    q1:'Do I need to prepay?', a1:'No. You pay on site, cash only for now.',
-    q2:'Are taxes included?', a2:'No, prices are in USD without taxes.',
-    q3:'What does a course include?', a3:'The SSI certificate and learning materials.',
-    q4:'I haven’t dived for a while. What now?', a4:'If it’s been more than six months, your first dive will be a check dive, priced as one dive.',
-    q5:'Do I need insurance?', a5:'We recommend insurance that covers diving. The instructor and the dive center are insured.',
-    q6:'Can I cancel or reschedule?', a6:'Yes, message us and we’ll sort it out.',
-    q7:'How many dives a day?', a7:'Three to four dives a day from a rented boat.', q8:'Do you have nitrox?', a8:'Not yet, we dive on regular air. When nitrox arrives, we’ll say so here.',
-    ctk:'Back to the surface', ct1:'Message us,', ct2:'let’s dive together', ctp:'Just your name and a few words about what you’d like to try. We reply within a few hours.',
-    w1:'Gan island, Laamu Atoll, Maldives', w2:'Phone number and messenger handles will appear before opening',
-    wh1:'Sleep. Live.', wh2:'Eat. Dive.', whk:'that’s what SLED stands for',
-    t1:'The dive center is right on the partner hotel’s grounds. Your gear is a few steps from your room.', t2:'Island life at ocean pace: white sand, a lagoon and no rush.', t3:'Rest and food between dives, so the second dive feels great too.', t4:'3–4 dives a day with an instructor who explains everything clearly.',
-    c9:'first breath underwater', c10:'baby shark', c11:'reef shark', c12:'snorkeling', c13:'lagoon from above', c14:'after the dive',
+    sp1h:'Message us', sp1p:'On Telegram or WhatsApp. Your name and a few words like “I want to try” or “I’m certified, take me to the reef” are enough.',
+    sp2h:'Pick a day', sp2p:'Our admin replies within a few hours and finds a time that fits your holiday.',
+    sp3h:'Dive!', sp3p:'No prepayment. Pay on site, cash only for now. Then it’s just bubbles and turtles.',
+    g1:'Winter', g2:'never comes here', gp:'While it’s slush and puffer jackets back home, it’s +30 here, with clear water and reefs a few minutes away by boat.',
+    fq1:'Questions', fq2:'before the dive', fqk:'didn’t find an answer? message us',
+    q1:'Do I need to pay in advance?', a1:'No, not a cent. You pay on site, cash only for now.',
+    q2:'Are taxes included?', a2:'No. Prices are in USD and taxes are added separately, as is usual in the Maldives.',
+    q3:'What does a course include?', a3:'The SSI certificate and all learning materials. Nothing extra to pay for them.',
+    q4:'I haven’t dived in ages. Is that a problem?', a4:'Not at all. If it’s been more than six months, your first dive will be a check dive: you refresh your skills and Aleksandr makes sure all is well. Priced as one regular dive.',
+    q5:'Do I need insurance?', a5:'We strongly recommend insurance that covers diving. The instructor and the dive center are insured.',
+    q6:'My plans changed. Can I cancel?', a6:'Of course. Message us and we’ll work out how to reschedule.',
+    q7:'How many dives a day?', a7:'Three to four, by boat. Want fewer? Then we dive less: it’s your holiday.', q8:'Do you have nitrox?', a8:'Not yet, we dive on regular air. As soon as it arrives, we’ll say so here.',
+    ctk:'Surfacing!', ct1:'So,', ct2:'shall we dive?', ctp:'Tell us your name and what you’re after: a first try, a certificate or just the reef. We reply within a few hours, and the turtles are already waiting.',
+    w1:'Gan island, Laamu Atoll, Maldives', w2:'Phone number and messenger handles will appear here before opening',
+    wh1:'Sleep. Live.', wh2:'Eat. Dive.', whk:'that’s SLED, letter by letter',
+    t1:'The dive center is right on the hotel grounds. Wake up, step out of your room, and a couple of minutes later you’re trying on a mask.', t2:'Barefoot from morning till night. White sand, a mint-green lagoon and not a single “urgent” all holiday.', t3:'Fruit, coffee and lunch with an ocean view between dives. A hungry diver is a sad diver, and we don’t allow that.', t4:'Three to four boat dives a day. As many as your energy and excitement allow.',
+    c9:'first breath underwater', c10:'baby shark, doesn’t bite', c11:'reef shark on patrol', c12:'mask, snorkel, go!', c13:'lagoon from above', c14:'and this is after the dive',
     ft:'SSI dive center · Gan island, Laamu Atoll, Maldives'
   };
   var RU = {};
@@ -775,7 +817,7 @@ footer img{height:64px;width:auto}
     splitMani();
     $$('.bt > span').forEach(function(b){ b.dataset.t = b.textContent; });
     try { localStorage.setItem('sled-lang', l); } catch (e) {}
-    if (hasGsap) ScrollTrigger.refresh();
+    if (hasGsap) { sizePin(); ScrollTrigger.refresh(); }
   }
   $('#lang-ru').addEventListener('click', function(){ setLang('ru'); });
   $('#lang-en').addEventListener('click', function(){ setLang('en'); });
@@ -793,7 +835,7 @@ footer img{height:64px;width:auto}
           var s = document.createElement('span'); s.className = 'wd'; s.textContent = t; out.appendChild(s);
         });
       } else {
-        if (n.classList && n.classList.contains('pic')) n.classList.add('wd');
+        if (n.classList) n.classList.add('wd');
         out.appendChild(n);
       }
     });
@@ -804,12 +846,14 @@ footer img{height:64px;width:auto}
     var p = $('#mani'); if (!p) return;
     var words = p.querySelectorAll('.wd');
     var r = p.getBoundingClientRect(), vh = innerHeight;
-    var prog = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
-    var lit = prog * words.length * 1.1;
-    for (var i = 0; i < words.length; i++) words[i].style.opacity = reduce ? 1 : Math.min(1, Math.max(0.14, lit - i));
+    if (r.bottom < -50 || r.top > vh + 50) return;
+    // fully lit by the time the paragraph's last line reaches 80% of the screen
+    var prog = Math.min(1, Math.max(0, (vh * 0.9 - r.top) / (r.height + vh * 0.1)));
+    var lit = prog * words.length * 1.15;
+    for (var i = 0; i < words.length; i++) words[i].style.opacity = Math.min(1, Math.max(0.2, lit - i));
   }
 
-  /* ---------- headings split into letters ---------- */
+  /* ---------- headings split into letters (no clipping masks: tall Cyrillic letters and italic tails stay whole) ---------- */
   function splitHead(h){
     (function walk(node){
       Array.prototype.slice.call(node.childNodes).forEach(function(n){
@@ -829,62 +873,79 @@ footer img{height:64px;width:auto}
   }
 
   /* ---------- marquee content ---------- */
-  var mq = '<span>Sleep</span><span class="dot"></span><span class="o">Live</span><span class="dot"></span><span class="f">Eat</span><span class="dot"></span><span class="t">Dive</span><span class="dot"></span>';
+  var mq = '<span>Sleep</span><span class="dot"></span><span class="s">Live</span><span class="dot"></span><span class="f">Eat</span><span class="dot"></span><span class="o">Dive</span><span class="dot"></span>';
   $('#m1').innerHTML = mq + mq + mq + mq;
-  $('#m2').innerHTML = '<span class="o">Gan</span><span class="dot"></span><span>Laamu</span><span class="dot"></span><span class="f">Maldives</span><span class="dot"></span><span class="o">SSI</span><span class="dot"></span>' .repeat(4);
+  $('#m2').innerHTML = '<span class="o">Gan</span><span class="dot"></span><span class="s">Laamu</span><span class="dot"></span><span class="t">Maldives</span><span class="dot"></span><span class="f">SSI</span><span class="dot"></span>'.repeat(4);
 
   /* ---------- polaroid layout (desktop) ---------- */
   var pols = $$('.pol');
   var desk = matchMedia('(min-width: 821px)');
   function placePols(){
     pols.forEach(function(el){
-      if (desk.matches && !reduce) {
+      if (desk.matches) {
         el.style.left = el.dataset.x + '%'; el.style.top = el.dataset.y + '%'; el.style.width = el.dataset.w + 'vw';
       } else { el.style.left = el.style.top = el.style.width = ''; }
     });
   }
   placePols();
 
-  /* ---------- header, gauge, deep mode, counters ---------- */
-  var top = $('#top'), flt = $('#float'), gauge = $('#gauge'), gnum = $('#gnum'), gdot = $('#gdot'), gfill = $('#gfill');
+  /* ---------- header, gauge, deep mode, floating buttons ---------- */
+  var top = $('#top'), flt = $('#float'), gauge = $('#gauge'), gnum = $('#gnum'), hnum = $('#hnum'), hdepth = $('#hdepth'), gdot = $('#gdot'), gfill = $('#gfill');
   var depthSecs = $$('[data-depth]');
-  var lastY = 0;
-  function depthAt(y){
-    var pts = depthSecs.map(function(s){ var r = s.getBoundingClientRect(); return [r.top + scrollY + r.height / 2, +s.dataset.depth]; });
-    if (y <= pts[0][0]) return pts[0][1];
-    for (var i = 1; i < pts.length; i++) {
-      if (y <= pts[i][0]) { var a = pts[i - 1], b = pts[i], t = (y - a[0]) / (b[0] - a[0]); return a[1] + (b[1] - a[1]) * t; }
-    }
-    return pts[pts.length - 1][1];
+  var narrow = matchMedia('(max-width: 900px)');
+  // section geometry is measured once per layout change, not on every scroll frame
+  var geo = [], coursesBox = [0, 0], docH = 0;
+  function measure(){
+    var y = scrollY;
+    geo = depthSecs.map(function(s){
+      var r = s.getBoundingClientRect(), k = s.dataset.dk ? s.dataset.dk.split(',') : null;
+      return {mid: r.top + y + r.height / 2, d: +s.dataset.depth, a: k ? r.top + y + r.height * +k[0] : 0, b: k ? r.top + y + r.height * +k[1] : -1};
+    });
+    var cr = $('#courses').getBoundingClientRect(); coursesBox = [cr.top + y, cr.bottom + y];
+    docH = root.scrollHeight;
   }
-  function onFrame(){
-    var y = scrollY, vh = innerHeight, mid = y + vh / 2;
-    top.classList.toggle('solid', y > 40);
-    top.classList.toggle('hide', y > vh * 1.2 && y > lastY + 2 && !$('#nav').classList.contains('open'));
-    if (y < lastY - 2) top.classList.remove('hide');
-    lastY = y;
-    flt.classList.toggle('show', y > vh * 0.9 && y < document.documentElement.scrollHeight - vh * 1.9);
-    // deep mode follows the section at the middle of the screen
-    function darkAt(py){
-      return depthSecs.some(function(s){
-        if (!s.dataset.dk) return false;
-        var r = s.getBoundingClientRect(), k = s.dataset.dk.split(',');
-        return py >= r.top + r.height * +k[0] && py <= r.top + r.height * +k[1];
-      });
+  function depthAt(y){
+    if (y <= geo[0].mid) return geo[0].d;
+    for (var i = 1; i < geo.length; i++) {
+      if (y <= geo[i].mid) { var a = geo[i - 1], b = geo[i], t = (y - a.mid) / (b.mid - a.mid); return a.d + (b.d - a.d) * t; }
     }
-    root.classList.toggle('deep', darkAt(36));
-    gauge.classList.toggle('dk', darkAt(vh / 2));
-    var d = Math.max(0, depthAt(mid));
-    gnum.textContent = Math.round(d) + (lang === 'en' ? ' m' : ' м');
+    return geo[geo.length - 1].d;
+  }
+  function darkAt(py){ for (var i = 0; i < geo.length; i++) if (py >= geo[i].a && py <= geo[i].b) return true; return false; }
+  var lastY = scrollY, upRun = 0;
+  function onFrame(){
+    var y = scrollY, vh = innerHeight, mid = y + vh / 2, dy = y - lastY;
+    var navOpen = $('#nav').classList.contains('open');
+    top.classList.toggle('solid', y > 40);
+    if (dy > 2 && y > vh * 1.2 && !navOpen) top.classList.add('hide');
+    if (dy < -2) top.classList.remove('hide');
+    upRun = dy < -1 ? upRun - dy : (dy > 1 ? 0 : upRun);
+    lastY = y;
+    var inRange = y > vh * 0.9 && y < docH - vh * 1.9;
+    if (narrow.matches) {
+      // phones: buttons appear only while scrolling back up, so they never cover what you're reading
+      if (!inRange || dy > 2) flt.classList.remove('show');
+      else if (upRun > 40) flt.classList.add('show');
+    } else flt.classList.toggle('show', inRange);
+    root.classList.toggle('deep', darkAt(y + 36));
+    gauge.classList.toggle('dk', darkAt(mid));
+    var d = Math.max(0, depthAt(mid)), txt = Math.round(d) + (lang === 'en' ? ' m' : ' м');
+    gnum.textContent = txt; hnum.textContent = txt;
     var k = Math.min(1, d / 30);
     gdot.style.top = (k * 100) + '%'; gfill.style.height = (k * 100) + '%';
-    var cr = $('#courses').getBoundingClientRect();
-    gauge.classList.toggle('off', y < vh * 0.3 || (cr.top < vh * 0.6 && cr.bottom > vh * 0.4));
+    var inCourses = coursesBox[0] - y < vh * 0.6 && coursesBox[1] - y > vh * 0.4;
+    gauge.classList.toggle('off', y < vh * 0.3 || inCourses);
+    hdepth.classList.toggle('on', y > vh * 0.5 && !navOpen);
     paintMani();
   }
   var ticking = false;
   addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(function(){ ticking = false; onFrame(); }); } }, {passive:true});
-  addEventListener('resize', function(){ placePols(); sizePin(); onFrame(); });
+  var lastW = innerWidth;
+  addEventListener('resize', function(){
+    // mobile browsers fire resize when the address bar slides; only a real width change needs a relayout
+    if (touch && innerWidth === lastW) { measure(); return; }
+    lastW = innerWidth; placePols(); sizePin(); measure(); onFrame();
+  });
 
   function countUp(el){
     var end = +el.dataset.count, suf = el.dataset.suffix || '', t0 = null;
@@ -893,12 +954,12 @@ footer img{height:64px;width:auto}
   }
 
   /* ---------- courses pin sizing ---------- */
-  var pinWide = matchMedia('(min-width: 901px)');
+  var pinOK = matchMedia('(min-width: 901px), (min-height: 560px)');
   var courses = $('#courses'), track = $('#track');
-  function trackShift(){ return Math.max(0, track.scrollWidth - innerWidth + 100); }
+  function trackShift(){ return Math.max(0, track.scrollWidth - innerWidth + (narrow.matches ? 24 : 100)); }
   function sizePin(){
-    if (!hasGsap || reduce) return;
-    if (pinWide.matches) { root.classList.add('js-pin'); courses.style.setProperty('--pin-h', (innerHeight + trackShift()) + 'px'); }
+    if (!hasGsap) return;
+    if (pinOK.matches) { root.classList.add('js-pin'); courses.style.setProperty('--pin-h', (innerHeight + trackShift() * (narrow.matches ? 1.1 : 1)) + 'px'); }
     else { root.classList.remove('js-pin'); courses.style.removeProperty('--pin-h'); track.style.transform = ''; }
   }
 
@@ -907,6 +968,7 @@ footer img{height:64px;width:auto}
     b.addEventListener('click', function(){
       var qa = b.parentElement, open = !qa.classList.contains('open');
       qa.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+      if (hasGsap) setTimeout(function(){ measure(); ScrollTrigger.refresh(); }, 520);
     });
   });
 
@@ -917,11 +979,12 @@ footer img{height:64px;width:auto}
     var open = nav.classList.toggle('open');
     burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
     top.classList.remove('hide');
+    if (lenis) { open ? lenis.stop() : lenis.start(); }
   });
 
-  /* ---------- smooth scroll + anchors ---------- */
+  /* ---------- smooth scroll (mouse and trackpad only) + anchors ---------- */
   var lenis = null;
-  if (window.Lenis && !reduce) {
+  if (window.Lenis && !touch) {
     lenis = new Lenis({duration: 1.15, smoothWheel: true});
     if (hasGsap) { lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(function(t){ lenis.raf(t * 1000); }); gsap.ticker.lagSmoothing(0); }
     else { (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(); }
@@ -932,7 +995,8 @@ footer img{height:64px;width:auto}
     var id = a.getAttribute('href'), el = id.length > 1 && document.getElementById(id.slice(1));
     if (!el) return;
     e.preventDefault(); closeNav();
-    if (lenis) lenis.scrollTo(el, {offset: 0, duration: 1.6}); else el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+    if (lenis) { lenis.start(); lenis.scrollTo(el, {offset: 0, duration: 1.6}); }
+    else scrollTo({top: el.getBoundingClientRect().top + scrollY, behavior: 'smooth'});
   });
 
   /* ---------- scroll badge spins faster while you scroll ---------- */
@@ -942,7 +1006,7 @@ footer img{height:64px;width:auto}
       var d = scrollY - lastSY; lastSY = scrollY;
       vel += (Math.min(40, Math.abs(d)) - vel) * .1;
       rot += .3 + vel * .35;
-      ring.style.transform = 'rotate(' + rot.toFixed(2) + 'deg)';
+      if (scrollY < innerHeight * 1.5) ring.style.transform = 'rotate(' + rot.toFixed(2) + 'deg)';
       requestAnimationFrame(spin);
     }
     requestAnimationFrame(spin);
@@ -959,7 +1023,7 @@ footer img{height:64px;width:auto}
 
   /* ---------- bubbles in the final section ---------- */
   (function(){
-    var c = $('#bubbles'); if (!c || reduce) return;
+    var c = $('#bubbles'); if (!c) return;
     var x = c.getContext('2d'), W, H, list = [], run = false, dpr = Math.min(2, devicePixelRatio || 1);
     function size(){ W = c.clientWidth; H = c.clientHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); }
     function add(){ list.push({x: Math.random() * W, y: H + 20, r: 2 + Math.random() * 9, v: .4 + Math.random() * 1.3, w: Math.random() * 6.28}); }
@@ -981,7 +1045,7 @@ footer img{height:64px;width:auto}
   })();
 
   /* ---------- GSAP choreography ---------- */
-  if (hasGsap && !reduce) {
+  if (hasGsap) {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ignoreMobileResize:true});
     sizePin();
@@ -989,37 +1053,35 @@ footer img{height:64px;width:auto}
     // hero entrance
     var tl = gsap.timeline({defaults:{ease:'expo.out'}});
     tl.from('#heroMedia img', {scale:1.25, duration:2.4, ease:'power3.out'}, 0)
-      .from('#h1 .ln > span', {yPercent:110, duration:1.4, stagger:.12}, .25)
+      .from('#h1 .ln > span', {y:70, opacity:0, rotation:3, duration:1.4, stagger:.14}, .25)
       .from('.hero-stk .stk', {y:40, opacity:0, scale:.6, rotation:function(i){ return [-18, 14, -10][i]; }, duration:1, stagger:.1, ease:'back.out(2)'}, .55)
-      .from('.hero-sub, .hero .btns', {y:30, opacity:0, duration:1.1, stagger:.1}, .8)
-      ;
+      .from('.hero-sub, .hero .btns', {y:30, opacity:0, duration:1.1, stagger:.1}, .8);
 
-    // hero scroll: sink under the waterline
+    // hero scroll: sink under the waterline; the text stays readable for the first third, then floats away
     gsap.timeline({scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom bottom', scrub:true}})
-      .to('#heroMedia', {scale:1.45, yPercent:-14, ease:'none'}, 0)
-      .to('#heroDeep', {opacity:1, ease:'none'}, 0)
-      .to('#heroIn', {yPercent:-40, opacity:0, ease:'power1.in', duration:.55}, 0)
+      .to('#heroMedia', {scale:1.45, yPercent:-14, ease:'none', duration:1}, 0)
+      .to('#heroDeep', {opacity:1, ease:'none', duration:1}, 0)
+      .to('#heroIn', {y:function(){ return -innerHeight * .35; }, opacity:0, ease:'power1.in', duration:.6}, .35)
       .to('#hint', {opacity:0, duration:.15}, 0);
 
     // marquee rows drift with scroll in opposite directions
     gsap.fromTo('#m1', {xPercent:0}, {xPercent:-30, ease:'none', scrollTrigger:{trigger:'.marq', start:'top bottom', end:'bottom top', scrub:true}});
     gsap.fromTo('#m2', {xPercent:-30}, {xPercent:0, ease:'none', scrollTrigger:{trigger:'.marq', start:'top bottom', end:'bottom top', scrub:true}});
 
-    // generic reveals
-    // every section heading: letters rise one after another
+    // every section heading: letters bounce up one after another
     $$('main h2').forEach(function(h){
       splitHead(h);
-      gsap.from(h.querySelectorAll('.ch'), {yPercent:115, rotation:10, opacity:0, duration:1.1, stagger:.022, ease:'expo.out', scrollTrigger:{trigger:h, start:'top 88%', once:true}});
+      gsap.from(h.querySelectorAll('.ch'), {y:'0.55em', rotation:12, opacity:0, duration:1, stagger:.022, ease:'back.out(1.8)', clearProps:'transform,opacity', scrollTrigger:{trigger:h, start:'top 90%', once:true}});
     });
     gsap.utils.toArray('.rv').filter(function(el){ return el.tagName !== 'H2'; }).forEach(function(el){
-      gsap.from(el, {y:60, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%', once:true}});
+      gsap.from(el, {y:50, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 92%', once:true}});
     });
     gsap.utils.toArray('.perk').forEach(function(el, i){
-      gsap.from(el, {y:120, rotation:i % 2 ? 12 : -12, opacity:0, duration:1.3, delay:i * .08, ease:'expo.out', clearProps:'transform,opacity', onComplete:function(){ el.classList.add('ready'); }, scrollTrigger:{trigger:'.perks', start:'top 85%', once:true}});
+      gsap.from(el, {y:120, rotation:i % 2 ? 12 : -12, opacity:0, duration:1.3, delay:(narrow.matches ? 0 : i * .08), ease:'expo.out', clearProps:'transform,opacity', onComplete:function(){ el.classList.add('ready'); }, scrollTrigger:{trigger:narrow.matches ? el : '.perks', start:'top 88%', once:true}});
     });
 
-    // polaroids: fly in and drift at different speeds over the pinned title
     var mm = gsap.matchMedia();
+    // polaroids: fly in and drift at different speeds over the pinned title
     mm.add('(min-width: 821px)', function(){
       pols.forEach(function(el){
         var s = +el.dataset.s, r = +el.dataset.r;
@@ -1027,9 +1089,13 @@ footer img{height:64px;width:auto}
       });
       gsap.fromTo('.sea-title', {scale:.82, opacity:.2}, {scale:1, opacity:1, ease:'none', scrollTrigger:{trigger:'#sea', start:'top 80%', end:'top top', scrub:true}});
     });
+    // phones: a two-column collage where the columns float at different speeds and the photos swing as they pass
     mm.add('(max-width: 820px)', function(){
+      gsap.fromTo('.sea-title', {scale:.86, opacity:.3}, {scale:1, opacity:1, ease:'none', scrollTrigger:{trigger:'.sea-title', start:'top 95%', end:'top 40%', scrub:true}});
       pols.forEach(function(el, i){
-        gsap.from(el, {y:90, rotation:i % 2 ? 14 : -14, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 92%', once:true}});
+        var r = +el.dataset.r, odd = i % 2;
+        gsap.fromTo(el, {y: odd ? 70 : 20, rotation: r * 1.4}, {y: odd ? -70 : -20, rotation: -r * .6, ease:'none', scrollTrigger:{trigger:el, start:'top bottom', end:'bottom top', scrub:true}});
+        gsap.from(el, {scale:.7, opacity:0, duration:1, ease:'back.out(1.6)', scrollTrigger:{trigger:el, start:'top 95%', once:true}});
       });
     });
 
@@ -1042,35 +1108,53 @@ footer img{height:64px;width:auto}
     // counters
     $$('[data-count]').forEach(function(el){
       el.textContent = '0';
-      ScrollTrigger.create({trigger:el, start:'top 85%', once:true, onEnter:function(){ countUp(el); }});
+      ScrollTrigger.create({trigger:el, start:'top 88%', once:true, onEnter:function(){ countUp(el); }});
     });
 
     // coach image mask
-    gsap.fromTo('.coach-img', {clipPath:'inset(30% 20% 30% 20% round 200px 200px 28px 28px)'}, {clipPath:'inset(0% 0% 0% 0% round 200px 200px 28px 28px)', ease:'none', scrollTrigger:{trigger:'.coach-img', start:'top 90%', end:'top 30%', scrub:true}});
+    gsap.fromTo('.coach-img', {clipPath:'inset(30% 20% 30% 20% round 200px 200px 28px 28px)'}, {clipPath:'inset(0% 0% 0% 0% round 200px 200px 28px 28px)', ease:'none', scrollTrigger:{trigger:'.coach-img', start:'top 92%', end:'top 35%', scrub:true}});
 
-    // courses: horizontal track while pinned
-    mm.add('(min-width: 901px)', function(){
+    // courses: horizontal track while pinned (phones too, as long as the screen is tall enough)
+    mm.add('(min-width: 901px), (min-height: 560px)', function(){
       gsap.fromTo(track, {x:0}, {x:function(){ return -trackShift(); }, ease:'none', scrollTrigger:{trigger:courses, start:'top top', end:'bottom bottom', scrub:true, invalidateOnRefresh:true}});
       gsap.fromTo('#cbar', {scaleX:0}, {scaleX:1, ease:'none', scrollTrigger:{trigger:courses, start:'top top', end:'bottom bottom', scrub:true}});
       gsap.utils.toArray('.card').forEach(function(c, i){ gsap.from(c, {y:120, rotation:6, opacity:0, duration:1.2, delay:i * .07, ease:'expo.out', clearProps:'transform,opacity', onComplete:function(){ c.classList.add('ready'); }, scrollTrigger:{trigger:courses, start:'top 70%', once:true}}); });
     });
-    mm.add('(max-width: 900px)', function(){
+    mm.add('(max-width: 900px) and (max-height: 559px)', function(){
       gsap.utils.toArray('.card').forEach(function(c){ gsap.from(c, {x:80, opacity:0, duration:1.1, ease:'expo.out', clearProps:'transform,opacity', onComplete:function(){ c.classList.add('ready'); }, scrollTrigger:{trigger:track, start:'top 88%', once:true}}); });
     });
 
     // laamu: framed photo opens to full screen, then the text arrives
-    var mobile = matchMedia('(max-width: 700px)').matches;
-    gsap.timeline({scrollTrigger:{trigger:'#laamu', start:'top top', end:'bottom bottom', scrub:true}})
-      .fromTo('#lframe', {clipPath: mobile ? 'inset(22% 8% 22% 8% round 28px)' : 'inset(16% 22% 16% 22% round 36px)'}, {clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'none', duration:1}, 0)
-      .fromTo('#lframe img', {scale:1.25}, {scale:1, ease:'none', duration:1}, 0)
-      .to('#lcap', {opacity:0, duration:.2}, 0)
-      .to('#lframe', {'--o':1, ease:'none', duration:.4}, .55)
-      .fromTo('#ltxt', {opacity:0, y:60}, {opacity:1, y:0, ease:'power2.out', duration:.4}, .6);
+    mm.add({m:'(max-width: 700px)', d:'(min-width: 701px)'}, function(ctx){
+      gsap.timeline({scrollTrigger:{trigger:'#laamu', start:'top top', end:'bottom bottom', scrub:true}})
+        .fromTo('#lframe', {clipPath: ctx.conditions.m ? 'inset(22% 8% 22% 8% round 28px)' : 'inset(16% 22% 16% 22% round 36px)'}, {clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'none', duration:1}, 0)
+        .fromTo('#lframe img', {scale:1.25}, {scale:1, ease:'none', duration:1}, 0)
+        .to('#lcap', {opacity:0, duration:.2}, 0)
+        .to('#lframe', {'--o':1, ease:'none', duration:.3}, .6)
+        .fromTo('#ltxt', {opacity:0, y:60}, {opacity:1, y:0, ease:'power2.out', duration:.3}, .7);
+    });
+
+    // SLED tiles: desktop rises out of a mask; phones get a stacked deck where each card settles back as the next one slides over
+    mm.add('(min-width: 901px)', function(){
+      gsap.from('.tile', {clipPath:'inset(100% 0% 0% 0% round 28px)', y:90, duration:1.4, stagger:.13, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
+      gsap.from('.tile .L', {yPercent:120, rotation:-12, duration:1.3, stagger:.13, delay:.35, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
+      gsap.from('.tile .tx', {y:40, opacity:0, duration:1, stagger:.13, delay:.55, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
+    });
+    mm.add('(max-width: 900px)', function(){
+      var tiles = $$('.tile');
+      tiles.forEach(function(t, i){
+        gsap.from(t.querySelector('.L'), {yPercent:80, rotation:-14, opacity:0, duration:1.2, ease:'expo.out', scrollTrigger:{trigger:t, start:'top 80%', once:true}});
+        gsap.from(t.querySelector('.tx'), {y:40, opacity:0, duration:1, delay:.15, ease:'expo.out', scrollTrigger:{trigger:t, start:'top 75%', once:true}});
+        gsap.fromTo(t.querySelector('img'), {scale:1.2}, {scale:1, ease:'none', scrollTrigger:{trigger:t, start:'top bottom', end:'top 20%', scrub:true}});
+        var next = tiles[i + 1]; if (!next) return;
+        gsap.to(t, {scale:.92, filter:'brightness(.72)', ease:'none', scrollTrigger:{trigger:next, start:'top 75%', end:'top 25%', scrub:true}});
+      });
+    });
 
     // dive profile draws as you scroll
     var line = $('#dline'), dot = $('#ddot'), len = line.getTotalLength();
     line.style.strokeDasharray = len; line.style.strokeDashoffset = len;
-    ScrollTrigger.create({trigger:'.profile', start:'top 85%', end:'bottom 35%', scrub:true, onUpdate:function(s){
+    ScrollTrigger.create({trigger:'.profile', start:'top 88%', end:'bottom 40%', scrub:true, onUpdate:function(s){
       line.style.strokeDashoffset = len * (1 - s.progress);
       var pt = line.getPointAtLength(len * s.progress); dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
     }});
@@ -1079,19 +1163,15 @@ footer img{height:64px;width:auto}
     gsap.fromTo('#gr1', {x:0}, {x:function(){ return -Math.max(0, $('#gr1').scrollWidth - innerWidth) * .7; }, ease:'none', scrollTrigger:{trigger:'.gal', start:'top bottom', end:'bottom top', scrub:true, invalidateOnRefresh:true}});
     gsap.fromTo('#gr2', {x:function(){ return -Math.max(0, $('#gr2').scrollWidth - innerWidth) * .7; }}, {x:0, ease:'none', scrollTrigger:{trigger:'.gal', start:'top bottom', end:'bottom top', scrub:true, invalidateOnRefresh:true}});
 
-    // SLED tiles: rise out of a mask, letters slide up
-    gsap.from('.tile', {clipPath:'inset(100% 0% 0% 0% round 28px)', y:90, duration:1.4, stagger:.13, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
-    gsap.from('.tile .L', {yPercent:120, rotation:-12, duration:1.3, stagger:.13, delay:.35, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
-    gsap.from('.tile .tx', {y:40, opacity:0, duration:1, stagger:.13, delay:.55, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
     // FAQ photo stack fans out while scrolling
     gsap.utils.toArray('#fpics img').forEach(function(img, i){
       gsap.fromTo(img, {rotation:[-2, 1, -1][i], x:[40, 0, -40][i]}, {rotation:[-14, 6, 12][i], x:[-20, 0, 30][i], y:[10, -20, 24][i], ease:'none', scrollTrigger:{trigger:'#faq', start:'top bottom', end:'bottom top', scrub:true}});
     });
-    // FAQ rows slide in
-    gsap.from('.qa', {x:90, opacity:0, duration:1, stagger:.08, ease:'expo.out', scrollTrigger:{trigger:'#qas', start:'top 85%', once:true}});
+    // FAQ rows rise in
+    gsap.from('.qa', {y:40, opacity:0, duration:1, stagger:.07, ease:'expo.out', scrollTrigger:{trigger:'#qas', start:'top 88%', once:true}});
     // steps and their numbers
     gsap.utils.toArray('.step').forEach(function(st, i){
-      gsap.from(st.querySelector('.n'), {scale:0, rotation:-40, duration:1, delay:i * .15, ease:'back.out(2.2)', scrollTrigger:{trigger:'.steps', start:'top 85%', once:true}});
+      gsap.from(st.querySelector('.n'), {scale:0, rotation:-40, duration:1, delay:(narrow.matches ? 0 : i * .15), ease:'back.out(2.2)', scrollTrigger:{trigger:narrow.matches ? st : '.steps', start:'top 88%', once:true}});
     });
     // gallery pictures pop in
     ['#gr1', '#gr2'].forEach(function(id){
@@ -1099,9 +1179,10 @@ footer img{height:64px;width:auto}
     });
     // stickers outside the hero pop in
     gsap.utils.toArray('main section:not(.hero) .stk').forEach(function(el){
-      gsap.from(el, {scale:0, rotation:-25, duration:.9, ease:'back.out(2.4)', scrollTrigger:{trigger:el, start:'top 92%', once:true}});
+      gsap.from(el, {scale:0, rotation:-25, duration:.9, ease:'back.out(2.4)', scrollTrigger:{trigger:el, start:'top 94%', once:true}});
     });
 
+    ScrollTrigger.addEventListener('refresh', function(){ measure(); onFrame(); });
     addEventListener('load', function(){ sizePin(); ScrollTrigger.refresh(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ sizePin(); ScrollTrigger.refresh(); });
   } else {
@@ -1110,6 +1191,7 @@ footer img{height:64px;width:auto}
 
   splitMani();
   try { if (localStorage.getItem('sled-lang') === 'en') setLang('en'); } catch (e) {}
+  measure();
   onFrame();
 })();
 </script>
