@@ -194,6 +194,24 @@ html.menu-open .hdepth{opacity:0}
   .hero-sub{font-size:15px;max-width:52ch}
   .btn{min-height:50px}.btn .bi{width:38px;height:38px}
 }
+/* phones: the two messenger buttons sit side by side, so the hero fits Safari's short window (toolbars eat ~120px) */
+@media (max-width:440px){
+  .hero .btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .hero .btn{min-height:54px;gap:8px;padding:6px 10px 6px 6px;font-size:13px;letter-spacing:.04em}
+  .hero .btn .bi{width:42px;height:42px}
+  .hero .btn::before{left:27px;width:42px;height:42px;margin:-21px 0 0 -21px}
+}
+@media (max-width:350px){
+  .hero .btn{font-size:12px;letter-spacing:.02em}
+  .hero .btn .bi{width:36px;height:36px}
+  .hero .btn::before{left:24px;width:36px;height:36px;margin:-18px 0 0 -18px}
+}
+@media (max-width:700px) and (max-height:600px){.badge{display:none}}
+@media (max-width:700px) and (max-height:520px){
+  .hero-in{padding-top:84px}
+  .hero h1{font-size:clamp(30px,8.4vh,44px)}
+  .hero-sub{font-size:14.5px;line-height:1.45}
+}
 
 /* depth gauge: labelled scale on wide screens, a slim rail at the edge on phones */
 .gauge.dk{color:#F2FBFD}
@@ -469,6 +487,8 @@ html:not(.js-pin) .c-bar{display:none}
 .qa .ans p{padding:0 2px 28px;color:var(--muted);max-width:56ch;font-size:clamp(17.5px,1.5vw,21px);transform:translateY(-14px);opacity:0;transition:transform .55s var(--ease),opacity .45s}
 .qa.open .ans p{transform:none;opacity:1;transition-delay:.08s}
 @media (max-width:860px){.faq-grid{grid-template-columns:minmax(0,1fr)}.faq-side{position:static}}
+/* laptops and iPad landscape: the floating messenger buttons sit in the right margin, keep the "+" icons clear of them */
+@media (min-width:901px) and (max-width:1420px){.qa button{padding-right:78px}}
 
 /* CTA — back to the surface */
 .cta{position:relative;overflow:hidden;isolation:isolate;color:#fff;min-height:min(100svh,940px);display:flex;align-items:center}
@@ -970,6 +990,60 @@ footer .top-cta{display:inline-flex}
     q14:'Do you have nitrox?',
     a14:'Not yet, we dive on regular air. We’ll announce it here once it’s available.'
   };
+  // photo descriptions and button labels for screen readers, keyed by the Russian text
+  var EN_ATTR = {
+    'Остров атолла с высоты, бирюзовая лагуна и риф':'An atoll island from above, turquoise lagoon and reef',
+    'Маленькая рифовая акула на мелководье':'A small reef shark in the shallows',
+    'Пляж с пальмами на Мальдивах':'A beach with palm trees in the Maldives',
+    'Риф и рыбы':'Reef and fish',
+    'Выход в море на лодке':'Heading out by boat',
+    'Дайвер у стены рифа':'A diver by the reef wall',
+    'Стая рыб над рифом в лучах солнца':'A school of fish over the reef in the sunlight',
+    'Дайверы на занятии':'Divers during a lesson',
+    'Дайвер с аквалангом у рифа':'A scuba diver by the reef',
+    'Дайвер в подводном гроте':'A diver in an underwater cave',
+    'Двое дайверов в расщелине рифа':'Two divers in a reef crevice',
+    'Инструктор ведёт дайвера вдоль стены рифа':'An instructor guiding a diver along the reef wall',
+    'Кораллы':'Corals',
+    'Дайвер с аквалангом рядом с морской черепахой':'A scuba diver next to a sea turtle',
+    'Двое дайверов над рифом':'Two divers over the reef',
+    'Завтрак у моря':'Breakfast by the sea',
+    'Группа дайверов у рифа':'A group of divers by the reef',
+    'Остров на Мальдивах над водой и коралловое дно под водой':'A Maldives island above the water and the coral bottom below',
+    'Дайвер в гидрокостюме у борта лодки':'A diver in a wetsuit by the side of the boat',
+    'Манта':'Manta ray',
+    'Пальмы и лагуна':'Palm trees and the lagoon',
+    'Пальмы над бирюзовой лагуной':'Palm trees over a turquoise lagoon',
+    'Коралловый риф с яркими рыбками':'A coral reef with colourful fish',
+    'Рифовая акула':'Reef shark',
+    'Стая жёлтых рыб у рифа':'A school of yellow fish by the reef',
+    'Дайвер и китовая акула':'A diver and a whale shark',
+    'Гамак между пальмами у океана':'A hammock between palm trees by the ocean',
+    'Качели на пальме у моря':'A swing on a palm tree by the sea',
+    'Морская черепаха над рифом':'A sea turtle over the reef',
+    'Черепаха над песчаным дном':'A turtle over the sandy bottom',
+    'Черепаха':'Turtle',
+    'Китовая акула':'Whale shark',
+    'SLED, наверх':'SLED, back to top',
+    'Основное меню':'Main menu',
+    'Язык сайта':'Site language',
+    'Открыть меню':'Open menu',
+    'Вниз':'Scroll down',
+    'SLED в цифрах':'SLED in numbers',
+    'Фотографии':'Photos',
+    'Разделы сайта':'Site sections',
+    'Написать в Telegram':'Message us on Telegram',
+    'Написать в WhatsApp':'Message us on WhatsApp'
+  };
+  var attrEls = $$('img[alt], [aria-label]').filter(function(el){ return el.id !== 'burger'; });
+  attrEls.forEach(function(el){ var a = el.tagName === 'IMG' ? 'alt' : 'aria-label'; el.dataset.ruAttr = el.getAttribute(a); });
+  function langAttrs(l){
+    attrEls.forEach(function(el){
+      var a = el.tagName === 'IMG' ? 'alt' : 'aria-label', ru = el.dataset.ruAttr;
+      el.setAttribute(a, l === 'en' && EN_ATTR[ru] ? EN_ATTR[ru] : ru);
+    });
+    var bg = $('#burger'); if (bg) bg.setAttribute('aria-label', bg.getAttribute('aria-expanded') === 'true' ? (l === 'en' ? 'Close menu' : 'Закрыть меню') : (l === 'en' ? 'Open menu' : 'Открыть меню'));
+  }
   var RU = {};
   $$('[data-i]').forEach(function(el){ RU[el.dataset.i] = el.innerHTML; });
   var lang = 'ru';
@@ -979,6 +1053,7 @@ footer .top-cta{display:inline-flex}
     var dict = l === 'en' ? EN : RU;
     $$('[data-i]').forEach(function(el){ var k = el.dataset.i; if (dict[k] != null) el.innerHTML = dict[k]; });
     root.lang = l;
+    langAttrs(l);
     $('#lang-ru').setAttribute('aria-pressed', l === 'ru');
     $('#lang-en').setAttribute('aria-pressed', l === 'en');
     splitMani();
@@ -1417,6 +1492,8 @@ footer .top-cta{display:inline-flex}
     // dive profile draws as you scroll
     var line = $('#dline'), dot = $('#ddot'), len = line.getTotalLength();
     line.style.strokeDasharray = len; line.style.strokeDashoffset = len;
+    // browsers without the CSS "r" property get the bigger phone dot as an attribute
+    if (!(window.CSS && CSS.supports('r', '1px')) && matchMedia('(max-width: 760px)').matches) dot.setAttribute('r', 18);
     ScrollTrigger.create({trigger:'.profile', start:'top 88%', end:'bottom 40%', scrub:true, onUpdate:function(s){
       line.style.strokeDashoffset = len * (1 - s.progress);
       var pt = line.getPointAtLength(len * s.progress); dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
