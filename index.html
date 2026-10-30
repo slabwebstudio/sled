@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#FFF6E8">
-<meta property="og:title" content="SLED Dive Center · Ган, Лааму, Мальдивы">
-<meta property="og:description" content="Небольшой дайв-центр SSI на острове Ган. Инструктор говорит по-русски, группы до четырёх человек, оплата на месте.">
+<meta property="og:title" content="SLED Dive Center, Ган, Лааму, Мальдивы">
+<meta property="og:description" content="Небольшой дайв-центр SSI на острове Ган, атолл Лааму. Инструктор говорит по-русски, группы до четырёх человек.">
 <meta property="og:type" content="website">
 <link rel="icon" href="logo-dark.png">
 <title>SLED Dive Center</title>
-<meta name="description" content="SLED — небольшой дайв-центр SSI на острове Ган, атолл Лааму, Мальдивы. Инструктор говорит по-русски, в группе не больше четырёх человек, без предоплаты.">
+<meta name="description" content="SLED, небольшой дайв-центр SSI на острове Ган, атолл Лааму, Мальдивы. Инструктор говорит по-русски, в группе не больше четырёх человек.">
 <link rel="stylesheet" href="assets/fonts.css">
 <style>
 /* Layout: a dive in one scroll. Bright surface at the top, the page darkens as you go deeper, then surfaces again into sunlight at the contacts. */
@@ -50,8 +50,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--fin);outline-offset:3px;border-radius:6px}
-h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;line-height:.98;letter-spacing:-.012em;font-variant-numeric:lining-nums;text-wrap:balance;overflow-wrap:break-word}
-h1 em,h2 em,.acc{font-style:italic;font-weight:600;letter-spacing:-.005em}
+h1,h2,h3{margin:0;font-family:var(--display);font-style:italic;font-weight:500;line-height:1;letter-spacing:0;font-variant-numeric:lining-nums;text-wrap:balance;overflow-wrap:break-word}
+h1 em,h2 em,.acc{font-style:italic;font-weight:600}
 p{margin:0}
 .wrap{width:100%;max-width:1260px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
 @media (min-width:1700px){.wrap{max-width:1480px}}
@@ -78,8 +78,23 @@ p{margin:0}
 .btn:hover::before{transform:scale(14)}
 .btn:hover .bi{transform:rotate(-360deg) scale(1.08)}
 .btn:active{transform:scale(.97)}
-.btn::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 4.5s 2s infinite}
-@keyframes shine{0%{left:-40%}22%,100%{left:130%}}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-160%) skewX(-20deg);animation:shine 4.5s 1.2s infinite}
+@keyframes shine{0%{transform:translateX(-160%) skewX(-20deg)}22%,100%{transform:translateX(480%) skewX(-20deg)}}
+.btn .bi svg{animation:wob 3.8s ease-in-out infinite}
+.btn-glass .bi svg{animation-delay:1.6s}
+@keyframes wob{0%,80%,100%{transform:none}84%{transform:rotate(-16deg) scale(1.18)}88%{transform:rotate(14deg) scale(1.18)}92%{transform:rotate(-8deg) scale(1.08)}96%{transform:rotate(4deg)}}
+.btn-fin{animation:glow 2.8s ease-out infinite}
+@keyframes glow{0%{box-shadow:0 18px 40px -16px rgba(249,140,43,.95),0 0 0 0 rgba(249,167,43,.55)}70%,100%{box-shadow:0 18px 40px -16px rgba(249,140,43,.95),0 0 0 22px rgba(249,167,43,0)}}
+.btn-glass{animation:glowg 2.8s 1.4s ease-out infinite}
+@keyframes glowg{0%{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7),0 0 0 0 rgba(37,211,102,.55)}70%,100%{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7),0 0 0 22px rgba(37,211,102,0)}}
+@media (hover:none){
+  .btn:active::before{transform:scale(14)}
+  .btn:active .bi{transform:rotate(-360deg) scale(1.1)}
+  .btn:active .bt>span{transform:translateY(-50%)}
+  .btn-fin:active{color:#fff}
+  .btn-fin:active .bi{background:var(--fin);color:var(--ink)}
+  .btn-glass:active .bi{background:#fff;color:#25D366}
+}
 .btn-fin{background:linear-gradient(115deg,#FFB547,var(--fin) 45%,#FF8A3D);color:var(--ink);box-shadow:0 18px 40px -16px rgba(249,140,43,.95)}
 .btn-fin .bi{background:var(--ink);color:var(--fin)}
 .btn-fin::before{background:var(--ink)}
@@ -146,15 +161,19 @@ html.menu-open .hdepth{opacity:0}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 52%}
 .hero-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(255,255,255,0) 30%,rgba(3,62,84,.25) 55%,rgba(3,48,66,.72) 100%)}
 .hero-deep{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,191,208,.25) 0%,rgba(10,120,145,.55) 55%,rgba(255,246,232,1) 100%);opacity:0}
+.hero-bub{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.stk.pops{display:none;transform:rotate(5deg);cursor:default}
+@media (min-width:1101px) and (min-height:781px){.stk.pops{display:inline-block}}
 .hero-in{position:relative;padding-block:120px clamp(40px,7vh,84px);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(16px,2.4vh,26px)}
 .hero-stk{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
 .hero-stk .stk:nth-child(1){transform:rotate(-4deg)}
 .hero-stk .stk:nth-child(2){transform:rotate(3deg)}
 .hero-stk .stk:nth-child(3){transform:rotate(-2deg)}
+.hero-stk .stk.pops{transform:rotate(5deg)}
 .hero h1{font-size:clamp(48px,min(13.5vw,16.5vh),210px);line-height:.95;text-shadow:0 6px 40px rgba(3,48,66,.35)}
 .hero h1 .ln{display:block}
 .hero h1 .ln>span{display:inline-block}
-.hero h1 .ln.acc{color:var(--fin);padding-left:clamp(0px,7vw,140px);font-size:1.08em;line-height:1}
+.hero h1 .ln.acc{color:var(--fin);padding-left:clamp(0px,7vw,140px);font-size:1.04em;line-height:1.02}
 .hero-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px 40px}
 .hero-sub{max-width:42ch;font-size:clamp(18px,1.55vw,22px);font-weight:500;color:#F1FCFE;text-shadow:0 2px 14px rgba(3,48,66,.6)}
 .badge{position:absolute;right:max(5vw,var(--gr));top:calc(130px + env(safe-area-inset-top,0px));width:clamp(104px,10vw,150px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 20px 50px -24px rgba(5,41,58,.5)}
@@ -188,7 +207,8 @@ html.menu-open .hdepth{opacity:0}
 .gauge .rail{position:relative;width:2px;height:180px;background:var(--hair)}
 .gauge .fill{position:absolute;left:0;top:0;width:2px;height:0;background:var(--fin)}
 .gauge .dot{position:absolute;left:50%;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--fin);box-shadow:0 0 0 5px rgba(249,167,43,.25)}
-.gauge b{font:700 16px/1 var(--body);letter-spacing:0;font-variant-numeric:tabular-nums}
+.gauge b{font:700 16px/1 var(--body);letter-spacing:0;font-variant-numeric:tabular-nums;min-width:4.4em;text-align:center}
+.gauge #gphase{text-align:center;max-width:9em;line-height:1.25}
 .gauge.off{opacity:0}
 @media (max-width:1380px){
   .gauge{right:calc(5px + env(safe-area-inset-right,0px));gap:0}
@@ -200,7 +220,7 @@ html.menu-open .hdepth{opacity:0}
 
 /* MARQUEE */
 .marq{padding-block:clamp(36px,6vw,80px) clamp(20px,3vw,40px);overflow:hidden}
-.mrow{display:flex;width:max-content;gap:.35em;font:600 clamp(64px,11.5vw,200px)/1.05 var(--display);letter-spacing:-.015em;font-variant-numeric:lining-nums;white-space:nowrap;will-change:transform}
+.mrow{display:flex;width:max-content;gap:.35em;font:italic 500 clamp(64px,11.5vw,200px)/1.05 var(--display);letter-spacing:0;font-variant-numeric:lining-nums;white-space:nowrap;will-change:transform}
 .mrow span{display:inline-flex;align-items:center;gap:.35em}
 .mrow .o{color:transparent;-webkit-text-stroke:1.5px var(--fg)}
 .mrow .f{color:var(--fin)}
@@ -225,7 +245,7 @@ html.menu-open .hdepth{opacity:0}
 .perk:nth-child(3){transform:rotate(-1deg)}
 .perk:nth-child(4){transform:rotate(2deg) translateY(14px)}
 .perk:hover{transform:rotate(0) translateY(-8px)}
-.perk b{font:600 clamp(52px,4.6vw,72px)/.9 var(--display);letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.perk b{font:italic 600 clamp(52px,4.6vw,72px)/.9 var(--display);letter-spacing:0;font-variant-numeric:lining-nums}
 .perk:nth-child(1) b{color:var(--lagoon)}
 .perk:nth-child(2) b{color:var(--fin)}
 .perk:nth-child(3) b{color:var(--coral)}
@@ -247,7 +267,9 @@ html.menu-open .hdepth{opacity:0}
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--ease)}
 .tile:hover img{transform:scale(1.08)}
 .tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,0) 30%,rgba(5,41,58,.88))}
-.tile .L{position:absolute;left:18px;top:10px;font:600 clamp(110px,12vw,200px)/1 var(--display);color:rgba(255,255,255,.14);-webkit-text-stroke:1.8px rgba(255,255,255,.95);text-shadow:0 4px 30px rgba(5,41,58,.35)}
+.tile .sh{position:absolute;inset:0;z-index:1;background:#031a26;opacity:0;pointer-events:none}
+.tile .tx{z-index:2}
+.tile .L{position:absolute;left:18px;top:10px;font:italic 500 clamp(110px,12vw,200px)/1 var(--display);color:rgba(255,255,255,.14);-webkit-text-stroke:1.8px rgba(255,255,255,.95);text-shadow:0 4px 30px rgba(5,41,58,.35)}
 .tile:nth-child(1) .L{-webkit-text-stroke-color:var(--lagoon)}
 .tile:nth-child(2) .L{-webkit-text-stroke-color:#fff}
 .tile:nth-child(3) .L{-webkit-text-stroke-color:var(--fin)}
@@ -284,6 +306,7 @@ html.menu-open .hdepth{opacity:0}
   .pol{position:relative;left:auto!important;top:auto!important;width:auto!important;padding:7px 7px 0}
   .pol:nth-child(even){margin-top:56px}
   .pol figcaption{font-size:21px;padding:8px 2px 10px}
+  .pol{box-shadow:0 12px 22px -14px rgba(0,0,0,.6)}
 }
 
 /* STATS over a parallax photo */
@@ -293,7 +316,7 @@ html.menu-open .hdepth{opacity:0}
 .stats::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,.55),rgba(5,41,58,.8))}
 .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px}
 .stat{display:grid;gap:12px;align-content:start}
-.stat b{font:600 clamp(56px,6.6vw,124px)/.9 var(--display);letter-spacing:-.01em;font-variant-numeric:lining-nums tabular-nums;color:#fff;white-space:nowrap}
+.stat b{font:italic 600 clamp(56px,6.6vw,124px)/.9 var(--display);letter-spacing:0;font-variant-numeric:lining-nums tabular-nums;color:#fff;white-space:nowrap}
 .stat:nth-child(2) b{color:var(--fin)}
 .stat:nth-child(4) b{color:var(--lagoon)}
 .stat span{font-weight:600;color:#E2F6F9;max-width:20ch;font-size:clamp(16.5px,1.45vw,20px);line-height:1.35}
@@ -371,22 +394,26 @@ html.menu-open .hdepth{opacity:0}
 html:not(.js-pin) .c-bar{display:none}
 
 /* LAAMU — a framed photo opens to full screen */
-.laamu{position:relative;height:220vh}
+.laamu{position:relative;height:280vh}
 .l-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
-.l-frame{position:absolute;inset:0;clip-path:inset(16% 22% 16% 22% round 36px);will-change:clip-path}
+.l-frame{position:absolute;inset:-1px;clip-path:inset(16% 22% 16% 22% round 36px);will-change:clip-path}
 .l-frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.25);will-change:transform}
-.l-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,41,58,.82),rgba(5,41,58,.25) 70%);opacity:var(--o,0)}
-.l-txt{position:relative;z-index:2;color:#fff;display:grid;gap:22px;align-content:center;width:100%;opacity:0;padding-top:56px}
-.l-txt h2{font-size:clamp(48px,min(9vw,14.5vh),150px);max-width:9ch;line-height:.98}
+.l-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,41,58,.86),rgba(5,41,58,.5) 70%,rgba(5,41,58,.3));opacity:var(--o,0)}
+.l-txt{position:relative;z-index:2;color:#fff;display:grid;gap:clamp(12px,2.2vh,22px);align-content:center;width:100%;opacity:0;padding-top:56px}
+.l-txt h2{font-size:clamp(44px,min(8vw,12.5vh),130px);line-height:1}
 .l-txt h2 em{color:var(--fin)}
-.l-txt p{max-width:42ch;font-size:clamp(18px,1.65vw,23px);color:#EAF8FB;font-weight:500}
+.l-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,48px);max-width:1020px}
+.l-txt p{font-size:clamp(16.5px,1.35vw,20px);line-height:1.55;color:#EAF8FB;font-weight:500}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
 .chips span{border:1.5px solid rgba(255,255,255,.6);border-radius:999px;padding:11px 18px;font-weight:600;font-size:16.5px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,.1)}
 .l-cap{position:absolute;bottom:clamp(20px,6vh,60px);left:50%;transform:translateX(-50%) rotate(-3deg);font:italic 500 clamp(26px,2.3vw,34px)/1 var(--display);color:var(--fg);white-space:nowrap}
+@media (max-width:820px) and (max-height:760px){.l-p2{display:none}}
 @media (max-width:700px){
   .l-frame{clip-path:inset(22% 8% 22% 8% round 28px)}
   .l-frame::after{background:linear-gradient(180deg,rgba(5,41,58,.15) 0%,rgba(5,41,58,.55) 35%,rgba(5,41,58,.88) 100%)}
-  .l-txt{align-content:end;padding-bottom:max(36px,env(safe-area-inset-bottom,0px));height:100%;gap:16px}
+  .l-txt{align-content:end;padding-bottom:max(36px,env(safe-area-inset-bottom,0px));height:100%;gap:14px}
+  .l-cols{grid-template-columns:minmax(0,1fr);gap:10px}
+  .l-txt p{font-size:16px;line-height:1.5}
   .chips span{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(5,41,58,.35);font-size:15px;padding:9px 14px}
 }
 
@@ -478,8 +505,13 @@ footer .top-cta{display:inline-flex}
 .float a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 14px 30px -10px rgba(0,0,0,.55);transition:transform .3s var(--ease)}
 .float a:first-child{background:#27A6E5}
 .float a:last-child{background:#25D366}
-.float a:hover{transform:scale(1.1) rotate(-6deg)}
-.float svg{width:28px;height:28px}
+.float a{position:relative}
+.float a::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid currentColor;opacity:0;animation:fring 2.4s ease-out infinite}
+.float a:last-child::after{animation-delay:1.2s}
+@keyframes fring{0%{transform:scale(1);opacity:.75}75%,100%{transform:scale(1.7);opacity:0}}
+.float a:hover,.float a:active{transform:scale(1.1) rotate(-6deg)}
+.float svg{width:28px;height:28px;animation:wob 3.8s ease-in-out infinite}
+.float a:last-child svg{animation-delay:1.9s}
 @media (max-width:900px){.float{grid-auto-flow:column;right:auto;left:50%;transform:translate(-50%,180%)}.float.show{transform:translate(-50%,0)}.float a{width:54px;height:54px}.float svg{width:25px;height:25px}}
 
 /* heading letters (JS adds motion; content is visible without it) */
@@ -493,8 +525,8 @@ footer .top-cta{display:inline-flex}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="logo" href="#hero" aria-label="SLED — наверх">
-      <img class="lg-dark" src="logo-dark.png" alt="SLED — Sleep Live Eat Dive">
+    <a class="logo" href="#hero" aria-label="SLED, наверх">
+      <img class="lg-dark" src="logo-dark.png" alt="SLED, Sleep Live Eat Dive">
       <img class="lg-light" src="logo-light.png" alt="" aria-hidden="true">
     </a>
     <span class="hdepth" id="hdepth" aria-hidden="true"><span data-i="depth">глубина</span> <b id="hnum">0 м</b></span>
@@ -518,27 +550,29 @@ footer .top-cta{display:inline-flex}
 </header>
 
 <aside class="gauge off" id="gauge" aria-hidden="true">
-  <span data-i="depth">глубина</span>
+  <span id="gphase">глубина</span>
   <div class="rail"><div class="fill" id="gfill"></div><div class="dot" id="gdot"></div></div>
   <b id="gnum">0 м</b>
 </aside>
 
 <main>
-  <section class="hero" id="hero" data-depth="0">
+  <section class="hero" id="hero" data-depth="0" data-hold="1">
     <div class="hero-stick">
       <div class="hero-media" id="heroMedia"><img src="photos/hero.jpg" alt="Остров на Мальдивах над водой и коралловое дно под водой" fetchpriority="high"></div>
       <div class="hero-shade"></div>
       <div class="hero-deep" id="heroDeep"></div>
+      <canvas class="hero-bub" id="hbub" aria-hidden="true"></canvas>
       <a class="badge" href="#about" id="hint" aria-label="Вниз"><svg class="ring" id="ring" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text><textPath href="#circ" data-i="hint">там внизу черепахи · листайте вниз · </textPath></text></svg><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></span></a>
       <div class="wrap hero-in" id="heroIn">
         <div class="hero-stk">
           <span class="stk t" data-i="s1">Остров Ган · атолл Лааму</span>
           <span class="stk o" data-i="s2">Инструктор SSI говорит по-русски</span>
           <span class="stk c" data-i="s3">Максимум 4 человека в группе</span>
+          <span class="stk w pops" id="pops" aria-hidden="true"><span id="popt" data-i="pop0">Поймайте пузырь</span></span>
         </div>
         <h1 id="h1"><span class="ln"><span data-i="h1a">Ныряйте</span></span><span class="ln acc"><span data-i="h1b">в вечное лето</span></span></h1>
         <div class="hero-row">
-          <p class="hero-sub" data-i="hsub">Небольшой дайв-центр на юге Мальдив, вдали от туристических маршрутов. Тёплая вода круглый год, черепахи и манты на рифах и никаких очередей под водой.</p>
+          <p class="hero-sub" data-i="hsub">Небольшой дайв-центр на атолле Лааму, на юге Мальдив, вдали от туристических маршрутов. Тёплая вода круглый год, черепахи и манты на рифах и никаких очередей под водой.</p>
           <div class="btns">
             <a class="btn btn-fin" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.3-1.5zM9.5 14.6l-.4 4.3-1.6-5.1 10.8-6.8z"/></svg></span><span class="bt"><span data-i="b1" data-t="Записаться">Записаться</span></span></a>
             <a class="btn btn-glass" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span class="bt"><span data-t="WhatsApp">WhatsApp</span></span></a>
@@ -548,39 +582,39 @@ footer .top-cta{display:inline-flex}
     </div>
   </section>
 
-  <section class="marq" aria-hidden="true" data-depth="2">
+  <section class="marq" aria-hidden="true" data-depth="3">
     <div class="mrow" id="m1"></div>
     <div class="mrow" id="m2"></div>
   </section>
 
   <section class="mani" id="about" data-depth="5">
     <div class="wrap">
-      <p class="mani-text" id="mani" data-i="mani">Мы намеренно остаёмся небольшими. Один инструктор, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> не больше четырёх человек в группе и никакого конвейера: никто не торопит и никто не теряется в толпе. Всё объясняем по-русски, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> а оплачиваете вы уже на месте, когда убедитесь, что этот <em>риф того стоит.</em></p>
+      <p class="mani-text" id="mani" data-i="mani">Мы намеренно остаёмся небольшими. Один инструктор, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> не больше четырёх человек в группе: никто не торопит, никто не теряется, и каждый успевает рассмотреть риф. Всё объясняем по-русски, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> а стоит ли этот атолл вашего отпуска, вы поймёте уже <em>под водой.</em></p>
       <div class="perks">
-        <article class="perk"><b>4</b><h3 data-i="p1h">человека в группе, не больше</h3><p data-i="p1p">Александр следит за каждым. Не нужно махать руками на глубине, чтобы вас заметили.</p></article>
+        <article class="perk"><b>4</b><h3 data-i="p1h">человека в группе, не больше</h3><p data-i="p1p">Столько мы берём на одно погружение, чтобы у инструктора хватало внимания на каждого, а у вас хватало спокойствия.</p></article>
         <article class="perk"><b>RU</b><h3 data-i="p2h">всё на русском</h3><p data-i="p2p">Брифинг, теория и разбор погружения на родном языке. Никаких «sorry, I don’t understand» на пятнадцати метрах.</p></article>
         <article class="perk"><b>SSI</b><h3 data-i="p3h">международный сертификат</h3><p data-i="p3p">Сертификат SSI признают по всему миру: с ним можно нырять в Египте, на Бали, в Таиланде и где угодно ещё.</p></article>
-        <article class="perk"><b>0 $</b><h3 data-i="p4h">предоплаты</h3><p data-i="p4p">Напишите нам, приезжайте и ныряйте. Оплата на месте.</p></article>
+        <article class="perk"><b>6</b><h3 data-i="p4h">комплектов снаряжения</h3><p data-i="p4p">Всё нужное уже на месте, поэтому ласты и регулятор можно не тащить в самолёте. Приезжайте налегке.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="words" aria-label="Sleep Live Eat Dive" data-depth="6">
+  <section class="words" aria-label="Sleep Live Eat Dive" data-depth="8">
     <div class="wrap">
       <div class="words-head">
         <h2><span data-i="wh1">Спать. Жить.</span><br><em data-i="wh2">Есть. Нырять.</em></h2>
         <span class="hand" data-i="whk">так расшифровывается SLED</span>
       </div>
       <div class="tiles" id="tiles">
-        <article class="tile" style="--i:0"><img src="photos/sleep.jpg" alt="Гамак между пальмами у океана" loading="lazy"><span class="L" aria-hidden="true">S</span><div class="tx"><h3>Sleep</h3><p data-i="t1">Дайв-центр находится прямо на территории отеля. От номера до снаряжения пара минут пешком.</p></div></article>
-        <article class="tile" style="--i:1"><img src="photos/live.jpg" alt="Девушка с маской для снорклинга бежит в море" loading="lazy"><span class="L" aria-hidden="true">L</span><div class="tx"><h3>Live</h3><p data-i="t2">Босиком с утра до вечера: белый песок, лагуна цвета мятной жвачки и ни одного «срочно» за весь отпуск.</p></div></article>
-        <article class="tile" style="--i:2"><img src="photos/eat.jpg" alt="Завтрак у моря" loading="lazy"><span class="L" aria-hidden="true">E</span><div class="tx"><h3>Eat</h3><p data-i="t3">Между погружениями фрукты, кофе и обед с видом на океан. Голодный дайвер — грустный дайвер, мы такого не допускаем.</p></div></article>
-        <article class="tile" style="--i:3"><img src="photos/dive.jpg" alt="Ныряльщик среди рыб в солнечных лучах" loading="lazy"><span class="L" aria-hidden="true">D</span><div class="tx"><h3>Dive</h3><p data-i="t4">Три-четыре погружения в день с лодки. Сколько нырять, решаете вы.</p></div></article>
+        <article class="tile" style="--i:0"><img src="photos/sleep.jpg" alt="Гамак между пальмами у океана" loading="lazy"><span class="L" aria-hidden="true">S</span><div class="tx"><h3>Sleep</h3><p data-i="t1">Дайв-центр находится прямо на территории отеля. Проснулись, позавтракали, и через пару минут вы уже у снаряжения: без ранних трансферов и долгой дороги до лодки.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:1"><img src="photos/live.jpg" alt="Дайвер в гидрокостюме у борта лодки" loading="lazy"><span class="L" aria-hidden="true">L</span><div class="tx"><h3>Live</h3><p data-i="t2">Здесь всё устроено неспешно: утро на лодке, обед в тени пальм, вечером закат и никаких планов. Остров небольшой, и уже на второй день кажется, что вы живёте тут давно.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:2"><img src="photos/eat.jpg" alt="Завтрак у моря" loading="lazy"><span class="L" aria-hidden="true">E</span><div class="tx"><h3>Eat</h3><p data-i="t3">Между погружениями фрукты, кофе и обед с видом на океан. Голодный дайвер, как известно, дайвер грустный, и мы такого не допускаем.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:3"><img src="photos/dive.jpg" alt="Дайвер с аквалангом рядом с морской черепахой" loading="lazy"><span class="L" aria-hidden="true">D</span><div class="tx"><h3>Dive</h3><p data-i="t4">Три или четыре погружения в день с лодки. Сколько нырять, решаете вы: хотите одно погружение и целый день на пляже, так и сделаем. В группе не больше четырёх человек, поэтому лодка не превращается в автобус.</p></div><i class="sh"></i></article>
       </div>
     </div>
   </section>
 
-  <section class="sea dk" id="sea" data-depth="18" data-dk="0.14,1">
+  <section class="sea dk" id="sea" data-depth="12" data-dk="0.14,1">
     <div class="sea-stick">
       <div class="sea-title">
         <span class="hand" data-i="seak">задержите дыхание… шутка, у нас баллоны</span>
@@ -589,24 +623,23 @@ footer .top-cta{display:inline-flex}
       </div>
     </div>
     <div class="pols" id="pols">
-      <figure class="pol" data-x="4" data-y="5" data-w="24" data-r="-7" data-s="0.5"><img src="photos/turtle.jpg" alt="Морская черепаха над рифом" loading="lazy"><figcaption data-i="c1">привет, черепаха</figcaption></figure>
-      <figure class="pol" data-x="70" data-y="3" data-w="23" data-r="6" data-s="1.0"><img src="photos/manta.jpg" alt="Манта" loading="lazy"><figcaption data-i="c2">манта над головой</figcaption></figure>
-      <figure class="pol" data-x="34" data-y="20" data-w="13" data-r="5" data-s="1.7" style="--ar:3/4"><img src="photos/turtle2.jpg" alt="Черепаха над песчаным дном" loading="lazy"><figcaption data-i="c3">в толще воды</figcaption></figure>
-      <figure class="pol" data-x="52" data-y="9" data-w="17" data-r="-4" data-s="1.3"><img src="photos/selfie.jpg" alt="Девушка в маске под водой" loading="lazy"><figcaption data-i="c9">первый вдох под водой</figcaption></figure>
-      <figure class="pol" data-x="74" data-y="27" data-w="23" data-r="-5" data-s="0.8"><img src="photos/school.jpg" alt="Стая жёлтых рыб у рифа" loading="lazy"><figcaption data-i="c4">рыбный час пик</figcaption></figure>
-      <figure class="pol" data-x="2" data-y="31" data-w="25" data-r="4" data-s="1.2"><img src="photos/whale.jpg" alt="Китовая акула" loading="lazy"><figcaption data-i="c5">китовая акула, если повезёт</figcaption></figure>
-      <figure class="pol" data-x="22" data-y="47" data-w="13" data-r="-8" data-s="1.5" style="--ar:4/5"><img src="photos/babyshark.jpg" alt="Маленькая рифовая акула на мелководье" loading="lazy"><figcaption data-i="c10">акулёнок, не кусается</figcaption></figure>
-      <figure class="pol" data-x="56" data-y="44" data-w="14" data-r="-6" data-s="1.0" style="--ar:3/4"><img src="photos/coral.jpg" alt="Кораллы" loading="lazy"><figcaption data-i="c6">кораллы всех цветов</figcaption></figure>
-      <figure class="pol" data-x="76" data-y="54" data-w="22" data-r="5" data-s="0.9"><img src="photos/reefshark.jpg" alt="Рифовая акула" loading="lazy"><figcaption data-i="c11">рифовая акула</figcaption></figure>
-      <figure class="pol" data-x="3" data-y="61" data-w="20" data-r="6" data-s="1.1"><img src="photos/snorkel.jpg" alt="Ребёнок в маске для снорклинга" loading="lazy"><figcaption data-i="c12">маска, трубка, лагуна</figcaption></figure>
-      <figure class="pol" data-x="38" data-y="65" data-w="22" data-r="-3" data-s="0.7"><img src="photos/swimmers.jpg" alt="Люди плавают в бирюзовой лагуне, вид сверху" loading="lazy"><figcaption data-i="c13">лагуна сверху</figcaption></figure>
-      <figure class="pol" data-x="84" data-y="73" data-w="12" data-r="8" data-s="1.6" style="--ar:3/4"><img src="photos/turtle3.jpg" alt="Черепаха" loading="lazy"><figcaption data-i="c7">позирует</figcaption></figure>
-      <figure class="pol" data-x="9" data-y="81" data-w="24" data-r="-4" data-s="0.9"><img src="photos/group.jpg" alt="Группа дайверов у рифа" loading="lazy"><figcaption data-i="c8">группа до четырёх человек</figcaption></figure>
-      <figure class="pol" data-x="60" data-y="80" data-w="13" data-r="7" data-s="1.3" style="--ar:2/3"><img src="photos/swing.jpg" alt="Качели на пальме у моря" loading="lazy"><figcaption data-i="c14">отдых после погружения</figcaption></figure>
+      <figure class="pol" data-x="4" data-y="5" data-w="24" data-r="-7" data-s="0.5"><img src="photos/turtle.jpg" alt="Морская черепаха над рифом"><figcaption data-i="c1">привет, черепаха</figcaption></figure>
+      <figure class="pol" data-x="70" data-y="3" data-w="23" data-r="6" data-s="1.0"><img src="photos/manta.jpg" alt="Манта"><figcaption data-i="c2">манта над головой</figcaption></figure>
+      <figure class="pol" data-x="34" data-y="20" data-w="13" data-r="5" data-s="1.7" style="--ar:3/4"><img src="photos/turtle2.jpg" alt="Черепаха над песчаным дном"><figcaption data-i="c3">в толще воды</figcaption></figure>
+      <figure class="pol" data-x="52" data-y="9" data-w="17" data-r="-4" data-s="1.3"><img src="photos/c-try.jpg" alt="Дайвер с аквалангом у рифа"><figcaption data-i="c9">первый вдох под водой</figcaption></figure>
+      <figure class="pol" data-x="74" data-y="27" data-w="23" data-r="-5" data-s="0.8"><img src="photos/school.jpg" alt="Стая жёлтых рыб у рифа"><figcaption data-i="c4">рыбный час пик</figcaption></figure>
+      <figure class="pol" data-x="2" data-y="31" data-w="25" data-r="4" data-s="1.2"><img src="photos/whale.jpg" alt="Китовая акула"><figcaption data-i="c5">китовая акула, если повезёт</figcaption></figure>
+      <figure class="pol" data-x="22" data-y="47" data-w="13" data-r="-8" data-s="1.5" style="--ar:4/5"><img src="photos/babyshark.jpg" alt="Маленькая рифовая акула на мелководье"><figcaption data-i="c10">акулёнок, не кусается</figcaption></figure>
+      <figure class="pol" data-x="56" data-y="44" data-w="14" data-r="-6" data-s="1.0" style="--ar:3/4"><img src="photos/coral.jpg" alt="Кораллы"><figcaption data-i="c6">кораллы всех цветов</figcaption></figure>
+      <figure class="pol" data-x="76" data-y="54" data-w="22" data-r="5" data-s="0.9"><img src="photos/reefshark.jpg" alt="Рифовая акула"><figcaption data-i="c11">рифовая акула</figcaption></figure>
+      <figure class="pol" data-x="3" data-y="61" data-w="22" data-r="6" data-s="1.1"><img src="photos/divers.jpg" alt="Двое дайверов над рифом"><figcaption data-i="c12">ныряем с напарником</figcaption></figure>
+      <figure class="pol" data-x="84" data-y="73" data-w="12" data-r="8" data-s="1.6" style="--ar:3/4"><img src="photos/turtle3.jpg" alt="Черепаха"><figcaption data-i="c7">позирует</figcaption></figure>
+      <figure class="pol" data-x="9" data-y="81" data-w="24" data-r="-4" data-s="0.9"><img src="photos/group.jpg" alt="Группа дайверов у рифа"><figcaption data-i="c8">группа до четырёх человек</figcaption></figure>
+      <figure class="pol" data-x="44" data-y="70" data-w="13" data-r="7" data-s="1.3" style="--ar:2/3"><img src="photos/swing.jpg" alt="Качели на пальме у моря"><figcaption data-i="c14">отдых после погружения</figcaption></figure>
     </div>
   </section>
 
-  <section class="stats dk" aria-label="SLED в цифрах" data-depth="24" data-dk="0,1">
+  <section class="stats dk" aria-label="SLED в цифрах" data-depth="15" data-dk="0,1">
     <div class="bgimg" data-par="18"><img src="photos/rays.jpg" alt="" loading="lazy"></div>
     <div class="wrap stats-grid">
       <div class="stat rv"><b data-count="12">12</b><span data-i="st1">лет Александр обучает дайверов</span></div>
@@ -616,10 +649,10 @@ footer .top-cta{display:inline-flex}
     </div>
   </section>
 
-  <section class="coach dk" id="coach" data-depth="30" data-dk="0,0.8">
+  <section class="coach dk" id="coach" data-depth="18" data-dk="0,0.8">
     <div class="wrap coach-grid">
       <div class="coach-img rv-img">
-        <img src="photos/cave.jpg" alt="Дайвер в столбе солнечного света" loading="lazy" data-par="10">
+        <img src="photos/coach.jpg" alt="Инструктор в гидрокостюме и маске на поверхности" loading="lazy" data-par="10" style="object-position:62% 50%">
         <span class="stk o">SSI Assistant Instructor Trainer</span>
       </div>
       <div class="coach-txt">
@@ -635,7 +668,7 @@ footer .top-cta{display:inline-flex}
     </div>
   </section>
 
-  <section class="courses" id="courses" data-depth="12">
+  <section class="courses" id="courses" data-depth="18" data-hold="1">
     <div class="c-stick">
       <div class="wrap c-head">
         <h2><span data-i="ch1">Выберите</span><br><em data-i="ch2">свою глубину</em></h2>
@@ -653,20 +686,23 @@ footer .top-cta{display:inline-flex}
     </div>
   </section>
 
-  <section class="laamu" id="laamu" data-depth="4">
+  <section class="laamu" id="laamu" data-depth="14">
     <div class="l-stick">
-      <div class="l-frame" id="lframe"><img src="photos/laamu.jpg" alt="Острова и песчаные косы Мальдив с высоты" loading="lazy"></div>
+      <div class="l-frame" id="lframe"><img src="photos/atoll.jpg" alt="Остров атолла с высоты, бирюзовая лагуна и риф"></div>
       <span class="l-cap" id="lcap" data-i="lcap">листайте дальше, тут красиво</span>
       <div class="wrap l-txt" id="ltxt">
         <span class="stk t" style="justify-self:start;transform:rotate(-3deg)" data-i="lk">Атолл Лааму</span>
         <h2><span data-i="lh1">Риф</span> <em data-i="lh2">без очереди</em></h2>
-        <p data-i="lp">Лааму далеко от Мале, и туристические потоки сюда почти не доходят. Пока на популярных атоллах лодки выстраиваются у одного рифа, здесь под водой тихо, а мант, черепах и кораллов хватает на всех.</p>
-        <div class="chips"><span data-i="f1">3–4 погружения в день</span><span data-i="f2">Выходы на лодке</span><span data-i="f3">Вода тёплая круглый год</span></div>
+        <div class="l-cols">
+          <p data-i="lp">Лааму, один из южных атоллов Мальдив, и до него добираются немногие. Нет вереницы лодок у каждого рифа и толп на пляже: под водой тихо, а мант, черепах и кораллов хватает на всех.</p>
+          <p class="l-p2" data-i="lp2">Форма атолла прикрывает внутренние рифы от сильных течений, поэтому здесь спокойно новичкам, а опытные дайверы уходят к каналам, где обычно встречаются и манты, и акулы, и большие стаи рыб. Вода тёплая круглый год, а видимость нередко достигает двадцати-тридцати метров.</p>
+        </div>
+        <div class="chips"><span data-i="f1">3-4 погружения в день</span><span data-i="f2">Выходы на лодке</span><span data-i="f3">Вода тёплая круглый год</span><span data-i="f4">Вдали от толп</span></div>
       </div>
     </div>
   </section>
 
-  <section class="how" id="how" data-depth="8">
+  <section class="how" id="how" data-depth="10">
     <div class="wrap">
       <h2 class="rv"><span data-i="hw1">Три шага</span><br><em data-i="hw2">до погружения</em></h2>
       <div class="profile" aria-hidden="true">
@@ -683,25 +719,26 @@ footer .top-cta{display:inline-flex}
       <div class="steps">
         <div class="step rv"><span class="n">1</span><h3 data-i="sp1h">Напишите нам</h3><p data-i="sp1p">В Telegram или WhatsApp. Достаточно имени и пары слов: «хочу попробовать» или «есть сертификат, хочу на риф».</p></div>
         <div class="step rv"><span class="n">2</span><h3 data-i="sp2h">Выберем день</h3><p data-i="sp2p">Администратор ответит в течение нескольких часов и подберёт время под ваш отпуск.</p></div>
-        <div class="step rv"><span class="n">3</span><h3 data-i="sp3h">Погружение</h3><p data-i="sp3p">Без предоплаты: оплата на месте, пока наличными. Дальше остаются только пузыри и черепахи.</p></div>
+        <div class="step rv"><span class="n">3</span><h3 data-i="sp3h">Погружение</h3><p data-i="sp3p">Оплата на месте, пока наличными. Дальше остаются только пузыри и черепахи.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="gal dk" aria-label="Фотографии" data-depth="20" data-dk="0.12,0.88">
+  <section class="gal dk" aria-label="Фотографии" data-depth="7" data-dk="0.12,0.88">
     <div class="wrap gal-head">
       <h2 class="rv"><span data-i="g1">Здесь не</span><br><em data-i="g2">бывает зимы</em></h2>
-      <p class="rv" data-i="gp">Пока дома слякоть и пуховики, здесь +30, прозрачная вода и рифы в нескольких минутах на лодке.</p>
+      <p class="rv" data-i="gp">Пока дома слякоть и пуховики, здесь плюс тридцать, а вода тёплая, как в ванне. Рифы в нескольких минутах от берега на лодке, поэтому день не уходит на дорогу: утром вы под водой, днём на пляже, вечером смотрите на закат.</p>
     </div>
     <div class="grow" id="gr1">
       <figure style="--ar:1.506"><img src="photos/reefshark.jpg" alt="Рифовая акула" loading="lazy"></figure>
       <figure style="--ar:1.498"><img src="photos/beach.jpg" alt="Пляж с пальмами на Мальдивах" loading="lazy"></figure>
       <figure style="--ar:1.509"><img src="photos/c-fun.jpg" alt="Стая рыб над рифом в лучах солнца" loading="lazy"></figure>
       <figure style="--ar:0.562"><img src="photos/turtle3.jpg" alt="Черепаха" loading="lazy"></figure>
-      <figure style="--ar:1.498"><img src="photos/atoll.jpg" alt="Остров на атолле с высоты" loading="lazy"></figure>
+      <figure style="--ar:1.333"><img src="photos/divers.jpg" alt="Двое дайверов над рифом" loading="lazy"></figure>
       <figure style="--ar:1.5"><img src="photos/shark.jpg" alt="Дайвер и китовая акула" loading="lazy"></figure>
       <figure style="--ar:0.667"><img src="photos/c-check.jpg" alt="Дайвер у стены рифа" loading="lazy"></figure>
       <figure style="--ar:0.668"><img src="photos/cave.jpg" alt="Дайвер в подводном гроте" loading="lazy"></figure>
+      <figure style="--ar:1.333"><img src="photos/coach.jpg" alt="Дайвер на поверхности" loading="lazy"></figure>
     </div>
     <div class="grow" id="gr2">
       <figure style="--ar:1.494"><img src="photos/c-boat.jpg" alt="Выход в море на лодке" loading="lazy"></figure>
@@ -711,11 +748,11 @@ footer .top-cta{display:inline-flex}
       <figure style="--ar:1.333"><img src="photos/palms.jpg" alt="Пальмы и лагуна" loading="lazy"></figure>
       <figure style="--ar:1.498"><img src="photos/c-adv.jpg" alt="Риф и рыбы" loading="lazy"></figure>
       <figure style="--ar:1.509"><img src="photos/school.jpg" alt="Стая жёлтых рыб у рифа" loading="lazy"></figure>
-      <figure style="--ar:1.78"><img src="photos/swimmers.jpg" alt="Лагуна сверху" loading="lazy"></figure>
+      <figure style="--ar:0.75"><img src="photos/reef2.jpg" alt="Коралловый риф с яркими рыбками" loading="lazy"></figure>
     </div>
   </section>
 
-  <section class="faq" id="faq" data-depth="5">
+  <section class="faq" id="faq" data-depth="5" data-hold="1">
     <div class="wrap faq-grid">
       <div class="faq-side">
         <h2 class="rv"><span data-i="fq1">Вопросы</span><br><em data-i="fq2">до погружения</em></h2>
@@ -723,14 +760,20 @@ footer .top-cta{display:inline-flex}
         <div class="faq-pics" id="fpics" aria-hidden="true"><img src="photos/beach2.jpg" alt="" loading="lazy"><img src="photos/c-try.jpg" alt="" loading="lazy"><img src="photos/turtle.jpg" alt="" loading="lazy"></div>
       </div>
       <div class="qas" id="qas">
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q1">Нужна ли предоплата?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a1">Нет. Оплата на месте, пока только наличными.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q2">Налоги включены в цену?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a2">Нет. Цены указаны в долларах, налоги начисляются отдельно, как принято на Мальдивах.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q3">Что входит в курс?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a3">Сертификат SSI и все учебные материалы. Доплачивать за них не нужно.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q4">Был долгий перерыв. Это проблема?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a4">Нет. Если перерыв больше полугода, первое погружение будет проверочным: вы спокойно вспомните навыки, а Александр убедится, что всё в порядке. Стоит как одно обычное погружение.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q5">Нужна ли страховка?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a5">Рекомендуем оформить страховку, которая покрывает дайвинг. Инструктор и дайв-центр застрахованы.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q6">Планы изменились. Можно отменить?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a6">Да. Напишите нам, и мы вместе решим, как перенести погружение.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q7">Сколько погружений в день?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a7">Три-четыре, с лодки. Если хочется меньше, ныряем меньше: это ваш отпуск.</p></div></div></div>
-        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q8">Есть ли нитрокс?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a8">Пока нет, погружения на обычном воздухе. Когда появится, сообщим здесь.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q1">Можно ли нырять совсем без опыта?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a1">Да, для этого и есть пробное погружение. Инструктор расскажет главное на берегу, покажет, как дышать и выравнивать давление в ушах, и всё время будет рядом. Погружаетесь на небольшую глубину, где светло, тепло и всё видно. Многим после этого сразу хочется на полный курс.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q2">Нужно ли уметь плавать и какая нужна подготовка?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a2">Для пробного погружения достаточно не бояться воды и чувствовать себя в ней уверенно, спортивная форма не нужна. Перед занятием вы заполните короткую медицинскую анкету SSI: если на какие-то вопросы ответите «да», понадобится справка от врача, это обычная практика. Для курса Open Water нужно уметь проплыть небольшую дистанцию и несколько минут продержаться на воде, остальному научим.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q3">Сколько длится курс Open Water?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a3">Обычно три-четыре дня: теория, отработка навыков на мелководье и четыре погружения в открытой воде. Сертификат SSI и учебные материалы входят в цену курса. Теорию можно пройти заранее онлайн, тогда в отпуске останется больше времени на воду. Расписание подберём под ваши даты.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q4">С какого возраста можно нырять?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a4">По стандартам SSI курс Open Water доступен с десяти лет, до пятнадцати выдаётся юниорский сертификат. Если вы хотите попробовать с ребёнком, напишите нам его возраст, и мы подскажем, как лучше всё организовать.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q5">Что взять с собой?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a5">Купальник или плавки, полотенце, солнцезащитный крем и сменную одежду. Если сертификат уже есть, возьмите карточку и логбук. Всё снаряжение у нас есть, но если у вас привычная маска, лучше привезти свою: она точно сядет по лицу.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q6">Как и когда оплачивать?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a6">Предоплата не нужна, платите на месте, пока только наличными. Цены указаны в долларах, налоги начисляются отдельно, как принято на Мальдивах. Точную стоимость нужного вам погружения или курса пришлём в мессенджере.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q7">Нужна ли страховка?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a7">Мы рекомендуем оформить страховку, которая покрывает дайвинг: её можно добавить к обычной туристической или купить у специализированных страховщиков. Инструктор и дайв-центр застрахованы, но это не заменяет вашу личную страховку.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q8">Был долгий перерыв. Это проблема?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a8">Нет. Если вы не ныряли больше полугода, первое погружение будет проверочным: вы спокойно вспомните навыки, а Александр убедится, что всё в порядке. Стоит как одно обычное погружение.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q9">Планы изменились. Можно отменить или перенести?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a9">Предоплаты нет, поэтому вы ничего не теряете. Просто напишите нам, как только поймёте, что планы поменялись, лучше за сутки: мы освободим место на лодке и предложим его другому гостю. Перенесём погружение на любой свободный день. Если выход сорвётся из-за погоды или по нашей вине, договоримся о новой дате. Каждую ситуацию разбираем отдельно и ищем вариант, который устроит вас.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q10">Сколько погружений в день и как это проходит?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a10">Три-четыре, с лодки. Мы выходим к рифам, ныряем с перерывами на отдых и возвращаемся на берег. Перед первым погружением Александр лично проверяет воздух и грузы у каждого. Если хочется меньше, ныряем меньше: это ваш отпуск, а не марафон.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q11">Опасны ли акулы и другие обитатели?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a11">Рифовые и китовые акулы для людей, как правило, не опасны: они держатся на расстоянии и занимаются своими делами. Главное правило дайвера: ничего не трогать и не гнаться за животными, тогда все ведут себя спокойно. Подробно об этом рассказываем на брифинге перед каждым погружением.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q12">Когда лучше приезжать?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a12">Нырять можно круглый год, вода тёплая всегда. С декабря по апрель обычно меньше дождей и спокойнее море, с мая по ноябрь чаще бывают дожди и ветер, зато погружения не пропадают. Если сомневаетесь в датах, напишите нам, и мы расскажем, чего ждать в ваш приезд.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q13">Как добраться до острова Ган?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a13">Из Мале обычно летят внутренним рейсом до аэропорта атолла Лааму, перелёт занимает около часа, дальше короткий трансфер до Гана. Актуальные рейсы и расписание лучше уточнить перед бронированием, в этом мы тоже поможем в мессенджере.</p></div></div></div>
+        <div class="qa"><button type="button" aria-expanded="false"><span data-i="q14">Есть ли нитрокс?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a14">Пока нет, погружения проходят на обычном воздухе. Когда нитрокс появится, мы сообщим здесь.</p></div></div></div>
       </div>
     </div>
   </section>
@@ -739,9 +782,9 @@ footer .top-cta{display:inline-flex}
     <div class="bgimg" data-par="12"><img src="photos/palms.jpg" alt="Пальмы над бирюзовой лагуной" loading="lazy"></div>
     <canvas id="bubbles" aria-hidden="true"></canvas>
     <div class="wrap">
-      <span class="stk w rv" style="justify-self:start;transform:rotate(-3deg)" data-i="ctk">Всплываем</span>
+      <span class="stk w rv" style="justify-self:start;transform:rotate(-3deg)" data-i="ctk">Всплыли, 0 м</span>
       <h2 class="rv"><span data-i="cz1">Ну что,</span><em data-i="cz2">ныряем?</em></h2>
-      <p class="sub rv" data-i="ctp">Напишите имя и что вас интересует: первое погружение, сертификат или выходы на риф. Ответим в течение нескольких часов.</p>
+      <p class="sub rv" data-i="ctp">Напишите, как вас зовут и чего хочется: впервые попробовать с аквалангом, пройти курс или выйти на риф с готовым сертификатом. Ответим в течение нескольких часов и подберём день под ваш отпуск.</p>
       <div class="btns rv">
         <a class="btn btn-fin" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.3-1.5zM9.5 14.6l-.4 4.3-1.6-5.1 10.8-6.8z"/></svg></span><span class="bt"><span data-t="Telegram">Telegram</span></span></a>
         <a class="btn btn-glass" href="#contacts"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3z"/></svg></span><span class="bt"><span data-t="WhatsApp">WhatsApp</span></span></a>
@@ -753,7 +796,7 @@ footer .top-cta{display:inline-flex}
 
 <footer>
   <div class="wrap">
-    <a href="#hero" aria-label="SLED — наверх"><img src="logo-light.png" alt="SLED — Sleep Live Eat Dive" loading="lazy"></a>
+    <a href="#hero" aria-label="SLED, наверх"><img src="logo-light.png" alt="SLED, Sleep Live Eat Dive" loading="lazy"></a>
     <nav class="ft-nav" aria-label="Разделы сайта">
       <a href="#about" data-i="nav1">О нас</a>
       <a href="#coach" data-i="nav3">Инструктор</a>
@@ -789,51 +832,151 @@ footer .top-cta{display:inline-flex}
 
   /* ---------- language ---------- */
   var EN = {
-    nav1:'About', nav2:'Underwater', nav3:'Instructor', nav4:'Courses', nav5:'Laamu', nav6:'FAQ', cta0:'Message us', depth:'depth', hint:'turtles down there · scroll down · ',
-    s1:'Gan island · Laamu Atoll', s2:'SSI instructor, Russian & English', s3:'Max 4 per group',
-    h1a:'Dive into', h1b:'endless summer',
-    hsub:'A small dive center in the south of the Maldives, away from the tourist routes. Warm water all year, turtles and mantas on the reefs, and no queues underwater.',
+    nav1:'About',
+    nav2:'Underwater',
+    nav3:'Instructor',
+    nav4:'Courses',
+    nav5:'Laamu',
+    nav6:'FAQ',
+    cta0:'Message us',
+    depth:'depth',
+    hint:'turtles down there · scroll down · ',
+    s1:'Gan island · Laamu Atoll',
+    s2:'SSI instructor, Russian & English',
+    s3:'Max 4 per group',
+    pop0:'Catch a bubble',
+    h1a:'Dive into',
+    h1b:'endless summer',
+    hsub:'A small dive center on Laamu Atoll in the south of the Maldives, away from the tourist routes. Warm water all year, turtles and mantas on the reefs, and no queues underwater.',
     b1:'Book a dive',
-    mani:'We stay small on purpose. One instructor, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> no more than four divers per group and no conveyor belt: nobody rushes you, nobody gets lost in a crowd. Everything is explained clearly, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> and you pay on site, once you’re sure this <em>reef is worth it.</em>',
-    p1h:'divers per group, tops', p1p:'Aleksandr keeps an eye on everyone. No need to wave your arms at depth to get noticed.',
-    p2h:'Russian & English', p2p:'Briefings, theory and debriefs in a language you actually understand.',
-    p3h:'an international certificate', p3p:'SSI certification is recognised worldwide: dive in Egypt, Bali, Thailand or anywhere else.',
-    p4h:'prepayment', p4p:'Message us, come over and dive. Payment on site.',
-    seak:'hold your breath… just kidding, we have tanks', sea1:'Your reef', sea2:'neighbours', seap:'Turtles that aren’t shy of people. Mantas gliding overhead. Young reef sharks in the shallows and fish schools so thick the sun disappears behind them.',
-    c1:'hello, turtle', c2:'manta overhead', c3:'in the blue', c4:'fish rush hour', c5:'whale shark, if you’re lucky', c6:'corals in every colour', c7:'posing', c8:'groups of up to four',
-    st1:'years Aleksandr has been teaching', st2:'dives in his logbook', st3:'students certified', st4:'dives a day, if you wish',
-    ck:'Your instructor', cn1:'Aleksandr', cn2:'Shykun',
+    mani:'We stay small on purpose. One instructor, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> no more than four divers per group: nobody rushes you, nobody gets lost, and everyone has time to look at the reef. Everything is explained clearly, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> and whether this atoll is worth your holiday, you’ll find out <em>underwater.</em>',
+    p1h:'divers per group, tops',
+    p1p:'That’s how many we take on one dive, so the instructor has attention for everyone and you have peace of mind.',
+    p2h:'Russian & English',
+    p2p:'Briefings, theory and debriefs in a language you actually understand.',
+    p3h:'an international certificate',
+    p3p:'SSI certification is recognised worldwide: dive in Egypt, Bali, Thailand or anywhere else.',
+    p4h:'sets of gear',
+    p4p:'Everything you need is already here, so you can leave your fins and regulator at home. Travel light.',
+    seak:'hold your breath… just kidding, we have tanks',
+    sea1:'Your reef',
+    sea2:'neighbours',
+    seap:'Turtles that aren’t shy of people. Mantas gliding overhead. Young reef sharks in the shallows and fish schools so thick the sun disappears behind them.',
+    c1:'hello, turtle',
+    c2:'manta overhead',
+    c3:'in the blue',
+    c4:'fish rush hour',
+    c5:'whale shark, if you’re lucky',
+    c6:'corals in every colour',
+    c7:'posing',
+    c8:'groups of up to four',
+    c9:'first breath underwater',
+    c10:'baby shark, doesn’t bite',
+    c11:'reef shark',
+    c12:'diving with a buddy',
+    c14:'resting after the dive',
+    st1:'years Aleksandr has been teaching',
+    st2:'dives in his logbook',
+    st3:'students certified',
+    st4:'dives a day, if you wish',
+    ck:'Your instructor',
+    cn1:'Aleksandr',
+    cn2:'Shykun',
     clead:'Twelve years of teaching and six and a half thousand dives. Aleksandr trains not only divers but future instructors, so you are in safe hands.',
-    ct1:'Works at your pace: if you’re nervous, we take our time; if it goes well, we move on', ct2:'Explains things simply, without unnecessary jargon', ct3:'Before your first dive he personally checks everyone’s air and weights',
-    ch1:'Choose', ch2:'your depth', chp:'The SSI certificate and learning materials are included in every course. Prices in USD, taxes not included. We’ll send the exact price in the chat.',
-    k1t:'First time', k1h:'Try dive', k1p:'No experience needed. The instructor stays right next to you; all you do is breathe and watch the fish. Chances are you’ll want more.',
-    k2t:'First certificate', k2p:'The core course that makes you an independent diver: dive with a buddy down to 18 metres anywhere in the world.',
-    k3t:'Next step', k3h:'Advanced level', k3p:'For those who are already hooked. New skills, specialties and deeper dives.',
-    k4t:'Certified divers', k4h:'Fun diving', k4p:'Already certified? Then we simply take the boat out to the reef. Three to four dives a day, groups of up to four.',
-    k5t:'After a break', k5h:'Check dive', k5p:'For anyone who hasn’t dived for over six months. One relaxed dive to refresh your skills. Priced as a regular dive.',
-    k6t:'Rental', k6h:'Equipment', k6p:'Six full sets on site. You can travel light.',
-    price:'Price on request', ask:'Ask',
-    lcap:'keep scrolling, it gets pretty', lk:'Laamu Atoll', lh1:'A reef', lh2:'with no queue', lp:'Laamu is far from Malé, and the tourist flow barely reaches it. While boats line up at a single reef on the popular atolls, it’s quiet underwater here, with plenty of mantas, turtles and coral for everyone.',
-    f1:'3–4 dives a day', f2:'Boat trips', f3:'Warm water all year',
-    hw1:'Three steps', hw2:'to your dive', pr0:'0 m · surface', pr1:'bottom · up to 18 m', pr2:'5 m · 3 min stop',
-    sp1h:'Message us', sp1p:'On Telegram or WhatsApp. Your name and a few words are enough: “I’d like to try” or “I’m certified, take me to the reef”.',
-    sp2h:'We pick a day', sp2p:'Our admin replies within a few hours and finds a time that suits your holiday.',
-    sp3h:'The dive', sp3p:'No prepayment: pay on site, cash only for now. After that it’s just bubbles and turtles.',
-    g1:'Winter', g2:'never comes here', gp:'While it’s slush and puffer jackets back home, it’s +30 here, with clear water and reefs a few minutes away by boat.',
-    fq1:'Questions', fq2:'before the dive', fqk:'didn’t find an answer? message us',
-    q1:'Do I need to pay in advance?', a1:'No. Payment on site, cash only for now.',
-    q2:'Are taxes included?', a2:'No. Prices are in USD and taxes are added separately, as is usual in the Maldives.',
-    q3:'What does a course include?', a3:'The SSI certificate and all learning materials. Nothing extra to pay.',
-    q4:'It’s been a while since my last dive. Is that a problem?', a4:'No. If it’s been more than six months, your first dive will be a check dive: you calmly refresh your skills and Aleksandr makes sure everything is fine. Priced as one regular dive.',
-    q5:'Do I need insurance?', a5:'We recommend insurance that covers diving. The instructor and the dive center are insured.',
-    q6:'My plans changed. Can I cancel?', a6:'Yes. Message us and we’ll find a way to reschedule together.',
-    q7:'How many dives a day?', a7:'Three to four, by boat. If you’d like fewer, we dive less: it’s your holiday.', q8:'Do you have nitrox?', a8:'Not yet, we dive on regular air. We’ll announce it here once it’s available.',
-    ctk:'Surfacing', cz1:'So,', cz2:'shall we dive?', ctp:'Tell us your name and what you’re interested in: a first dive, a certificate or reef trips. We reply within a few hours.',
-    w1:'Gan island, Laamu Atoll, Maldives', w2:'Phone number and messenger handles will appear here before opening',
-    wh1:'Sleep. Live.', wh2:'Eat. Dive.', whk:'that’s what SLED stands for',
-    t1:'The dive center is right on the hotel grounds. A couple of minutes’ walk from your room to your gear.', t2:'Barefoot from morning till night. White sand, a mint-green lagoon and not a single “urgent” all holiday.', t3:'Fruit, coffee and lunch with an ocean view between dives. A hungry diver is a sad diver, and we don’t allow that.', t4:'Three to four boat dives a day. How many you do is up to you.',
-    c9:'first breath underwater', c10:'baby shark, doesn’t bite', c11:'reef shark', c12:'mask, snorkel, lagoon', c13:'lagoon from above', c14:'resting after the dive',
-    ft:'SSI dive center · Gan island, Laamu Atoll, Maldives'
+    ct1:'Works at your pace: if you’re nervous, we take our time; if it goes well, we move on',
+    ct2:'Explains things simply, without unnecessary jargon',
+    ct3:'Before your first dive he personally checks everyone’s air and weights',
+    ch1:'Choose',
+    ch2:'your depth',
+    chp:'The SSI certificate and learning materials are included in every course. Prices in USD, taxes not included. We’ll send the exact price in the chat.',
+    k1t:'First time',
+    k1h:'Try dive',
+    k1p:'No experience needed. The instructor stays right next to you; all you do is breathe and watch the fish. Chances are you’ll want more.',
+    k2t:'First certificate',
+    k2p:'The core course that makes you an independent diver: dive with a buddy down to 18 metres anywhere in the world.',
+    k3t:'Next step',
+    k3h:'Advanced level',
+    k3p:'For those who are already hooked. New skills, specialties and deeper dives.',
+    k4t:'Certified divers',
+    k4h:'Fun diving',
+    k4p:'Already certified? Then we simply take the boat out to the reef. Three to four dives a day, groups of up to four.',
+    k5t:'After a break',
+    k5h:'Check dive',
+    k5p:'For anyone who hasn’t dived for over six months. One relaxed dive to refresh your skills. Priced as a regular dive.',
+    k6t:'Rental',
+    k6h:'Equipment',
+    k6p:'Six full sets on site. You can travel light.',
+    price:'Price on request',
+    ask:'Ask',
+    lcap:'keep scrolling, it gets pretty',
+    lk:'Laamu Atoll',
+    lh1:'A reef',
+    lh2:'with no queue',
+    lp:'Laamu is one of the southern atolls of the Maldives, and few travellers make it here. No line of boats at every reef, no crowds on the beach: it’s quiet underwater, with plenty of mantas, turtles and coral for everyone.',
+    lp2:'The shape of the atoll shelters the inner reefs from strong currents, so it’s relaxed for beginners, while experienced divers head for the channels, where mantas, sharks and big fish schools are often seen. The water is warm all year and visibility can reach twenty to thirty metres.',
+    f1:'3-4 dives a day',
+    f2:'Boat trips',
+    f3:'Warm water all year',
+    f4:'Away from the crowds',
+    hw1:'Three steps',
+    hw2:'to your dive',
+    pr0:'0 m · surface',
+    pr1:'bottom · up to 18 m',
+    pr2:'5 m · 3 min stop',
+    sp1h:'Message us',
+    sp1p:'On Telegram or WhatsApp. Your name and a few words are enough: “I’d like to try” or “I’m certified, take me to the reef”.',
+    sp2h:'We pick a day',
+    sp2p:'Our admin replies within a few hours and finds a time that suits your holiday.',
+    sp3h:'The dive',
+    sp3p:'Pay on site, cash only for now. After that it’s just bubbles and turtles.',
+    g1:'Winter',
+    g2:'never comes here',
+    gp:'While it’s slush and puffer jackets back home, it’s +30 here and the water is warm as a bath. The reefs are a few minutes from shore by boat, so the day isn’t spent on the road: you’re underwater in the morning, on the beach at noon and watching the sunset in the evening.',
+    fq1:'Questions',
+    fq2:'before the dive',
+    fqk:'didn’t find an answer? message us',
+    ctk:'Surfaced, 0 m',
+    cz1:'So,',
+    cz2:'shall we dive?',
+    ctp:'Tell us your name and what you have in mind: a first scuba try, a course, or reef dives with a certificate you already have. We reply within a few hours and find a day that fits your holiday.',
+    w1:'Gan island, Laamu Atoll, Maldives',
+    w2:'Phone number and messenger handles will appear here before opening',
+    wh1:'Sleep. Live.',
+    wh2:'Eat. Dive.',
+    whk:'that’s what SLED stands for',
+    t1:'The dive center is right on the hotel grounds. You wake up, have breakfast, and a couple of minutes later you’re at your gear: no early transfers, no long road to the boat.',
+    t2:'Everything here is unhurried: a morning on the boat, lunch in the shade of palms, sunset in the evening and no plans at all. The island is small, and by day two it feels like you’ve lived here for ages.',
+    t3:'Fruit, coffee and lunch with an ocean view between dives. A hungry diver is, as they say, a sad diver, and we don’t allow that.',
+    t4:'Three or four boat dives a day. How many you do is up to you: want one dive and a whole day on the beach? Done. No more than four per group, so the boat never turns into a bus.',
+    ft:'SSI dive center · Gan island, Laamu Atoll, Maldives',
+    q1:'Can I dive with no experience at all?',
+    a1:'Yes, that’s what the try dive is for. The instructor explains the essentials on shore, shows you how to breathe and equalise your ears, and stays right next to you. You go down to a shallow depth where it’s bright, warm and you can see everything. Many people want the full course straight after.',
+    q2:'Do I need to be able to swim, and how should I prepare?',
+    a2:'For a try dive it’s enough not to be afraid of water and to feel confident in it; you don’t need to be an athlete. Before the session you fill in a short SSI medical form: if you answer “yes” to some questions you’ll need a doctor’s note, which is standard practice. For the Open Water course you should be able to swim a short distance and stay afloat for a few minutes; we teach the rest.',
+    q3:'How long does the Open Water course take?',
+    a3:'Usually three to four days: theory, skills practice in shallow water and four open-water dives. The SSI certificate and learning materials are included in the price. You can do the theory online beforehand, which leaves more time in the water on holiday. We’ll fit the schedule to your dates.',
+    q4:'What is the minimum age?',
+    a4:'Under SSI standards the Open Water course is open from ten years old, with a junior certificate issued up to fifteen. If you’d like to try with a child, message us their age and we’ll suggest the best way to do it.',
+    q5:'What should I bring?',
+    a5:'Swimwear, a towel, sunscreen and a change of clothes. If you’re already certified, bring your card and logbook. We have all the gear, but if you have a mask you like, bring it: it’s sure to fit your face.',
+    q6:'How and when do I pay?',
+    a6:'No prepayment: pay on site, cash only for now. Prices are in USD and taxes are added separately, as is usual in the Maldives. We’ll send the exact price of your dive or course in the chat.',
+    q7:'Do I need insurance?',
+    a7:'We recommend insurance that covers diving: you can add it to regular travel insurance or buy it from a specialist provider. The instructor and the dive center are insured, but that doesn’t replace your own insurance.',
+    q8:'It’s been a while since my last dive. Is that a problem?',
+    a8:'No. If it’s been more than six months, your first dive will be a check dive: you calmly refresh your skills and Aleksandr makes sure everything is fine. Priced as one regular dive.',
+    q9:'My plans changed. Can I cancel or reschedule?',
+    a9:'There’s no prepayment, so you lose nothing. Just message us as soon as you know your plans changed, ideally a day ahead: we’ll free up the spot on the boat for another guest. We’ll move your dive to any free day. If a trip is cancelled because of weather or through our fault, we’ll agree a new date. We look at every situation individually and look for something that works for you.',
+    q10:'How many dives a day and how does it work?',
+    a10:'Three to four, by boat. We head out to the reefs, dive with breaks to rest, and return to shore. Before your first dive Aleksandr personally checks everyone’s air and weights. If you want fewer, we dive less: it’s your holiday, not a marathon.',
+    q11:'Are sharks and other marine life dangerous?',
+    a11:'Reef sharks and whale sharks are generally not dangerous to people: they keep their distance and go about their business. The main rule for divers is not to touch anything or chase animals, and then everyone behaves calmly. We go over this in detail at the briefing before every dive.',
+    q12:'When is the best time to come?',
+    a12:'You can dive all year and the water is always warm. From December to April there is usually less rain and the sea is calmer; from May to November there’s more rain and wind, but dives still go ahead. If you’re unsure about dates, message us and we’ll tell you what to expect.',
+    q13:'How do I get to Gan island?',
+    a13:'From Malé you usually take a domestic flight to the atoll’s airport, about an hour, then a short transfer to Gan. Check current flights and schedules before you book; we’ll help with that in the chat too.',
+    q14:'Do you have nitrox?',
+    a14:'Not yet, we dive on regular air. We’ll announce it here once it’s available.'
   };
   var RU = {};
   $$('[data-i]').forEach(function(el){ RU[el.dataset.i] = el.innerHTML; });
@@ -926,24 +1069,50 @@ footer .top-cta{display:inline-flex}
   var depthSecs = $$('[data-depth]');
   var narrow = matchMedia('(max-width: 900px)');
   // section geometry is measured once per layout change, not on every scroll frame
-  var geo = [], coursesBox = [0, 0], docH = 0;
+  var geo = [], pts = [], coursesBox = [0, 0], docH = 0, deepA = 0, deepB = 0, maxD = 0;
   function measure(){
     var y = scrollY;
+    pts = [];
     geo = depthSecs.map(function(s){
-      var r = s.getBoundingClientRect(), k = s.dataset.dk ? s.dataset.dk.split(',') : null;
-      return {mid: r.top + y + r.height / 2, d: +s.dataset.depth, a: k ? r.top + y + r.height * +k[0] : 0, b: k ? r.top + y + r.height * +k[1] : -1};
+      var r = s.getBoundingClientRect(), top = r.top + y, k = s.dataset.dk ? s.dataset.dk.split(',') : null, d = +s.dataset.depth;
+      // a "hold" section keeps one depth from its first to its last part (the bottom, the safety stop)
+      if (s.dataset.hold) { pts.push({y: top + r.height * .1, d: d}); pts.push({y: top + r.height * .9, d: d}); }
+      else pts.push({y: top + r.height / 2, d: d});
+      return {a: k ? top + r.height * +k[0] : 0, b: k ? top + r.height * +k[1] : -1};
     });
+    maxD = 0; pts.forEach(function(p){ maxD = Math.max(maxD, p.d); });
+    deepA = 0; deepB = 0;
+    pts.forEach(function(p){ if (p.d === maxD) { if (!deepA) deepA = p.y; deepB = p.y; } });
     var cr = $('#courses').getBoundingClientRect(); coursesBox = [cr.top + y, cr.bottom + y];
     docH = root.scrollHeight;
   }
+  // depth only ever grows on the way down to the bottom, then only shrinks on the way up, so the number always means something
   function depthAt(y){
-    if (y <= geo[0].mid) return geo[0].d;
-    for (var i = 1; i < geo.length; i++) {
-      if (y <= geo[i].mid) { var a = geo[i - 1], b = geo[i], t = (y - a.mid) / (b.mid - a.mid); return a.d + (b.d - a.d) * t; }
+    if (y <= pts[0].y) return pts[0].d;
+    for (var i = 1; i < pts.length; i++) {
+      if (y <= pts[i].y) { var a = pts[i - 1], b = pts[i], t = (y - a.y) / (b.y - a.y); t = t * t * (3 - 2 * t); return a.d + (b.d - a.d) * t; }
     }
-    return geo[geo.length - 1].d;
+    return pts[pts.length - 1].d;
   }
   function darkAt(py){ for (var i = 0; i < geo.length; i++) if (py >= geo[i].a && py <= geo[i].b) return true; return false; }
+  var PH = {
+    ru: {down: 'спуск', deep: 'на глубине', up: 'подъём', stop: 'остановка 3 мин', top: 'поверхность'},
+    en: {down: 'descent', deep: 'at depth', up: 'ascent', stop: 'safety stop', top: 'surface'}
+  };
+  var dispD = 0, tgtD = 0, phase = 'top', chasing = false, gphase = $('#gphase');
+  function paintDepth(){
+    var d = Math.max(0, dispD), n = Math.round(d), arrow = phase === 'down' ? '↓ ' : (phase === 'up' ? '↑ ' : '');
+    var txt = arrow + n + (lang === 'en' ? ' m' : ' м');
+    gnum.textContent = txt; hnum.textContent = txt;
+    gphase.textContent = PH[lang][phase];
+    var k = Math.min(1, d / (maxD || 18));
+    gdot.style.top = (k * 100) + '%'; gfill.style.height = (k * 100) + '%';
+  }
+  function chase(){
+    var diff = tgtD - dispD;
+    if (Math.abs(diff) < .04) { dispD = tgtD; chasing = false; paintDepth(); return; }
+    dispD += diff * .18; paintDepth(); requestAnimationFrame(chase);
+  }
   var lastY = scrollY, upRun = 0;
   function onFrame(){
     var y = scrollY, vh = innerHeight, mid = y + vh / 2, dy = y - lastY;
@@ -962,20 +1131,20 @@ footer .top-cta{display:inline-flex}
     } else flt.classList.toggle('show', inRange && !inCourses);
     root.classList.toggle('deep', darkAt(y + 36));
     gauge.classList.toggle('dk', darkAt(mid));
-    var d = Math.max(0, depthAt(mid)), txt = Math.round(d) + (lang === 'en' ? ' m' : ' м');
-    gnum.textContent = txt; hnum.textContent = txt;
-    var k = Math.min(1, d / 30);
-    gdot.style.top = (k * 100) + '%'; gfill.style.height = (k * 100) + '%';
-    gauge.classList.toggle('off', y < vh * 0.3 || inCourses);
+    tgtD = depthAt(mid);
+    phase = tgtD < .5 ? 'top' : (mid < deepA - 1 ? 'down' : (mid <= deepB + 1 ? 'deep' : (Math.abs(tgtD - 5) < .35 ? 'stop' : 'up')));
+    if (!chasing) { chasing = true; requestAnimationFrame(chase); }
+    gauge.classList.toggle('off', y < vh * 0.3);
     hdepth.classList.toggle('on', y > vh * 0.5 && !navOpen);
+    paintDepth();
     paintMani();
   }
   var ticking = false;
   addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(function(){ ticking = false; onFrame(); }); } }, {passive:true});
-  var lastW = innerWidth;
+  var lastW = innerWidth, rzT = 0;
   addEventListener('resize', function(){
     // mobile browsers fire resize when the address bar slides; only a real width change needs a relayout
-    if (touch && innerWidth === lastW) { measure(); return; }
+    if (touch && innerWidth === lastW) { clearTimeout(rzT); rzT = setTimeout(measure, 250); return; }
     lastW = innerWidth; placePols(); sizePin(); measure(); onFrame();
   });
 
@@ -1063,6 +1232,56 @@ footer .top-cta{display:inline-flex}
     });
   }
 
+  /* ---------- hero: bubbles you can pop (mouse over them, or tap) ---------- */
+  (function(){
+    var c = $('#hbub'), stick = $('.hero-stick'); if (!c || !stick) return;
+    var x = c.getContext('2d'), W = 0, H = 0, dpr = Math.min(touch ? 1.5 : 2, devicePixelRatio || 1), bubs = [], fx = [], run = false, n = 0;
+    var cap = touch ? 14 : 26, pops = $('#pops'), popt = $('#popt');
+    function size(){ W = c.clientWidth; H = c.clientHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    function add(px, py, r){ bubs.push({x: px == null ? Math.random() * W : px, y: py == null ? H + 40 : py, r: r || 9 + Math.random() * (touch ? 20 : 26), v: .45 + Math.random() * 1.0, w: Math.random() * 6.28}); }
+    function label(){ popt.removeAttribute('data-i'); popt.textContent = (lang === 'en' ? 'Bubbles caught: ' : 'Поймано пузырей: ') + n; }
+    function pop(i){
+      var b = bubs.splice(i, 1)[0], bxx = b.dx != null ? b.dx : b.x;
+      fx.push({k: 'r', x: bxx, y: b.y, r: b.r, t: 0});
+      for (var j = 0; j < 7; j++) { var a = j / 7 * 6.28 + Math.random(); fx.push({k: 'd', x: bxx, y: b.y, vx: Math.cos(a) * (1.2 + Math.random() * 1.8), vy: Math.sin(a) * (1.2 + Math.random() * 1.8), t: 0}); }
+      n++; label();
+      if (pops && window.gsap) gsap.fromTo(pops, {scale:1.25}, {scale:1, duration:.5, ease:'back.out(3)', overwrite:true});
+    }
+    function hit(px, py, slack){
+      for (var i = bubs.length - 1; i >= 0; i--) { var b = bubs[i], dx = (b.dx != null ? b.dx : b.x) - px, dy = b.y - py, rr = b.r + slack; if (dx * dx + dy * dy <= rr * rr) { pop(i); return true; } }
+      return false;
+    }
+    function local(e){ var r = c.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    stick.addEventListener('pointermove', function(e){ if (e.pointerType !== 'mouse') return; var p = local(e); hit(p[0], p[1], 6); });
+    stick.addEventListener('pointerdown', function(e){
+      if (e.target.closest && e.target.closest('a,button')) return;
+      var p = local(e);
+      if (!hit(p[0], p[1], touch ? 16 : 8)) { fx.push({k: 'r', x: p[0], y: p[1], r: 6, t: 0}); for (var j = 0; j < 3; j++) add(p[0] + (Math.random() - .5) * 30, p[1], 4 + Math.random() * 7); }
+    });
+    function loop(){
+      if (!run) return;
+      x.clearRect(0, 0, W, H);
+      if (bubs.length < cap && Math.random() < .08) add();
+      for (var i = bubs.length - 1; i >= 0; i--) {
+        var b = bubs[i]; b.y -= b.v; b.w += .02; var bx = b.x + Math.sin(b.w) * 10;
+        if (b.y < -40) { bubs.splice(i, 1); continue; }
+        x.beginPath(); x.arc(bx, b.y, b.r, 0, 6.283); x.fillStyle = 'rgba(255,255,255,.10)'; x.fill();
+        x.lineWidth = 1.6; x.strokeStyle = 'rgba(255,255,255,.7)'; x.stroke();
+        x.beginPath(); x.arc(bx - b.r * .35, b.y - b.r * .38, b.r * .22, 0, 6.283); x.fillStyle = 'rgba(255,255,255,.85)'; x.fill();
+        b.dx = bx;
+      }
+      for (var f = fx.length - 1; f >= 0; f--) {
+        var e = fx[f]; e.t += 1;
+        if (e.k === 'r') { var p = e.t / 22; if (p >= 1) { fx.splice(f, 1); continue; } x.beginPath(); x.arc(e.x, e.y, e.r + p * 26, 0, 6.283); x.strokeStyle = 'rgba(255,255,255,' + (.8 * (1 - p)) + ')'; x.lineWidth = 2; x.stroke(); }
+        else { var p2 = e.t / 26; if (p2 >= 1) { fx.splice(f, 1); continue; } e.x += e.vx; e.y += e.vy; e.vy += .05; x.beginPath(); x.arc(e.x, e.y, 2.4 * (1 - p2) + .6, 0, 6.283); x.fillStyle = 'rgba(255,255,255,' + (.9 * (1 - p2)) + ')'; x.fill(); }
+      }
+      requestAnimationFrame(loop);
+    }
+    size(); addEventListener('resize', function(){ if (!touch || innerWidth !== lastW) size(); });
+    for (var k = 0; k < 8; k++) add(Math.random() * innerWidth, Math.random() * innerHeight * .9);
+    new IntersectionObserver(function(es){ var v = es[0].isIntersecting; if (v && !run) { run = true; loop(); } else if (!v) run = false; }).observe(stick);
+  })();
+
   /* ---------- bubbles in the final section ---------- */
   (function(){
     var c = $('#bubbles'); if (!c) return;
@@ -1096,8 +1315,18 @@ footer .top-cta{display:inline-flex}
     var tl = gsap.timeline({defaults:{ease:'expo.out'}});
     tl.from('#heroMedia img', {scale:1.25, duration:2.4, ease:'power3.out'}, 0)
       .from('#h1 .ln > span', {y:70, opacity:0, rotation:3, duration:1.4, stagger:.14}, .25)
-      .from('.hero-stk .stk', {y:40, opacity:0, scale:.6, rotation:function(i){ return [-18, 14, -10][i]; }, duration:1, stagger:.1, ease:'back.out(2)'}, .55)
+      .from('.hero-stk .stk', {y:40, opacity:0, scale:.6, rotation:function(i){ return [-18, 14, -10, 12][i]; }, duration:1, stagger:.1, ease:'back.out(2)', clearProps:'opacity,scale,y'}, .55)
       .from('.hero-sub, .hero .btns', {y:30, opacity:0, duration:1.1, stagger:.1}, .8);
+
+    // hero follows the mouse a little
+    if (matchMedia('(pointer: fine)').matches) {
+      var hx = gsap.quickTo('#heroMedia img', 'x', {duration:1.2, ease:'power3.out'}), hy = gsap.quickTo('#heroMedia img', 'y', {duration:1.2, ease:'power3.out'});
+      var tx = gsap.quickTo('#h1', 'x', {duration:1.2, ease:'power3.out'}), ty = gsap.quickTo('#h1', 'y', {duration:1.2, ease:'power3.out'});
+      $('.hero-stick').addEventListener('pointermove', function(e){
+        var nx = e.clientX / innerWidth - .5, ny = e.clientY / innerHeight - .5;
+        hx(-nx * 36); hy(-ny * 24); tx(nx * 14); ty(ny * 9);
+      });
+    }
 
     // hero scroll: sink under the waterline; the text stays readable for the first third, then floats away
     gsap.timeline({scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom bottom', scrub:true}})
@@ -1168,12 +1397,14 @@ footer .top-cta{display:inline-flex}
 
     // laamu: framed photo opens to full screen, then the text arrives
     mm.add({m:'(max-width: 700px)', d:'(min-width: 701px)'}, function(ctx){
+      // the frame is fully open by 45% of the scroll; the rest of the pin is spent reading the text on a full-screen photo
       gsap.timeline({scrollTrigger:{trigger:'#laamu', start:'top top', end:'bottom bottom', scrub:true}})
-        .fromTo('#lframe', {clipPath: ctx.conditions.m ? 'inset(22% 8% 22% 8% round 28px)' : 'inset(16% 22% 16% 22% round 36px)'}, {clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'none', duration:1}, 0)
-        .fromTo('#lframe img', {scale:1.25}, {scale:1, ease:'none', duration:1}, 0)
-        .to('#lcap', {opacity:0, duration:.2}, 0)
-        .to('#lframe', {'--o':1, ease:'none', duration:.3}, .6)
-        .fromTo('#ltxt', {opacity:0, y:60}, {opacity:1, y:0, ease:'power2.out', duration:.3}, .7);
+        .fromTo('#lframe', {clipPath: ctx.conditions.m ? 'inset(22% 8% 22% 8% round 28px)' : 'inset(16% 22% 16% 22% round 36px)'}, {clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'power1.inOut', duration:.45}, 0)
+        .fromTo('#lframe img', {scale:1.25}, {scale:1, ease:'none', duration:.45}, 0)
+        .to('#lcap', {opacity:0, duration:.1}, 0)
+        .to('#lframe', {'--o':1, ease:'none', duration:.15}, .4)
+        .fromTo('#ltxt', {opacity:0, y:60}, {opacity:1, y:0, ease:'power2.out', duration:.2}, .5)
+        .to({}, {duration:.3}, .7);
     });
 
     // SLED tiles: desktop rises out of a mask; phones get a stacked deck where each card settles back as the next one slides over
@@ -1189,7 +1420,8 @@ footer .top-cta{display:inline-flex}
         gsap.from(t.querySelector('.tx'), {y:40, opacity:0, duration:1, delay:.15, ease:'expo.out', scrollTrigger:{trigger:t, start:'top 75%', once:true}});
         gsap.fromTo(t.querySelector('img'), {scale:1.2}, {scale:1, ease:'none', scrollTrigger:{trigger:t, start:'top bottom', end:'top 20%', scrub:true}});
         var next = tiles[i + 1]; if (!next) return;
-        gsap.fromTo(t, {scale:1, filter:'brightness(1)'}, {scale:.93, filter:'brightness(.8)', ease:'none', scrollTrigger:{trigger:next, start:'top 75%', end:'top 25%', scrub:true}});
+        gsap.fromTo(t, {scale:1}, {scale:.93, ease:'none', scrollTrigger:{trigger:next, start:'top 75%', end:'top 25%', scrub:true}});
+        gsap.fromTo(t.querySelector('.sh'), {opacity:0}, {opacity:.45, ease:'none', scrollTrigger:{trigger:next, start:'top 75%', end:'top 25%', scrub:true}});
       });
     });
 
