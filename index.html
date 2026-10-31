@@ -277,9 +277,10 @@ html.menu-open .hdepth{opacity:0}
 .words-head .hand{font-size:clamp(30px,2.9vw,44px);color:var(--coral);transform:rotate(-4deg)}
 .tiles{display:flex;gap:14px;height:clamp(460px,72vh,720px)}
 .tile{position:relative;flex:1 1 0;min-width:0;border-radius:28px;overflow:hidden;color:#fff;isolation:isolate;transition:flex-grow .8s var(--ease)}
-@media (hover:hover){.tile:hover{flex-grow:2.3}}
+/* the hover widening is driven by real mouse moves (JS adds .on), so tiles don't start resizing just because the page scrolled under a resting cursor */
+.tile.on{flex-grow:2.3}
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--ease)}
-.tile:hover img{transform:scale(1.08)}
+.tile.on img{transform:scale(1.08)}
 .tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,41,58,0) 30%,rgba(5,41,58,.88))}
 .tile .sh{position:absolute;inset:0;z-index:1;background:#031a26;opacity:0;pointer-events:none}
 .tile .cov{position:absolute;inset:-1px;z-index:4;background:var(--sand);transform-origin:50% 0;pointer-events:none;will-change:transform}
@@ -304,7 +305,7 @@ html.menu-open .hdepth{opacity:0}
 /* SEA — polaroids drift past a pinned title */
 .sea{position:relative;height:340vh;overflow-x:clip;background:linear-gradient(180deg,var(--sand) 0,#8FDDE4 10vh,#13809A 26vh,#0A4E63 40vh,var(--abyss) 60vh,var(--abyss) 100%)}
 .sea-stick{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;padding-left:var(--gl);padding-right:var(--gr);z-index:3;pointer-events:none}
-.sea-title{display:grid;gap:22px;justify-items:center;position:relative;z-index:3;pointer-events:none;text-shadow:0 4px 30px rgba(5,41,58,.9),0 1px 3px rgba(5,41,58,.8)}
+.sea-title{display:grid;gap:22px;justify-items:center;position:relative;z-index:3;pointer-events:none;will-change:transform,opacity;text-shadow:0 4px 30px rgba(5,41,58,.9),0 1px 3px rgba(5,41,58,.8)}
 @media (min-width:821px){.sea-title::before{content:"";position:absolute;inset:-22% -18%;z-index:-1;background:radial-gradient(closest-side,rgba(5,41,58,.93),rgba(5,41,58,.75) 55%,rgba(5,41,58,0));pointer-events:none}}
 .sea-title h2{font-size:clamp(44.1px,6.5vw,110.7px);line-height:.98}
 .sea-title h2 em{color:var(--lagoon)}
@@ -372,7 +373,7 @@ html.menu-open .hdepth{opacity:0}
 .card .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .card:hover .im img{transform:scale(1.08)}
 .card .stk{position:absolute;top:16px;left:16px;transform:rotate(-3deg)}
-.card .bd{padding:24px 24px 26px;display:grid;gap:10px;flex:1;align-content:start}
+.card .bd{padding:24px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
 .card h3{font-size:32px;line-height:1.02}
 .card p{color:var(--muted-l);font-size:17px;line-height:1.5}
 .card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid rgba(35,31,32,.1);font-size:15px;font-weight:600;color:var(--muted-l)}
@@ -1221,7 +1222,8 @@ footer .top-cta{display:inline-flex}
     tgtD = depthAt(mid);
     phase = tgtD < .5 ? 'top' : (mid < deepA - 1 ? 'down' : (mid <= deepB + 1 ? 'deep' : (Math.abs(tgtD - 5) < .35 ? 'stop' : 'up')));
     if (!chasing) { chasing = true; requestAnimationFrame(chase); }
-    gauge.classList.toggle('off', y < vh * 0.3);
+    // the gauge steps aside while the course cards slide under it
+    gauge.classList.toggle('off', y < vh * 0.3 || inCourses);
     hdepth.classList.toggle('on', y > vh * 0.5 && !navOpen);
     paintDepth();
     paintMani();
@@ -1502,6 +1504,14 @@ footer .top-cta{display:inline-flex}
     // SLED tiles: desktop rises out of a mask; phones get a stacked deck where each card settles back as the next one slides over
     mm.add('(min-width: 901px)', function(){
       var covs = $$('.tile').map(function(t){ var c = document.createElement('span'); c.className = 'cov'; t.appendChild(c); return c; });
+      // tiles widen only when the mouse really moves over them (scrolling under a still cursor sends moves with no movement)
+      var tl = $$('.tile'), box = $('#tiles');
+      function hov(e){ if (!e.movementX && !e.movementY) return; var t = e.currentTarget; if (!t.classList.contains('on')) tl.forEach(function(x){ x.classList.toggle('on', x === t); }); }
+      function out(){ tl.forEach(function(x){ x.classList.remove('on'); }); }
+      tl.forEach(function(t){ t.addEventListener('pointermove', hov); });
+      box.addEventListener('pointerleave', out);
+      // decode the reef polaroids while the tiles are on screen, so they don't all decode at once when the next section starts
+      ScrollTrigger.create({trigger:'#tiles', start:'top bottom', once:true, onEnter:function(){ $$('.pol img').forEach(function(i){ if (i.decode) i.decode().catch(function(){}); }); }});
       gsap.from('.tile', {y:90, duration:1.4, stagger:.13, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}});
       gsap.to(covs, {scaleY:0, duration:1.4, stagger:.13, ease:'expo.out', scrollTrigger:{trigger:'#tiles', start:'top 85%', once:true}, onComplete:function(){ covs.forEach(function(c){ c.remove(); }); }});
       return function(){ covs.forEach(function(c){ c.remove(); }); };
