@@ -296,7 +296,7 @@ html.menu-open .hdepth{opacity:0}
   .tiles{display:block;height:auto}
   .tile{position:sticky;top:calc(80px + var(--i,0) * 14px + env(safe-area-inset-top,0px));height:min(72svh,600px);margin-bottom:22px;box-shadow:0 -20px 40px -24px rgba(5,41,58,.5);transform-origin:50% 0}
   .tile:last-child{margin-bottom:0}
-  .tile .L{font-size:clamp(90px,28vw,150px)}
+  .tile .L{font-size:clamp(90px,28vw,150px);text-shadow:none}
   .tile h3{font-size:clamp(31px,8.6vw,44.7px)}
   .tile p{font-size:17px}
 }
@@ -447,7 +447,18 @@ html:not(.js-pin) .c-bar{display:none}
 .step .n{font:italic 700 96px/.85 var(--display);font-variant-numeric:lining-nums;color:var(--fin)}
 .step h3{font:700 clamp(23px,2vw,28px)/1.2 var(--body);letter-spacing:-.015em}
 .step p{color:var(--muted);font-size:clamp(17.5px,1.45vw,20px)}
-@media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr);gap:34px;margin-top:34px}.profile text{font-size:44px}.profile .line{stroke-width:10}.profile .base{stroke-width:8}#ddot{r:18px}}
+@media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr);gap:34px;margin-top:34px}.profile .line{stroke-width:10}.profile .base{stroke-width:8}#ddot{r:18px}}
+/* phones: the labels inside the drawing were too small and crossed the line, so they move into a legend under it */
+.pr-legend{display:none}
+@media (max-width:760px){
+  .profile svg text{display:none}
+  .profile svg{margin-block:6px 4px}
+  .pr-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:4px;font:600 14.5px/1.3 var(--body);color:var(--muted)}
+  .pr-legend span{display:inline-flex;align-items:center;gap:8px}
+  .pr-legend span::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--fin)}
+  .pr-legend .s::before{background:none;border:2px dashed var(--lagoon);width:10px;height:10px}
+  .pr-legend .t::before{background:none;border:3px solid var(--fin);width:8px;height:8px}
+}
 
 /* GALLERY rows drifting with scroll */
 .gal{overflow:hidden;padding-block:calc(30vh + 40px) calc(30vh + 30px);background:linear-gradient(180deg,var(--sand) 0,#8FDDE4 7vh,#13809A 15vh,#0A4E63 22vh,var(--abyss) 30vh,var(--abyss) calc(100% - 30vh),#0A4E63 calc(100% - 22vh),#13809A calc(100% - 15vh),#8FDDE4 calc(100% - 7vh),var(--sand) 100%)}
@@ -542,8 +553,8 @@ footer .top-cta{display:inline-flex}
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="#hero" aria-label="SLED, наверх">
-      <img decoding="async" class="lg-dark" src="logo-dark.png" alt="SLED, Sleep Live Eat Dive">
-      <img decoding="async" class="lg-light" src="logo-light.png" alt="" aria-hidden="true">
+      <img class="lg-dark" src="logo-dark.png" alt="SLED, Sleep Live Eat Dive">
+      <img class="lg-light" src="logo-light.png" alt="" aria-hidden="true">
     </a>
     <span class="hdepth" id="hdepth" aria-hidden="true"><span data-i="depth">глубина</span> <b id="hnum">0 м</b></span>
     <nav class="nav" id="nav" aria-label="Основное меню">
@@ -574,7 +585,7 @@ footer .top-cta{display:inline-flex}
 <main>
   <section class="hero" id="hero" data-depth="0" data-hold="1">
     <div class="hero-stick">
-      <div class="hero-media" id="heroMedia"><img decoding="async" src="photos/hero.jpg" alt="Остров на Мальдивах над водой и коралловое дно под водой" fetchpriority="high"></div>
+      <div class="hero-media" id="heroMedia"><img src="photos/hero.jpg" alt="Остров на Мальдивах над водой и коралловое дно под водой" fetchpriority="high"></div>
       <div class="hero-shade"></div>
       <div class="hero-deep" id="heroDeep"></div>
       <canvas class="hero-bub" id="hbub" aria-hidden="true"></canvas>
@@ -604,7 +615,7 @@ footer .top-cta{display:inline-flex}
 
   <section class="mani" id="about" data-depth="5">
     <div class="wrap">
-      <p class="mani-text" id="mani" data-i="mani">Мы намеренно остаёмся небольшими. Один инструктор, <span class="pic"><img decoding="async" src="photos/c-try.jpg" alt=""></span> не больше четырёх человек в группе: никто не торопит, никто не теряется, и каждый успевает рассмотреть риф. Всё объясняем по-русски, <span class="pic"><img decoding="async" src="photos/turtle2.jpg" alt=""></span> а стоит ли этот атолл вашего отпуска, вы поймёте уже <em>под водой.</em></p>
+      <p class="mani-text" id="mani" data-i="mani">Мы намеренно остаёмся небольшими. Один инструктор, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> не больше четырёх человек в группе: никто не торопит, никто не теряется, и каждый успевает рассмотреть риф. Всё объясняем по-русски, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> а стоит ли этот атолл вашего отпуска, вы поймёте уже <em>под водой.</em></p>
       <div class="perks">
         <article class="perk"><b>4</b><h3 data-i="p1h">человека в группе, не больше</h3><p data-i="p1p">Столько мы берём на одно погружение, чтобы у инструктора хватало внимания на каждого, а у вас хватало спокойствия.</p></article>
         <article class="perk"><b>RU</b><h3 data-i="p2h">всё на русском</h3><p data-i="p2p">Брифинг, теория и разбор погружения на родном языке. Никаких «sorry, I don’t understand» на пятнадцати метрах.</p></article>
@@ -621,10 +632,10 @@ footer .top-cta{display:inline-flex}
         <span class="hand" data-i="whk">так расшифровывается SLED</span>
       </div>
       <div class="tiles" id="tiles">
-        <article class="tile" style="--i:0"><img decoding="async" src="photos/sleep.jpg" alt="Гамак между пальмами у океана" loading="lazy"><span class="L" aria-hidden="true">S</span><div class="tx"><h3>Sleep</h3><p data-i="t1">Дайв-центр находится прямо на территории отеля. Проснулись, позавтракали, и через пару минут вы уже у снаряжения: без ранних трансферов и долгой дороги до лодки.</p></div><i class="sh"></i></article>
-        <article class="tile" style="--i:1"><img decoding="async" src="photos/live.jpg" alt="Дайвер в гидрокостюме у борта лодки" loading="lazy"><span class="L" aria-hidden="true">L</span><div class="tx"><h3>Live</h3><p data-i="t2">Здесь всё устроено неспешно: утро на лодке, обед в тени пальм, вечером закат и никаких планов. Остров небольшой, и уже на второй день кажется, что вы живёте тут давно.</p></div><i class="sh"></i></article>
-        <article class="tile" style="--i:2"><img decoding="async" src="photos/eat.jpg" alt="Завтрак у моря" loading="lazy"><span class="L" aria-hidden="true">E</span><div class="tx"><h3>Eat</h3><p data-i="t3">Между погружениями фрукты, кофе и обед с видом на океан. Голодный дайвер, как известно, дайвер грустный, и мы такого не допускаем.</p></div><i class="sh"></i></article>
-        <article class="tile" style="--i:3"><img decoding="async" src="photos/dive.jpg" alt="Дайвер с аквалангом рядом с морской черепахой" loading="lazy"><span class="L" aria-hidden="true">D</span><div class="tx"><h3>Dive</h3><p data-i="t4">Три или четыре погружения в день с лодки. Сколько нырять, решаете вы: хотите одно погружение и целый день на пляже, так и сделаем. Рифы в нескольких минутах от острова, поэтому между погружениями остаётся время на отдых и обед.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:0"><img src="photos/sleep.jpg" srcset="photos/sm/sleep.jpg 900w, photos/sleep.jpg 933w" sizes="(max-width:900px) 60vw, 25vw" alt="Гамак между пальмами у океана" loading="lazy"><span class="L" aria-hidden="true">S</span><div class="tx"><h3>Sleep</h3><p data-i="t1">Дайв-центр находится прямо на территории отеля. Проснулись, позавтракали, и через пару минут вы уже у снаряжения: без ранних трансферов и долгой дороги до лодки.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:1"><img src="photos/live.jpg" srcset="photos/sm/live.jpg 900w, photos/live.jpg 1400w" sizes="(max-width:900px) 60vw, 25vw" alt="Дайвер в гидрокостюме у борта лодки" loading="lazy"><span class="L" aria-hidden="true">L</span><div class="tx"><h3>Live</h3><p data-i="t2">Здесь всё устроено неспешно: утро на лодке, обед в тени пальм, вечером закат и никаких планов. Остров небольшой, и уже на второй день кажется, что вы живёте тут давно.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:2"><img src="photos/eat.jpg" srcset="photos/sm/eat.jpg 900w, photos/eat.jpg 933w" sizes="(max-width:900px) 60vw, 25vw" alt="Завтрак у моря" loading="lazy"><span class="L" aria-hidden="true">E</span><div class="tx"><h3>Eat</h3><p data-i="t3">Между погружениями фрукты, кофе и обед с видом на океан. Голодный дайвер, как известно, дайвер грустный, и мы такого не допускаем.</p></div><i class="sh"></i></article>
+        <article class="tile" style="--i:3"><img src="photos/dive.jpg" srcset="photos/sm/dive.jpg 900w, photos/dive.jpg 1400w" sizes="(max-width:900px) 60vw, 25vw" alt="Дайвер с аквалангом рядом с морской черепахой" loading="lazy"><span class="L" aria-hidden="true">D</span><div class="tx"><h3>Dive</h3><p data-i="t4">Три или четыре погружения в день с лодки. Сколько нырять, решаете вы: хотите одно погружение и целый день на пляже, так и сделаем. Рифы в нескольких минутах от острова, поэтому между погружениями остаётся время на отдых и обед.</p></div><i class="sh"></i></article>
       </div>
     </div>
   </section>
@@ -638,25 +649,25 @@ footer .top-cta{display:inline-flex}
       </div>
     </div>
     <div class="pols" id="pols">
-      <figure class="pol" data-x="4" data-y="5" data-w="24" data-r="-7" data-s="0.5"><img decoding="async" src="photos/turtle.jpg" alt="Морская черепаха над рифом"><figcaption data-i="c1">привет, черепаха</figcaption></figure>
-      <figure class="pol" data-x="70" data-y="3" data-w="23" data-r="6" data-s="1.0"><img decoding="async" src="photos/manta.jpg" alt="Манта"><figcaption data-i="c2">манта над головой</figcaption></figure>
-      <figure class="pol" data-x="34" data-y="20" data-w="13" data-r="5" data-s="1.7" style="--ar:3/4"><img decoding="async" src="photos/turtle2.jpg" alt="Черепаха над песчаным дном"><figcaption data-i="c3">в толще воды</figcaption></figure>
-      <figure class="pol" data-x="52" data-y="9" data-w="17" data-r="-4" data-s="1.3"><img decoding="async" src="photos/c-try.jpg" alt="Дайвер с аквалангом у рифа"><figcaption data-i="c9">первый вдох под водой</figcaption></figure>
-      <figure class="pol" data-x="74" data-y="27" data-w="23" data-r="-5" data-s="0.8"><img decoding="async" src="photos/school.jpg" alt="Стая жёлтых рыб у рифа"><figcaption data-i="c4">рыбный час пик</figcaption></figure>
-      <figure class="pol" data-x="2" data-y="31" data-w="25" data-r="4" data-s="1.2"><img decoding="async" src="photos/whale.jpg" alt="Китовая акула"><figcaption data-i="c5">китовая акула, если повезёт</figcaption></figure>
-      <figure class="pol" data-x="22" data-y="47" data-w="13" data-r="-8" data-s="1.5" style="--ar:4/5"><img decoding="async" src="photos/babyshark.jpg" alt="Маленькая рифовая акула на мелководье"><figcaption data-i="c10">акулёнок, не кусается</figcaption></figure>
-      <figure class="pol" data-x="56" data-y="44" data-w="14" data-r="-6" data-s="1.0" style="--ar:3/4"><img decoding="async" src="photos/coral.jpg" alt="Кораллы"><figcaption data-i="c6">кораллы всех цветов</figcaption></figure>
-      <figure class="pol" data-x="76" data-y="54" data-w="22" data-r="5" data-s="0.9"><img decoding="async" src="photos/reefshark.jpg" alt="Рифовая акула"><figcaption data-i="c11">рифовая акула</figcaption></figure>
-      <figure class="pol" data-x="3" data-y="61" data-w="22" data-r="6" data-s="1.1"><img decoding="async" src="photos/divers.jpg" alt="Двое дайверов над рифом"><figcaption data-i="c12">ныряем с напарником</figcaption></figure>
-      <figure class="pol" data-x="84" data-y="73" data-w="12" data-r="8" data-s="1.6" style="--ar:3/4"><img decoding="async" src="photos/turtle3.jpg" alt="Черепаха"><figcaption data-i="c7">позирует</figcaption></figure>
-      <figure class="pol" data-x="9" data-y="81" data-w="24" data-r="-4" data-s="0.9"><img decoding="async" src="photos/group.jpg" alt="Группа дайверов у рифа"><figcaption data-i="c8">вся группа в сборе</figcaption></figure>
-      <figure class="pol" data-x="44" data-y="70" data-w="13" data-r="7" data-s="1.3" style="--ar:2/3"><img decoding="async" src="photos/swing.jpg" alt="Качели на пальме у моря"><figcaption data-i="c14">отдых после погружения</figcaption></figure>
-      <figure class="pol" data-x="62" data-y="86" data-w="21" data-r="-5" data-s="1.0"><img decoding="async" src="photos/laamu.jpg" alt="Острова атолла Лааму с высоты"><figcaption data-i="c15">а это Лааму сверху</figcaption></figure>
+      <figure class="pol" data-x="4" data-y="5" data-w="24" data-r="-7" data-s="0.5"><img src="photos/turtle.jpg" srcset="photos/sm/turtle.jpg 900w, photos/turtle.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Морская черепаха над рифом"><figcaption data-i="c1">привет, черепаха</figcaption></figure>
+      <figure class="pol" data-x="70" data-y="3" data-w="23" data-r="6" data-s="1.0"><img src="photos/manta.jpg" srcset="photos/sm/manta.jpg 900w, photos/manta.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Манта"><figcaption data-i="c2">манта над головой</figcaption></figure>
+      <figure class="pol" data-x="34" data-y="20" data-w="13" data-r="5" data-s="1.7" style="--ar:3/4"><img src="photos/turtle2.jpg" alt="Черепаха над песчаным дном"><figcaption data-i="c3">в толще воды</figcaption></figure>
+      <figure class="pol" data-x="52" data-y="9" data-w="17" data-r="-4" data-s="1.3"><img src="photos/c-try.jpg" srcset="photos/sm/c-try.jpg 900w, photos/c-try.jpg 1200w" sizes="(max-width:820px) 46vw, 24vw" alt="Дайвер с аквалангом у рифа"><figcaption data-i="c9">первый вдох под водой</figcaption></figure>
+      <figure class="pol" data-x="74" data-y="27" data-w="23" data-r="-5" data-s="0.8"><img src="photos/school.jpg" srcset="photos/sm/school.jpg 900w, photos/school.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Стая жёлтых рыб у рифа"><figcaption data-i="c4">рыбный час пик</figcaption></figure>
+      <figure class="pol" data-x="2" data-y="31" data-w="25" data-r="4" data-s="1.2"><img src="photos/whale.jpg" srcset="photos/sm/whale.jpg 900w, photos/whale.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Китовая акула"><figcaption data-i="c5">китовая акула, если повезёт</figcaption></figure>
+      <figure class="pol" data-x="22" data-y="47" data-w="13" data-r="-8" data-s="1.5" style="--ar:4/5"><img src="photos/babyshark.jpg" alt="Маленькая рифовая акула на мелководье"><figcaption data-i="c10">акулёнок, не кусается</figcaption></figure>
+      <figure class="pol" data-x="56" data-y="44" data-w="14" data-r="-6" data-s="1.0" style="--ar:3/4"><img src="photos/coral.jpg" alt="Кораллы"><figcaption data-i="c6">кораллы всех цветов</figcaption></figure>
+      <figure class="pol" data-x="76" data-y="54" data-w="22" data-r="5" data-s="0.9"><img src="photos/reefshark.jpg" srcset="photos/sm/reefshark.jpg 900w, photos/reefshark.jpg 1200w" sizes="(max-width:820px) 46vw, 24vw" alt="Рифовая акула"><figcaption data-i="c11">рифовая акула</figcaption></figure>
+      <figure class="pol" data-x="3" data-y="61" data-w="22" data-r="6" data-s="1.1"><img src="photos/divers.jpg" srcset="photos/sm/divers.jpg 900w, photos/divers.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Двое дайверов над рифом"><figcaption data-i="c12">ныряем с напарником</figcaption></figure>
+      <figure class="pol" data-x="84" data-y="73" data-w="12" data-r="8" data-s="1.6" style="--ar:3/4"><img src="photos/turtle3.jpg" alt="Черепаха"><figcaption data-i="c7">позирует</figcaption></figure>
+      <figure class="pol" data-x="9" data-y="81" data-w="24" data-r="-4" data-s="0.9"><img src="photos/group.jpg" srcset="photos/sm/group.jpg 900w, photos/group.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Группа дайверов у рифа"><figcaption data-i="c8">вся группа в сборе</figcaption></figure>
+      <figure class="pol" data-x="44" data-y="70" data-w="13" data-r="7" data-s="1.3" style="--ar:2/3"><img src="photos/swing.jpg" alt="Качели на пальме у моря"><figcaption data-i="c14">отдых после погружения</figcaption></figure>
+      <figure class="pol" data-x="62" data-y="86" data-w="21" data-r="-5" data-s="1.0"><img src="photos/laamu.jpg" srcset="photos/sm/laamu.jpg 900w, photos/laamu.jpg 1400w" sizes="(max-width:820px) 46vw, 24vw" alt="Острова атолла Лааму с высоты"><figcaption data-i="c15">а это Лааму сверху</figcaption></figure>
     </div>
   </section>
 
   <section class="stats dk" aria-label="SLED в цифрах" data-depth="15" data-dk="0,1">
-    <div class="bgimg" data-par="18"><img decoding="async" src="photos/rays.jpg" alt="" loading="lazy"></div>
+    <div class="bgimg" data-par="18"><img src="photos/rays.jpg" alt="" loading="lazy"></div>
     <div class="wrap stats-grid">
       <div class="stat rv"><b data-count="12">12</b><span data-i="st1">лет Александр обучает дайверов</span></div>
       <div class="stat rv"><b data-count="6500">6500</b><span data-i="st2">погружений в его логбуке</span></div>
@@ -668,7 +679,7 @@ footer .top-cta{display:inline-flex}
   <section class="coach dk" id="coach" data-depth="18" data-dk="0,0.8">
     <div class="wrap coach-grid">
       <div class="coach-img rv-img">
-        <img decoding="async" src="photos/coach.jpg" alt="Инструктор ведёт дайвера вдоль стены рифа" loading="lazy" data-par="10" style="object-position:50% 40%">
+        <img src="photos/coach.jpg" srcset="photos/sm/coach.jpg 900w, photos/coach.jpg 933w" sizes="(max-width:860px) 60vw, 40vw" alt="Инструктор ведёт дайвера вдоль стены рифа" loading="lazy" data-par="10" style="object-position:50% 40%">
         <span class="stk o">SSI Assistant Instructor Trainer</span>
       </div>
       <div class="coach-txt">
@@ -691,12 +702,12 @@ footer .top-cta{display:inline-flex}
         <p data-i="chp">Сертификат SSI и учебные материалы входят в стоимость курса. Цены в долларах, налоги не включены. Точную стоимость сообщим в мессенджере.</p>
       </div>
       <div class="track" id="track">
-        <article class="card"><div class="im"><img decoding="async" src="photos/c-try.jpg" alt="" loading="lazy"><span class="stk t" data-i="k1t">Впервые</span></div><div class="bd"><h3 data-i="k1h">Пробное погружение</h3><p data-i="k1p">Опыт не нужен. Инструктор всё время рядом, а от вас требуется только дышать и смотреть на рыб. Скорее всего, захочется ещё.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img decoding="async" src="photos/c-ow.jpg" alt="" loading="lazy"><span class="stk o" data-i="k2t">Первый сертификат</span></div><div class="bd"><h3>Open Water Diver</h3><p data-i="k2p">Базовый курс, после которого вы становитесь самостоятельным дайвером: погружения с напарником до 18 метров в любой точке мира.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img decoding="async" src="photos/c-adv.jpg" alt="" loading="lazy"><span class="stk c" data-i="k3t">Следующий шаг</span></div><div class="bd"><h3 data-i="k3h">Продвинутый уровень</h3><p data-i="k3p">Для тех, кого уже затянуло. Пять погружений с новыми навыками: глубокое, навигация и другие на выбор. После курса можно нырять до 30 метров.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img decoding="async" src="photos/c-fun.jpg" alt="" loading="lazy"><span class="stk w" data-i="k4t">С сертификатом</span></div><div class="bd"><h3 data-i="k4h">Фан-дайвинг</h3><p data-i="k4p">Если сертификат уже есть, просто выходим на лодке к рифу. Три-четыре погружения в день, группа до четырёх человек.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img decoding="async" src="photos/divers.jpg" alt="" loading="lazy"><span class="stk t" data-i="k5t">После перерыва</span></div><div class="bd"><h3 data-i="k5h">Проверочное погружение</h3><p data-i="k5p">Если вы не ныряли больше полугода. Одно спокойное погружение, чтобы освежить навыки. Стоит как обычное.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
-        <article class="card"><div class="im"><img decoding="async" src="photos/c-boat.jpg" alt="" loading="lazy"><span class="stk o" data-i="k6t">Аренда</span></div><div class="bd"><h3 data-i="k6h">Снаряжение</h3><p data-i="k6p">Шесть полных комплектов на месте. Можно лететь налегке.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-try.jpg" srcset="photos/sm/c-try.jpg 900w, photos/c-try.jpg 1200w" sizes="(max-width:900px) 60vw, 25vw" alt="" loading="lazy"><span class="stk t" data-i="k1t">Впервые</span></div><div class="bd"><h3 data-i="k1h">Пробное погружение</h3><p data-i="k1p">Опыт не нужен. Инструктор всё время рядом, а от вас требуется только дышать и смотреть на рыб. Скорее всего, захочется ещё.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-ow.jpg" srcset="photos/sm/c-ow.jpg 900w, photos/c-ow.jpg 1200w" sizes="(max-width:900px) 60vw, 25vw" alt="" loading="lazy"><span class="stk o" data-i="k2t">Первый сертификат</span></div><div class="bd"><h3>Open Water Diver</h3><p data-i="k2p">Базовый курс, после которого вы становитесь самостоятельным дайвером: погружения с напарником до 18 метров в любой точке мира.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-adv.jpg" srcset="photos/sm/c-adv.jpg 900w, photos/c-adv.jpg 1200w" sizes="(max-width:900px) 60vw, 25vw" alt="" loading="lazy"><span class="stk c" data-i="k3t">Следующий шаг</span></div><div class="bd"><h3 data-i="k3h">Продвинутый уровень</h3><p data-i="k3p">Для тех, кого уже затянуло. Пять погружений с новыми навыками: глубокое, навигация и другие на выбор. После курса можно нырять до 30 метров.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-fun.jpg" srcset="photos/sm/c-fun.jpg 900w, photos/c-fun.jpg 1200w" sizes="(max-width:900px) 60vw, 25vw" alt="" loading="lazy"><span class="stk w" data-i="k4t">С сертификатом</span></div><div class="bd"><h3 data-i="k4h">Фан-дайвинг</h3><p data-i="k4p">Если сертификат уже есть, просто выходим на лодке к рифу. Три-четыре погружения в день, группа до четырёх человек.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/divers.jpg" srcset="photos/sm/divers.jpg 900w, photos/divers.jpg 1400w" sizes="(max-width:900px) 60vw, 25vw" alt="" loading="lazy"><span class="stk t" data-i="k5t">После перерыва</span></div><div class="bd"><h3 data-i="k5h">Проверочное погружение</h3><p data-i="k5p">Если вы не ныряли больше полугода. Одно спокойное погружение, чтобы освежить навыки. Стоит как обычное.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
+        <article class="card"><div class="im"><img src="photos/c-boat.jpg" srcset="photos/sm/c-boat.jpg 900w, photos/c-boat.jpg 1200w" sizes="(max-width:900px) 60vw, 25vw" alt="" loading="lazy"><span class="stk o" data-i="k6t">Аренда</span></div><div class="bd"><h3 data-i="k6h">Снаряжение</h3><p data-i="k6p">Шесть полных комплектов на месте. Можно лететь налегке.</p><div class="meta"><span data-i="price">Цена по запросу</span><a href="#contacts" data-i="ask">Узнать</a></div></div></article>
       </div>
       <div class="wrap"><div class="c-bar"><i id="cbar"></i></div></div>
     </div>
@@ -704,7 +715,7 @@ footer .top-cta{display:inline-flex}
 
   <section class="laamu dk" id="laamu" data-depth="14" data-dk="0.42,0.97">
     <div class="l-stick">
-      <div class="l-frame" id="lframe"><img decoding="async" src="photos/atoll.jpg" alt="Остров атолла с высоты, бирюзовая лагуна и риф"></div>
+      <div class="l-frame" id="lframe"><img src="photos/atoll.jpg" alt="Остров атолла с высоты, бирюзовая лагуна и риф"></div>
       <span class="l-cap" id="lcap" data-i="lcap">листайте дальше, тут красиво</span>
       <div class="wrap l-txt" id="ltxt">
         <span class="stk t" style="justify-self:start;transform:rotate(-3deg)" data-i="lk">Атолл Лааму</span>
@@ -731,6 +742,7 @@ footer .top-cta{display:inline-flex}
           <text x="400" y="250" data-i="pr1">дно · до 18 м</text>
           <text x="990" y="96" text-anchor="end" data-i="pr2">5 м · остановка 3 мин</text>
         </svg>
+        <div class="pr-legend"><span class="s" data-i="pr0">0 м · поверхность</span><span class="d" data-i="pr1">дно · до 18 м</span><span class="t" data-i="pr2">5 м · остановка 3 мин</span></div>
       </div>
       <div class="steps">
         <div class="step rv"><span class="n">1</span><h3 data-i="sp1h">Напишите нам</h3><p data-i="sp1p">В Telegram или WhatsApp. Достаточно имени и пары слов: «хочу попробовать» или «есть сертификат, хочу на риф».</p></div>
@@ -746,25 +758,25 @@ footer .top-cta{display:inline-flex}
       <p class="rv" data-i="gp">Пока дома слякоть и пуховики, здесь плюс тридцать, а вода тёплая, как в ванне. Рифы в нескольких минутах от берега на лодке, поэтому день не уходит на дорогу: утром вы под водой, днём на пляже, вечером смотрите на закат.</p>
     </div>
     <div class="grow" id="gr1">
-      <figure style="--ar:1.506"><img decoding="async" src="photos/reefshark.jpg" alt="Рифовая акула" loading="lazy"></figure>
-      <figure style="--ar:1.498"><img decoding="async" src="photos/beach.jpg" alt="Пляж с пальмами на Мальдивах" loading="lazy"></figure>
-      <figure style="--ar:1.509"><img decoding="async" src="photos/c-fun.jpg" alt="Стая рыб над рифом в лучах солнца" loading="lazy"></figure>
-      <figure style="--ar:0.562"><img decoding="async" src="photos/turtle3.jpg" alt="Черепаха" loading="lazy"></figure>
-      <figure style="--ar:1.333"><img decoding="async" src="photos/divers.jpg" alt="Двое дайверов над рифом" loading="lazy"></figure>
-      <figure style="--ar:1.5"><img decoding="async" src="photos/shark.jpg" alt="Дайвер и китовая акула" loading="lazy"></figure>
-      <figure style="--ar:0.667"><img decoding="async" src="photos/c-check.jpg" alt="Дайвер у стены рифа" loading="lazy"></figure>
-      <figure style="--ar:0.668"><img decoding="async" src="photos/cave.jpg" alt="Дайвер в подводном гроте" loading="lazy"></figure>
-      <figure style="--ar:0.667"><img decoding="async" src="photos/coach.jpg" alt="Двое дайверов в расщелине рифа" loading="lazy"></figure>
+      <figure style="--ar:1.506"><img src="photos/reefshark.jpg" srcset="photos/sm/reefshark.jpg 900w, photos/reefshark.jpg 1200w" sizes="(max-width:700px) 75vw, 36vw" alt="Рифовая акула" loading="lazy"></figure>
+      <figure style="--ar:1.498"><img src="photos/beach.jpg" srcset="photos/sm/beach.jpg 900w, photos/beach.jpg 1400w" sizes="(max-width:700px) 75vw, 36vw" alt="Пляж с пальмами на Мальдивах" loading="lazy"></figure>
+      <figure style="--ar:1.509"><img src="photos/c-fun.jpg" srcset="photos/sm/c-fun.jpg 900w, photos/c-fun.jpg 1200w" sizes="(max-width:700px) 75vw, 36vw" alt="Стая рыб над рифом в лучах солнца" loading="lazy"></figure>
+      <figure style="--ar:0.562"><img src="photos/turtle3.jpg" alt="Черепаха" loading="lazy"></figure>
+      <figure style="--ar:1.333"><img src="photos/divers.jpg" srcset="photos/sm/divers.jpg 900w, photos/divers.jpg 1400w" sizes="(max-width:700px) 75vw, 36vw" alt="Двое дайверов над рифом" loading="lazy"></figure>
+      <figure style="--ar:1.5"><img src="photos/shark.jpg" srcset="photos/sm/shark.jpg 900w, photos/shark.jpg 1400w" sizes="(max-width:700px) 75vw, 36vw" alt="Дайвер и китовая акула" loading="lazy"></figure>
+      <figure style="--ar:0.667"><img src="photos/c-check.jpg" alt="Дайвер у стены рифа" loading="lazy"></figure>
+      <figure style="--ar:0.668"><img src="photos/cave.jpg" srcset="photos/sm/cave.jpg 900w, photos/cave.jpg 935w" sizes="(max-width:700px) 75vw, 36vw" alt="Дайвер в подводном гроте" loading="lazy"></figure>
+      <figure style="--ar:0.667"><img src="photos/coach.jpg" srcset="photos/sm/coach.jpg 900w, photos/coach.jpg 933w" sizes="(max-width:700px) 75vw, 36vw" alt="Двое дайверов в расщелине рифа" loading="lazy"></figure>
     </div>
     <div class="grow" id="gr2">
-      <figure style="--ar:1.494"><img decoding="async" src="photos/c-boat.jpg" alt="Выход в море на лодке" loading="lazy"></figure>
-      <figure style="--ar:0.75"><img decoding="async" src="photos/coral.jpg" alt="Кораллы" loading="lazy"></figure>
-      <figure style="--ar:1.5"><img decoding="async" src="photos/manta.jpg" alt="Манта" loading="lazy"></figure>
-      <figure style="--ar:1.333"><img decoding="async" src="photos/c-ow.jpg" alt="Дайверы на занятии" loading="lazy"></figure>
-      <figure style="--ar:1.333"><img decoding="async" src="photos/palms.jpg" alt="Пальмы и лагуна" loading="lazy"></figure>
-      <figure style="--ar:1.498"><img decoding="async" src="photos/c-adv.jpg" alt="Риф и рыбы" loading="lazy"></figure>
-      <figure style="--ar:1.509"><img decoding="async" src="photos/school.jpg" alt="Стая жёлтых рыб у рифа" loading="lazy"></figure>
-      <figure style="--ar:0.75"><img decoding="async" src="photos/reef2.jpg" alt="Коралловый риф с яркими рыбками" loading="lazy"></figure>
+      <figure style="--ar:1.494"><img src="photos/c-boat.jpg" srcset="photos/sm/c-boat.jpg 900w, photos/c-boat.jpg 1200w" sizes="(max-width:700px) 75vw, 36vw" alt="Выход в море на лодке" loading="lazy"></figure>
+      <figure style="--ar:0.75"><img src="photos/coral.jpg" alt="Кораллы" loading="lazy"></figure>
+      <figure style="--ar:1.5"><img src="photos/manta.jpg" srcset="photos/sm/manta.jpg 900w, photos/manta.jpg 1400w" sizes="(max-width:700px) 75vw, 36vw" alt="Манта" loading="lazy"></figure>
+      <figure style="--ar:1.333"><img src="photos/c-ow.jpg" srcset="photos/sm/c-ow.jpg 900w, photos/c-ow.jpg 1200w" sizes="(max-width:700px) 75vw, 36vw" alt="Дайверы на занятии" loading="lazy"></figure>
+      <figure style="--ar:1.333"><img src="photos/palms.jpg" srcset="photos/sm/palms.jpg 900w, photos/palms.jpg 1600w" sizes="(max-width:700px) 75vw, 36vw" alt="Пальмы и лагуна" loading="lazy"></figure>
+      <figure style="--ar:1.498"><img src="photos/c-adv.jpg" srcset="photos/sm/c-adv.jpg 900w, photos/c-adv.jpg 1200w" sizes="(max-width:700px) 75vw, 36vw" alt="Риф и рыбы" loading="lazy"></figure>
+      <figure style="--ar:1.509"><img src="photos/school.jpg" srcset="photos/sm/school.jpg 900w, photos/school.jpg 1400w" sizes="(max-width:700px) 75vw, 36vw" alt="Стая жёлтых рыб у рифа" loading="lazy"></figure>
+      <figure style="--ar:0.75"><img src="photos/reef2.jpg" srcset="photos/sm/reef2.jpg 900w, photos/reef2.jpg 1050w" sizes="(max-width:700px) 75vw, 36vw" alt="Коралловый риф с яркими рыбками" loading="lazy"></figure>
     </div>
   </section>
 
@@ -773,7 +785,7 @@ footer .top-cta{display:inline-flex}
       <div class="faq-side">
         <h2 class="rv"><span data-i="fq1">Вопросы</span><br><em data-i="fq2">до погружения</em></h2>
         <span class="hand rv" data-i="fqk">не нашли ответ? напишите нам</span>
-        <div class="faq-pics" id="fpics" aria-hidden="true"><img decoding="async" src="photos/beach2.jpg" alt="" loading="lazy"><img decoding="async" src="photos/c-try.jpg" alt="" loading="lazy"><img decoding="async" src="photos/turtle.jpg" alt="" loading="lazy"></div>
+        <div class="faq-pics" id="fpics" aria-hidden="true"><img src="photos/beach2.jpg" srcset="photos/sm/beach2.jpg 900w, photos/beach2.jpg 1400w" sizes="(max-width:860px) 40vw, 16vw" alt="" loading="lazy"><img src="photos/c-try.jpg" srcset="photos/sm/c-try.jpg 900w, photos/c-try.jpg 1200w" sizes="(max-width:860px) 40vw, 16vw" alt="" loading="lazy"><img src="photos/turtle.jpg" srcset="photos/sm/turtle.jpg 900w, photos/turtle.jpg 1400w" sizes="(max-width:860px) 40vw, 16vw" alt="" loading="lazy"></div>
       </div>
       <div class="qas" id="qas">
         <div class="qa"><button type="button" aria-expanded="false"><span data-i="q1">Можно ли нырять совсем без опыта?</span><i aria-hidden="true"></i></button><div class="ans"><div><p data-i="a1">Да, для этого и есть пробное погружение. Инструктор расскажет главное на берегу, покажет, как дышать и выравнивать давление в ушах, и всё время будет рядом. Погружаетесь на небольшую глубину, где светло, тепло и всё видно. Многим после этого сразу хочется на полный курс.</p></div></div></div>
@@ -795,7 +807,7 @@ footer .top-cta{display:inline-flex}
   </section>
 
   <section class="cta" id="contacts" data-depth="0">
-    <div class="bgimg" data-par="12"><img decoding="async" src="photos/palms.jpg" alt="Пальмы над бирюзовой лагуной" loading="lazy"></div>
+    <div class="bgimg" data-par="12"><img src="photos/palms.jpg" alt="Пальмы над бирюзовой лагуной" loading="lazy"></div>
     <canvas id="bubbles" aria-hidden="true"></canvas>
     <div class="wrap">
       <span class="stk w rv" style="justify-self:start;transform:rotate(-3deg)" data-i="ctk">Всплыли, 0 м</span>
@@ -812,7 +824,7 @@ footer .top-cta{display:inline-flex}
 
 <footer>
   <div class="wrap">
-    <a href="#hero" aria-label="SLED, наверх"><img decoding="async" src="logo-light.png" alt="SLED, Sleep Live Eat Dive" loading="lazy"></a>
+    <a href="#hero" aria-label="SLED, наверх"><img src="logo-light.png" alt="SLED, Sleep Live Eat Dive" loading="lazy"></a>
     <nav class="ft-nav" aria-label="Разделы сайта">
       <a href="#about" data-i="nav1">О нас</a>
       <a href="#coach" data-i="nav3">Инструктор</a>
@@ -865,7 +877,7 @@ footer .top-cta{display:inline-flex}
     h1b:'endless summer',
     hsub:'A small dive center on Laamu Atoll in the south of the Maldives, away from the tourist routes. Warm water all year, turtles and mantas on the reefs, and no queues underwater.',
     b1:'Telegram',
-    mani:'We stay small on purpose. One instructor, <span class="pic"><img decoding="async" src="photos/c-try.jpg" alt=""></span> no more than four divers per group: nobody rushes you, nobody gets lost, and everyone has time to look at the reef. Everything is explained clearly, <span class="pic"><img decoding="async" src="photos/turtle2.jpg" alt=""></span> and whether this atoll is worth your holiday, you’ll find out <em>underwater.</em>',
+    mani:'We stay small on purpose. One instructor, <span class="pic"><img src="photos/c-try.jpg" alt=""></span> no more than four divers per group: nobody rushes you, nobody gets lost, and everyone has time to look at the reef. Everything is explained clearly, <span class="pic"><img src="photos/turtle2.jpg" alt=""></span> and whether this atoll is worth your holiday, you’ll find out <em>underwater.</em>',
     p1h:'divers per group, tops',
     p1p:'That’s how many we take on one dive, so the instructor has attention for everyone and you have peace of mind.',
     p2h:'Russian & English',
@@ -1176,11 +1188,13 @@ footer .top-cta{display:inline-flex}
   function paintDepth(){
     var d = Math.max(0, dispD), n = Math.round(d), arrow = phase === 'down' ? '↓ ' : (phase === 'up' ? '↑ ' : '');
     var txt = arrow + n + (lang === 'en' ? ' m' : ' м');
-    gnum.textContent = txt; hnum.textContent = txt;
-    gphase.textContent = PH[lang][phase];
-    var k = Math.min(1, d / (maxD || 18));
-    gdot.style.top = (k * 100) + '%'; gfill.style.height = (k * 100) + '%';
+    // write to the page only when something visible changed: a text write every frame forces a relayout while scrolling
+    if (txt !== lastTxt) { lastTxt = txt; gnum.textContent = txt; hnum.textContent = txt; }
+    var ph = PH[lang][phase]; if (ph !== lastPh) { lastPh = ph; gphase.textContent = ph; }
+    var k = Math.round(Math.min(1, d / (maxD || 18)) * 1000) / 10;
+    if (k !== lastK) { lastK = k; gdot.style.top = k + '%'; gfill.style.height = k + '%'; }
   }
+  var lastTxt = '', lastPh = '', lastK = -1;
   function chase(){
     var diff = tgtD - dispD;
     if (Math.abs(diff) < .04) { dispD = tgtD; chasing = false; paintDepth(); return; }
